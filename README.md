@@ -7,10 +7,10 @@ Voz -> Audio WAV -> Whisper -> Texto -> Ollama -> JSON -> Google/YouTube
 ## Tecnologías
 Python
 Whisper
-sounddevice
-scipy
-numpy
-requests
+Sounddevice
+Scipy
+Numpy
+Requests
 Ollama
 FastAPI
 Uvicorn
