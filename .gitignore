@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+grabacion.wav
+.wakatime-project
+.venv/
+.env
