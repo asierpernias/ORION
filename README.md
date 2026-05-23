@@ -30,7 +30,7 @@ Comprueba que Ollama funciona:
 
 ollama list
 Uso en terminal
-###Ejecuta:
+### Ejecuta:
 
 python ORION.py
 Di una frase como:
