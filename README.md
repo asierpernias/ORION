@@ -16,7 +16,7 @@ requests
 Ollama
 FastAPI
 Uvicorn
-##Instalación
+## Instalación
 Instala las dependencias de Python:
 
 pip install -r requirements.txt
@@ -61,7 +61,7 @@ MAX_RECORD_SECONDS = 15
 OLLAMA_MODEL = "phi3:latest"
 Si el micrófono no detecta bien la voz, ajusta DEVICE_ID o SILENCE_THRESHOLD.
 
-##Nota
+## Nota
 La demo real funciona en local porque necesita acceso al micrófono, Whisper y Ollama ejecutándose en el ordenador del usuario.
 ```
 
