@@ -4,9 +4,9 @@ ORION es un asistente local por voz hecho en Python. Escucha el micrófono, dete
 
 ## Flujo
 
-```text
+
 Voz -> Audio WAV -> Whisper -> Texto -> Ollama -> JSON -> Google/YouTube
-Tecnologías
+##Tecnologías
 Python
 Whisper
 sounddevice
@@ -16,7 +16,7 @@ requests
 Ollama
 FastAPI
 Uvicorn
-Instalación
+##Instalación
 Instala las dependencias de Python:
 
 pip install -r requirements.txt
@@ -30,7 +30,7 @@ Comprueba que Ollama funciona:
 
 ollama list
 Uso en terminal
-Ejecuta:
+###Ejecuta:
 
 python ORION.py
 Di una frase como:
@@ -48,7 +48,7 @@ Abre en el navegador:
 http://127.0.0.1:8001
 Pulsa Escuchar, habla y espera a que ORION transcriba, analice y abra la búsqueda.
 
-Configuración
+##Configuración
 Los valores principales están en ORION.py:
 
 DEVICE_ID = 1
@@ -61,6 +61,7 @@ MAX_RECORD_SECONDS = 15
 OLLAMA_MODEL = "phi3:latest"
 Si el micrófono no detecta bien la voz, ajusta DEVICE_ID o SILENCE_THRESHOLD.
 
-Nota
+##Nota
 La demo real funciona en local porque necesita acceso al micrófono, Whisper y Ollama ejecutándose en el ordenador del usuario.
+```
 
