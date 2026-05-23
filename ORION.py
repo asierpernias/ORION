@@ -25,7 +25,7 @@ BLOCK_SECONDS = 0.2
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "phi3:latest"
 
-model = whisper.load_model("base")
+model = whisper.load_model("medium")
 
 def get_audio_level(audio):
     volume = np.linalg.norm(audio) / len(audio)
@@ -187,27 +187,51 @@ Reglas:
 
     return data
 
-def open_search(intent_data):
+def build_search_url(intent_data):
     query = intent_data.get("query", "").strip()
     engine = intent_data.get("engine", "google").strip().lower()
 
     if not query:
-        print("No hay búsqueda válida.")
-        return
+        return None
 
     if engine == "youtube":
-        url = "https://www.youtube.com/results?search_query=" + quote_plus(query)
-    else:
-        url = "https://www.google.com/search?q=" + quote_plus(query)
+        return "https://www.youtube.com/results?search_query=" + quote_plus(query)
+
+    return "https://www.google.com/search?q=" + quote_plus(query)
+
+def open_search(intent_data):
+    url = build_search_url(intent_data)
+
+    if not url:
+        print("No hay búsqueda válida.")
+        return
 
     print("Abriendo búsqueda:", url)
     webbrowser.open(url)
 
-audio_file = record_when_sound_detected()
+def run_orion():
+    audio_file = record_when_sound_detected()
 
-if audio_file:
+    if not audio_file:
+        return None
+
     text = transcribe_audio(audio_file)
 
-    if text:
-        intent_data = analyze_search_intent(text)
-        open_search(intent_data)
+    if not text:
+        return None
+
+    intent_data = analyze_search_intent(text)
+    url = build_search_url(intent_data)
+
+    return {
+        "text": text,
+        "intent": intent_data,
+        "url": url
+    }
+
+if __name__ == "__main__":
+    result = run_orion()
+
+    if result:
+        print("Resultado final:", result)
+        open_search(result["intent"])
