@@ -12,19 +12,22 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
 def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 @app.post("/run")
 def run():
     try:
         result = run_orion()
+
         if not result:
             return JSONResponse(
                 status_code=400,
                 content={"error": "No se pudo obtener resultado de ORION"}
             )
+
         return result
+
     except Exception as error:
         return JSONResponse(
             status_code=500,
