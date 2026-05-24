@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>ORION</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -10,18 +13,22 @@
         <h1>ORION</h1>
         <p>Asistente local por voz para buscar en Google o YouTube.</p>
 
-        <button id="listenButton">Escuchar</button>
+        <div class="orb" id="orb">
+            <button id="listenButton">Escuchar</button>
+        </div>
+
+        <span class="status" id="status"></span>
 
         <section class="result" id="resultBox">
-            <h2>Resultado:</h2>
+            <h2>Resultado</h2>
 
-            <p><strong>Texto detectado:</strong></p>
+            <p><strong>Texto detectado</strong></p>
             <pre id="textResult"></pre>
 
-            <p><strong>JSON:</strong></p>
+            <p><strong>JSON</strong></p>
             <pre id="jsonResult"></pre>
 
-            <p><strong>URL:</strong></p>
+            <p><strong>URL</strong></p>
             <a id="urlResult" href="#" target="_blank"></a>
         </section>
     </main>
