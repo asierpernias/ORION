@@ -1,4 +1,5 @@
 # ORION
+<img width="647" height="323" alt="image" src="https://github.com/user-attachments/assets/00fd4dd5-81dc-4742-b083-6f5d9b5f76fb" />
 ORION es un asistente local por voz hecho en Python. Escucha el micrófono, detecta cuando el usuario habla, graba el audio, lo transcribe con Whisper, analiza la intención de búsqueda con Ollama y abre automáticamente una búsqueda en Google o YouTube.
 
 ## Flujo
