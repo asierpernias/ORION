@@ -25,7 +25,7 @@ BLOCK_SECONDS = 0.2
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "phi3:latest"
 
-model = whisper.load_model("base")
+model = whisper.load_model("medium")
 
 
 def get_audio_level(audio):
