@@ -1,10 +1,10 @@
-const button = document.getElementById("listenButton");
-const orb = document.getElementById("orb");
-const statusEl = document.getElementById("status");
-const resultBox = document.getElementById("resultBox");
+const button     = document.getElementById("listenButton");
+const orb        = document.getElementById("orb");
+const statusEl   = document.getElementById("status");
+const resultBox  = document.getElementById("resultBox");
 const textResult = document.getElementById("textResult");
 const jsonResult = document.getElementById("jsonResult");
-const urlResult = document.getElementById("urlResult");
+const urlResult  = document.getElementById("urlResult");
 const cursorGlow = document.getElementById("cursorGlow");
 
 function setStatus(text) {
@@ -12,10 +12,35 @@ function setStatus(text) {
     statusEl.classList.toggle("visible", text.length > 0);
 }
 
-document.addEventListener("mousemove", (event) => {
-    cursorGlow.style.left = `${event.clientX}px`;
-    cursorGlow.style.top = `${event.clientY}px`;
+let glowX = 0, glowY = 0;
+let mouseX = 0, mouseY = 0;
+let fadeTimer = null;
+
+document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    cursorGlow.style.transition = "opacity 0.1s ease";
+    cursorGlow.style.opacity = "1";
+
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => {
+        cursorGlow.style.transition = "opacity 1.2s ease";
+        cursorGlow.style.opacity = "0";
+    }, 120);
 });
+
+function animateGlow() {
+    glowX += (mouseX - glowX) * 0.07;
+    glowY += (mouseY - glowY) * 0.07;
+
+    cursorGlow.style.left = `${glowX}px`;
+    cursorGlow.style.top  = `${glowY}px`;
+
+    requestAnimationFrame(animateGlow);
+}
+
+animateGlow();
 
 button.addEventListener("click", async () => {
     button.disabled = true;
@@ -38,8 +63,8 @@ button.addEventListener("click", async () => {
 
         textResult.textContent = data.text;
         jsonResult.textContent = JSON.stringify(data.intent, null, 2);
-        urlResult.textContent = data.url;
-        urlResult.href = data.url;
+        urlResult.textContent  = data.url;
+        urlResult.href         = data.url;
 
         resultBox.classList.add("visible");
         setStatus("Resultado listo");

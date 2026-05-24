@@ -41,19 +41,21 @@ body::before {
 
 .cursor-glow {
     position: fixed;
-    width: 220px;
-    height: 220px;
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
     background: radial-gradient(
         circle,
-        rgba(0, 194, 255, 0.28) 0%,
-        rgba(0, 194, 255, 0.12) 35%,
+        rgba(0, 194, 255, 0.12) 0%,
+        rgba(0, 194, 255, 0.05) 40%,
         transparent 70%
     );
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 1.2s ease;
 }
 
 main {
@@ -131,7 +133,6 @@ main > p {
         transform: scale(1);
         opacity: 1;
     }
-
     100% {
         transform: scale(1.25);
         opacity: 0;
@@ -152,7 +153,7 @@ button {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    cursor: pointer;
+    cursor: none;
     transition: background 0.2s, transform 0.15s;
 }
 
@@ -167,7 +168,7 @@ button:active:not(:disabled) {
 
 button:disabled {
     opacity: 0.45;
-    cursor: wait;
+    cursor: none;
 }
 
 .status {
