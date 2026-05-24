@@ -25,11 +25,13 @@ BLOCK_SECONDS = 0.2
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "phi3:latest"
 
-model = whisper.load_model("medium")
+model = whisper.load_model("base")
+
 
 def get_audio_level(audio):
     volume = np.linalg.norm(audio) / len(audio)
     return volume
+
 
 def record_when_sound_detected():
     print("Esperando sonido...")
@@ -110,6 +112,7 @@ def record_when_sound_detected():
 
     return AUDIO_FILE
 
+
 def transcribe_audio(audio_file):
     print("Transcribiendo audio...")
 
@@ -126,6 +129,7 @@ def transcribe_audio(audio_file):
 
     return text
 
+
 def extract_json(text):
     match = re.search(r"\{.*\}", text, re.DOTALL)
 
@@ -133,6 +137,7 @@ def extract_json(text):
         raise ValueError("No se encontró JSON en la respuesta de Ollama.")
 
     return match.group(0)
+
 
 def analyze_search_intent(text):
     print("Analizando intención con Ollama...")
@@ -146,18 +151,22 @@ Texto del usuario:
 Formato obligatorio:
 {{
   "intent": "search",
-  "query": "solo los términos que deben buscarse",
-  "engine": "google | youtube"
+  "query": "",
+  "engine": "google"
 }}
 
 Reglas:
 - Devuelve solo JSON.
 - No uses markdown.
 - No expliques nada.
+- El campo intent debe ser "search".
+- El campo engine solo puede ser "google" o "youtube".
+- El campo query nunca puede ser una explicación.
+- El campo query debe contener únicamente la búsqueda final.
 - Si el usuario dice "en YouTube", "youtube", "vídeo" o "videos", usa "engine": "youtube".
 - Si el usuario dice "en Google", "google" o no especifica plataforma, usa "engine": "google".
-- En query elimina palabras como "busca", "buscar", "abre", "en Google", "en YouTube", "youtube" o "google".
-- En query deja solo lo que el usuario quiere buscar.
+- En query elimina palabras como "busca", "buscar", "abre", "abrir", "en Google", "en YouTube", "youtube", "google" o "en internet".
+- Si el usuario dice "Abre YouTube en Google", devuelve query "YouTube" y engine "google".
 """
 
     response = requests.post(
@@ -169,7 +178,7 @@ Reglas:
             "format": "json",
             "options": {
                 "temperature": 0,
-                "num_predict": 120
+                "num_predict": 80
             }
         },
         timeout=180
@@ -187,6 +196,47 @@ Reglas:
 
     return data
 
+
+def quick_intent(text):
+    clean = text.lower().strip()
+
+    if ("en youtube" in clean or "youtube" in clean) and "en google" not in clean:
+        engine = "youtube"
+    else:
+        engine = "google"
+
+    query = clean
+
+    words_to_remove = [
+        "busca",
+        "buscar",
+        "abre",
+        "abrir",
+        "en google",
+        "en youtube",
+        "en internet",
+        "google",
+        "por favor"
+    ]
+
+    for word in words_to_remove:
+        query = query.replace(word, "")
+
+    query = query.strip(" .,;:")
+
+    if not query and "youtube" in clean:
+        query = "youtube"
+
+    if not query:
+        return None
+
+    return {
+        "intent": "search",
+        "query": query,
+        "engine": engine
+    }
+
+
 def build_search_url(intent_data):
     query = intent_data.get("query", "").strip()
     engine = intent_data.get("engine", "google").strip().lower()
@@ -199,6 +249,7 @@ def build_search_url(intent_data):
 
     return "https://www.google.com/search?q=" + quote_plus(query)
 
+
 def open_search(intent_data):
     url = build_search_url(intent_data)
 
@@ -208,6 +259,7 @@ def open_search(intent_data):
 
     print("Abriendo búsqueda:", url)
     webbrowser.open(url)
+
 
 def run_orion():
     audio_file = record_when_sound_detected()
@@ -220,7 +272,11 @@ def run_orion():
     if not text:
         return None
 
-    intent_data = analyze_search_intent(text)
+    intent_data = quick_intent(text)
+
+    if not intent_data:
+        intent_data = analyze_search_intent(text)
+
     url = build_search_url(intent_data)
 
     return {
@@ -228,6 +284,7 @@ def run_orion():
         "intent": intent_data,
         "url": url
     }
+
 
 if __name__ == "__main__":
     result = run_orion()
