@@ -53,6 +53,11 @@ Los valores principales están en ORION.py:
 
 DEVICE_ID = 1
 SAMPLE_RATE = 48000
+
+## Demo
+https://youtu.be/05UA5RDzzxI
+
+
 CHANNELS = 2
 SILENCE_THRESHOLD = 0.00002
 SILENCE_SECONDS = 2.5
