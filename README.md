@@ -53,11 +53,6 @@ Los valores principales están en ORION.py:
 
 DEVICE_ID = 1
 SAMPLE_RATE = 48000
-
-## Demo
-https://youtu.be/05UA5RDzzxI
-
-
 CHANNELS = 2
 SILENCE_THRESHOLD = 0.00002
 SILENCE_SECONDS = 2.5
@@ -66,7 +61,14 @@ MAX_RECORD_SECONDS = 15
 OLLAMA_MODEL = "phi3:latest"
 Si el micrófono no detecta bien la voz, ajusta DEVICE_ID o SILENCE_THRESHOLD.
 
+
+## Demo
+https://youtu.be/05UA5RDzzxI
+
+
 ## Nota
 La demo real funciona en local porque necesita acceso al micrófono, Whisper y Ollama ejecutándose en el ordenador del usuario.
+
+
 ```
 
