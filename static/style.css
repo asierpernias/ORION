@@ -1,3 +1,7 @@
+html {
+    cursor:("cursor.png")
+}
+
 :root {
     --accent: #00c2ff;
     --accent-dim: rgba(0, 194, 255, 0.15);
