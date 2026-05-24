@@ -10,29 +10,34 @@ import re
 import webbrowser
 from urllib.parse import quote_plus
 
+# Configuracion del audio y microfonos del dispositivo
 DEVICE_ID = 1
 SAMPLE_RATE = 48000
 CHANNELS = 2
 
 AUDIO_FILE = "grabacion.wav"
 
+# Configuraciones para la grabacion del audio
 SILENCE_THRESHOLD = 0.00002
 SILENCE_SECONDS = 2.5
 MIN_RECORD_SECONDS = 4
 MAX_RECORD_SECONDS = 15
 BLOCK_SECONDS = 0.2
 
+# Configuracion de OLLAMA.
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "phi3:latest"
 
+# Cargar modelo de Whisper.
 model = whisper.load_model("medium")
 
-
+# Grabar el nivel de audio para luego usarlo como referencia para decidir cuando grabar.
 def get_audio_level(audio):
     volume = np.linalg.norm(audio) / len(audio)
     return volume
 
-
+# Funcion que comprueba el nivel de audio y graba al detectar sonido
+# Guarda el audio como un .wav que se edita sobre si mismo
 def record_when_sound_detected():
     print("Esperando sonido...")
 
@@ -112,7 +117,7 @@ def record_when_sound_detected():
 
     return AUDIO_FILE
 
-
+# Usar el modelo de Whisper para transcribir el audio y guardarlo como texto
 def transcribe_audio(audio_file):
     print("Transcribiendo audio...")
 
@@ -129,7 +134,7 @@ def transcribe_audio(audio_file):
 
     return text
 
-
+# Extracion a partir de la respuesta de Ollama y conversion en JSON
 def extract_json(text):
     match = re.search(r"\{.*\}", text, re.DOTALL)
 
@@ -138,10 +143,11 @@ def extract_json(text):
 
     return match.group(0)
 
-
+# Analizar la intencion de la transcripcion de Whsisper usando el modelo de Ollama.
 def analyze_search_intent(text):
     print("Analizando intención con Ollama...")
 
+    # Reglas de Ollama (Prompt dado al modelo)
     prompt = f"""
 Devuelve solo un JSON válido para una búsqueda web.
 
@@ -196,7 +202,7 @@ Reglas:
 
     return data
 
-
+# Metodo para reducir la complejidad y el tiempo de respuesta de Ollama mediantee reglas senciallas.
 def quick_intent(text):
     clean = text.lower().strip()
 
@@ -229,14 +235,15 @@ def quick_intent(text):
 
     if not query:
         return None
-
+    
+    # Return de la intencion
     return {
         "intent": "search",
         "query": query,
         "engine": engine
     }
 
-
+# Construir la URL a partir de la intencion lanazada por ollama y el JSON
 def build_search_url(intent_data):
     query = intent_data.get("query", "").strip()
     engine = intent_data.get("engine", "google").strip().lower()
@@ -249,7 +256,7 @@ def build_search_url(intent_data):
 
     return "https://www.google.com/search?q=" + quote_plus(query)
 
-
+# Abrir la URL en el navegador 
 def open_search(intent_data):
     url = build_search_url(intent_data)
 
@@ -260,7 +267,7 @@ def open_search(intent_data):
     print("Abriendo búsqueda:", url)
     webbrowser.open(url)
 
-
+# Bucle principal que se devuelve a app.py para lanzar el proceso completo
 def run_orion():
     audio_file = record_when_sound_detected()
 
