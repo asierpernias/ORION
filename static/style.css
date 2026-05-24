@@ -100,6 +100,8 @@ main > p {
     position: absolute;
     border-radius: 50%;
     border: 1px solid rgba(0, 194, 255, 0.1);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .orb::before {
@@ -137,6 +139,8 @@ main > p {
 }
 
 button {
+    position: relative;
+    z-index: 1;
     width: 110px;
     height: 110px;
     border-radius: 50%;

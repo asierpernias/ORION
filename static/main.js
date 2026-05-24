@@ -21,6 +21,7 @@ button.addEventListener("click", async () => {
     button.disabled = true;
     button.textContent = "...";
     orb.classList.add("listening");
+    resultBox.classList.remove("visible");
     setStatus("Escuchando...");
 
     try {
@@ -41,17 +42,18 @@ button.addEventListener("click", async () => {
         urlResult.href = data.url;
 
         resultBox.classList.add("visible");
+        setStatus("Resultado listo");
 
         if (data.url) {
-            setStatus("Resultado listo");
             window.open(data.url, "_blank");
         }
     } catch (error) {
+        setStatus("Error");
         alert(error.message);
     } finally {
         button.disabled = false;
         button.textContent = "Escuchar";
         orb.classList.remove("listening");
-        setTimeout(() => setStatus(""), 1200);
+        setTimeout(() => setStatus(""), 1500);
     }
 });
