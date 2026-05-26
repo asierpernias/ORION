@@ -43,7 +43,7 @@ def record_when_sound_detected():
 
     frames = []
     pre_buffer = []
-    max_pre_buffer_chunks = 5
+    max_pre_buffer_chunks = 15
 
     recording = False
     start_time = None
