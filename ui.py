@@ -18,6 +18,7 @@ class AvatarWindow(QWidget):
         self.setup_window()
         self.setup_avatar()
         self.setWindowIcon(QIcon("icon.ico"))
+        self.processing = False
 
     def setup_window(self):
 
@@ -77,6 +78,13 @@ class AvatarWindow(QWidget):
 
     def mouseDoubleClickEvent(self, event):
 
+        if self.processing == True:
+            print("ORION is already running")
+            return
+        
+
+        self.processing = True
+
         print("Doble click detectado → ejecutando ORION")
 
         result = run_orion()
@@ -85,3 +93,5 @@ class AvatarWindow(QWidget):
 
         if result:
             open_search(result["intent"]) 
+            
+        self.processing = False
