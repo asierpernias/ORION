@@ -3,7 +3,7 @@ from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
 
-from ORION import run_orion
+from ORION import run_orion, open_search
 
 
 class AvatarWindow(QWidget):
@@ -82,3 +82,6 @@ class AvatarWindow(QWidget):
         result = run_orion()
 
         print(result)
+
+        if result:
+            open_search(result["intent"]) 
