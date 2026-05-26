@@ -1,11 +1,14 @@
 from PyQt6.QtWidgets import QWidget, QLabel
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap 
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon
 
 from ORION import run_orion
 
 
 class AvatarWindow(QWidget):
+
+    
 
     def __init__(self):
         super().__init__()
@@ -14,6 +17,7 @@ class AvatarWindow(QWidget):
 
         self.setup_window()
         self.setup_avatar()
+        self.setWindowIcon(QIcon("icon.ico"))
 
     def setup_window(self):
 
