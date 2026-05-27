@@ -104,9 +104,9 @@ class AvatarWindow(QWidget):
 
                 self.processing = False
 
-            thread = threading.Thread(
+        thread = threading.Thread(
             target=task,
             daemon=True
     )
 
-            thread.start()
+        thread.start()
