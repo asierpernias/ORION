@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QWidget, QLabel
 from PyQt6.QtGui import QPixmap 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
+import threading
 
 from ORION import run_orion, open_search
 
@@ -17,7 +18,7 @@ class AvatarWindow(QWidget):
 
         self.setup_window()
         self.setup_avatar()
-        self.setWindowIcon(QIcon("icon.ico"))
+        self.setWindowIcon(QIcon("assets\icon.ico"))
         self.processing = False
 
     def setup_window(self):
@@ -40,7 +41,7 @@ class AvatarWindow(QWidget):
         self.avatar = QLabel(self)
 
         pixmap = QPixmap(
-            r"C:\Users\ague_\Desktop\programacion\macondo_hackclub\ORION\assets\idle.png"
+            "assets\idle.png"
         )
 
         self.avatar.setPixmap(pixmap)
@@ -78,20 +79,34 @@ class AvatarWindow(QWidget):
 
     def mouseDoubleClickEvent(self, event):
 
+
+            
         if self.processing == True:
             print("ORION is already running")
             return
-        
-
-        self.processing = True
-
-        print("Doble click detectado → ejecutando ORION")
-
-        result = run_orion()
-
-        print(result)
-
-        if result:
-            open_search(result["intent"]) 
             
-        self.processing = False
+        def task():
+
+            try:
+
+                result = run_orion()
+
+                print(result)
+
+                if result:
+                    open_search(result["intent"])
+
+            except Exception as e:
+
+                print("Error:", e)
+
+            finally:
+
+                self.processing = False
+
+            thread = threading.Thread(
+            target=task,
+            daemon=True
+    )
+
+            thread.start()
