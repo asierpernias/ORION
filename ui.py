@@ -5,7 +5,7 @@ from PyQt6.QtGui import QIcon
 import threading
 
 from ORION import run_orion, open_search
-from animations import start_idle_animation()
+from animations import start_idle_animation
 
 
 class AvatarWindow(QWidget):
