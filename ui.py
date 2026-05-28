@@ -18,6 +18,7 @@ class AvatarWindow(QWidget):
 
         self.setup_window()
         self.setup_avatar()
+        self.idle_animation()
         self.setWindowIcon(QIcon("assets\icon.ico"))
         self.processing = False
 
@@ -40,10 +41,7 @@ class AvatarWindow(QWidget):
 
         self.avatar = QLabel(self)
 
-        pixmap = QPixmap(
-            "assets\idle.png"
-        )
-
+        pixmap = QPixmap("assets/idle/idle_1.png")
         self.avatar.setPixmap(pixmap)
 
         self.avatar.resize(pixmap.width(), pixmap.height())
