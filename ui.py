@@ -1,112 +1,39 @@
-from PyQt6.QtWidgets import QWidget, QLabel
-from PyQt6.QtGui import QPixmap 
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon
-import threading
-
-from ORION import run_orion, open_search
+from PyQt6.QtCore import QTimer
+from PyQt6.QtGui import QPixmap
 
 
-class AvatarWindow(QWidget):
+def idle_animation(self):
 
-    
+    self.idle_frames = [
+        QPixmap("assets/idle/idle_1.png"),
+        QPixmap("assets/idle/idle_2.png"),
+        QPixmap("assets/idle/idle_3.png"),
+        QPixmap("assets/idle/idle_4.png"),
+        QPixmap("assets/idle/idle_5.png")
+    ]
 
-    def __init__(self):
-        super().__init__()
+    self.idle_durations = [400, 250, 100, 250, 300]
 
-        self.drag_position = None
+    self.current_idle_frame = 0
 
-        self.setup_window()
-        self.setup_avatar()
-        self.setWindowIcon(QIcon("assets\icon.ico"))
-        self.processing = False
+    self.idle_timer = QTimer()
 
-    def setup_window(self):
+    self.idle_timer.timeout.connect(self.update_idle_frame)
 
-        self.setWindowTitle("ORION")
-
-        self.resize(256, 256)
-
-        self.setWindowFlags(
-            Qt.WindowType.FramelessWindowHint |
-            Qt.WindowType.WindowStaysOnTopHint
-        )
-
-        self.setAttribute(
-            Qt.WidgetAttribute.WA_TranslucentBackground
-        )
-
-    def setup_avatar(self):
-
-        self.avatar = QLabel(self)
-
-        pixmap = QPixmap(
-            "assets\idle.png"
-        )
-
-        self.avatar.setPixmap(pixmap)
-
-        self.avatar.resize(pixmap.width(), pixmap.height())
+    self.idle_timer.start(self.idle_durations[0])
 
 
-    def mousePressEvent(self, event):
+def update_idle_frame(self):
 
-        if event.button() == Qt.MouseButton.LeftButton:
-
-            self.drag_position = (
-                event.globalPosition().toPoint()
-                - self.frameGeometry().topLeft()
-            )
-
-            event.accept()
-
- 
-    def mouseMoveEvent(self, event):
-
-        if self.drag_position is not None:
-
-            self.move(
-                event.globalPosition().toPoint()
-                - self.drag_position
-            )
-
-            event.accept()
-
- 
-    def mouseReleaseEvent(self, event):
-
-        self.drag_position = None
-
-    def mouseDoubleClickEvent(self, event):
-
-
-            
-        if self.processing == True:
-            print("ORION is already running")
-            return
-            
-        def task():
-
-            try:
-
-                result = run_orion()
-
-                print(result)
-
-                if result:
-                    open_search(result["intent"])
-
-            except Exception as e:
-
-                print("Error:", e)
-
-            finally:
-
-                self.processing = False
-
-        thread = threading.Thread(
-            target=task,
-            daemon=True
+    self.avatar.setPixmap(
+        self.idle_frames[self.current_idle_frame]
     )
 
-        thread.start()
+    duration = self.idle_durations[self.current_idle_frame]
+
+    self.current_idle_frame += 1
+
+    if self.current_idle_frame >= len(self.idle_frames):
+        self.current_idle_frame = 0
+
+    self.idle_timer.start(duration)

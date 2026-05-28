@@ -10,6 +10,12 @@ import re
 import webbrowser
 from urllib.parse import quote_plus
 
+#PEQUEÑA NOTA
+#Todos los comentarios hechos en este proyecto son para mi propio entendimiento del 
+#Si, puede ser una tonteria pero tengo mala memoria y me facilitan mucho el trabajo
+#Por ese motivo pueden parece obvios, inutiles o simplemente innecesarios, pero la realidad es que no comento con otro objetivo.
+#Si, se que tal vez esta explicacion es innecesaria pero ya ves, no me cuesta nada
+
 # Configuracion del audio y microfonos del dispositivo
 DEVICE_ID = 1
 SAMPLE_RATE = 48000
