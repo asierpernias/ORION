@@ -20,7 +20,7 @@ class AvatarWindow(QWidget):
 
         self.setup_window()
         self.setup_avatar()
-        self.start_idle_animation()
+        start_idle_animation(self)
         self.setWindowIcon(QIcon("assets\icon.ico"))
         self.processing = False
 
