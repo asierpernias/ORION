@@ -21,14 +21,14 @@ class AvatarWindow(QWidget):
         self.setup_window()
         self.setup_avatar()
         start_idle_animation(self)
-        self.setWindowIcon(QIcon("assets\icon.ico"))
+        self.setWindowIcon(QIcon(r"assets/icon.ico"))
         self.processing = False
 
     def setup_window(self):
 
         self.setWindowTitle("ORION")
 
-        self.resize(1024, 1024)
+        self.resize(1024, 3000)
 
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
