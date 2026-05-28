@@ -28,7 +28,7 @@ class AvatarWindow(QWidget):
 
         self.setWindowTitle("ORION")
 
-        self.resize(1024, 3000)
+        self.resize(4096, 4096)
 
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
