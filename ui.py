@@ -5,11 +5,11 @@ from PyQt6.QtGui import QIcon
 import threading
 
 from ORION import run_orion, open_search
+from animations import start_idle_animation()
 
 
 class AvatarWindow(QWidget):
 
-    from state import idle_animation
 
     
 
@@ -20,7 +20,7 @@ class AvatarWindow(QWidget):
 
         self.setup_window()
         self.setup_avatar()
-        self.idle_animation()
+        self.start_idle_animation()
         self.setWindowIcon(QIcon("assets\icon.ico"))
         self.processing = False
 
