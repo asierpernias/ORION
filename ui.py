@@ -1,5 +1,6 @@
 from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QPixmap
+from ui import AvatarWindow
 
 
 def idle_animation(self):
