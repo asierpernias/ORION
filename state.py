@@ -1,40 +1,16 @@
-from PyQt6.QtCore import QTimer
-from PyQt6.QtGui import QPixmap
-from ui import AvatarWindow
+from PyQt6.QtWidgets import QWidget, QLabel
+from PyQt6.QtGui import QPixmap, QIcon
+from PyQt6.QtCore import Qt
+
+from animations import start_idle_animation
 
 
-def idle_animation(self):
+class AvatarWindow(QWidget):
 
-    self.idle_frames = [
-        QPixmap("assets/idle/idle_1.png"),
-        QPixmap("assets/idle/idle_2.png"),
-        QPixmap("assets/idle/idle_3.png"),
-        QPixmap("assets/idle/idle_4.png"),
-        QPixmap("assets/idle/idle_5.png")
-    ]
+    def __init__(self):
+        super().__init__()
 
-    self.idle_durations = [400, 250, 100, 250, 300]
+        self.setup_window()
+        self.setup_avatar()
 
-    self.current_idle_frame = 0
-
-    self.idle_timer = QTimer()
-
-    self.idle_timer.timeout.connect(self.update_idle_frame)
-
-    self.idle_timer.start(self.idle_durations[0])
-
-
-def update_idle_frame(self):
-
-    self.avatar.setPixmap(
-        self.idle_frames[self.current_idle_frame]
-    )
-
-    duration = self.idle_durations[self.current_idle_frame]
-
-    self.current_idle_frame += 1
-
-    if self.current_idle_frame >= len(self.idle_frames):
-        self.current_idle_frame = 0
-
-    self.idle_timer.start(duration)
+        start_idle_animation(self)
