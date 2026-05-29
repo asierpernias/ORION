@@ -1,28 +1,39 @@
+
 from PyQt6.QtWidgets import QWidget, QLabel
-from PyQt6.QtGui import QPixmap 
+from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon
-from controller import controller_run_orion
 import threading
-from animations import start_idle_animation
+
+from controller import controller_run_orion
+
+from animations import (
+    start_idle_animation,
+    start_recording_animation,
+    start_searching_animation,
+    start_responding_animation
+)
 
 
 class AvatarWindow(QWidget):
 
-
-    
+    IDLE = "IDLE"
+    RECORDING = "RECORDING"
+    SEARCHING = "SEARCHING"
+    RESPONDING = "RESPONDING"
 
     def __init__(self):
         super().__init__()
 
         self.drag_position = None
+        self.lock = threading.Lock()
 
         self.setup_window()
         self.setup_avatar()
-        start_idle_animation(self)
-        self.setWindowIcon(QIcon(r"assets/icon.ico"))
-        self.processing = False
-        self.lock = threading.Lock()
+
+        self.setWindowIcon(QIcon("assets/icon.ico"))
+
+        self.state = None
+        self.set_state(self.IDLE)
 
     def setup_window(self):
 
@@ -44,10 +55,53 @@ class AvatarWindow(QWidget):
         self.avatar = QLabel(self)
 
         pixmap = QPixmap("assets/idle/idle_1.png")
+
         self.avatar.setPixmap(pixmap)
 
-        self.avatar.resize(pixmap.width(), pixmap.height())
+        self.avatar.resize(
+            pixmap.width(),
+            pixmap.height()
+        )
 
+    def set_state(self, new_state):
+
+        if self.state == new_state:
+            return
+
+        self.state = new_state
+
+        print("New state =", new_state)
+
+        self.stop_all_animations()
+        self.update_animation()
+
+    def stop_all_animations(self):
+
+        if hasattr(self, "idle_timer"):
+            self.idle_timer.stop()
+
+        if hasattr(self, "recording_timer"):
+            self.recording_timer.stop()
+
+        if hasattr(self, "searching_timer"):
+            self.searching_timer.stop()
+
+        if hasattr(self, "responding_timer"):
+            self.responding_timer.stop()
+
+    def update_animation(self):
+
+        if self.state == self.IDLE:
+            start_idle_animation(self)
+
+        elif self.state == self.RECORDING:
+            start_recording_animation(self)
+
+        elif self.state == self.SEARCHING:
+            start_searching_animation(self)
+
+        elif self.state == self.RESPONDING:
+            start_responding_animation(self)
 
     def mousePressEvent(self, event):
 
@@ -60,7 +114,6 @@ class AvatarWindow(QWidget):
 
             event.accept()
 
- 
     def mouseMoveEvent(self, event):
 
         if self.drag_position is not None:
@@ -72,10 +125,11 @@ class AvatarWindow(QWidget):
 
             event.accept()
 
- 
     def mouseReleaseEvent(self, event):
 
         self.drag_position = None
 
     def mouseDoubleClickEvent(self, event):
+
         controller_run_orion(self)
+
