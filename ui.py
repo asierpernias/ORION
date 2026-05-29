@@ -1,7 +1,7 @@
 
 from PyQt6.QtWidgets import QWidget, QLabel
 from PyQt6.QtGui import QPixmap, QIcon
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 import threading
 
 from controller import controller_run_orion
@@ -16,13 +16,19 @@ from animations import (
 
 class AvatarWindow(QWidget):
 
+    state_requested = pyqtSignal(str)
+
     IDLE = "IDLE"
     RECORDING = "RECORDING"
     SEARCHING = "SEARCHING"
     RESPONDING = "RESPONDING"
 
+    def request_state(self, new_state):
+        self.state_requested.emit(new_state)
+
     def __init__(self):
         super().__init__()
+        self.state_requested.connect(self.set_state)
 
         self.drag_position = None
         self.lock = threading.Lock()

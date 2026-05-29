@@ -12,21 +12,21 @@ def controller_run_orion(self):
     def task():
 
         try:
-            self.set_state(self.SEARCHING)
+            self.request_state(self.SEARCHING)
 
             result = run_orion(ui=self)
 
             print(result)
 
             if result:
-                self.set_state(self.RESPONDING)
+                self.request_state(self.RESPONDING)
                 open_search(result["intent"])
 
         except Exception as e:
             print("Error:", e)
 
         finally:
-            self.set_state(self.IDLE)
+            self.request_state(self.IDLE)
             self.lock.release()
 
     thread = threading.Thread(

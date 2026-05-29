@@ -1,3 +1,4 @@
+
 import whisper
 import sounddevice as sd
 import numpy as np
@@ -10,43 +11,30 @@ import re
 import webbrowser
 from urllib.parse import quote_plus
 
-#PEQUEÑA NOTA
-#Todos los comentarios hechos en este proyecto son para mi propio entendimiento del 
-#Si, puede ser una tonteria pero tengo mala memoria y me facilitan mucho el trabajo
-#Por ese motivo pueden parece obvios, inutiles o simplemente innecesarios, pero la realidad es que no comento con otro objetivo.
-#Si, se que tal vez esta explicacion es innecesaria pero ya ves, no me cuesta nada
-
-# Configuracion del audio y microfonos del dispositivo
 DEVICE_ID = 1
 SAMPLE_RATE = 48000
 CHANNELS = 2
 
 AUDIO_FILE = "grabacion.wav"
 
-# Configuraciones para la grabacion del audio
 SILENCE_THRESHOLD = 0.00002
 SILENCE_SECONDS = 2.5
 MIN_RECORD_SECONDS = 4
 MAX_RECORD_SECONDS = 15
 BLOCK_SECONDS = 0.2
 
-# Configuracion de OLLAMA.
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "phi3:latest"
 
-# Cargar modelo de Whisper.
 model = whisper.load_model("medium")
 
-# Grabar el nivel de audio para luego usarlo como referencia para decidir cuando grabar.
+
 def get_audio_level(audio):
     volume = np.linalg.norm(audio) / len(audio)
     return volume
 
-# Funcion que comprueba el nivel de audio y graba al detectar sonido
-# Guarda el audio como un .wav que se edita sobre si mismo
-def record_when_sound_detected(ui=None):
 
-    
+def record_when_sound_detected(ui=None):
     print("Esperando sonido...")
 
     frames = []
@@ -68,7 +56,6 @@ def record_when_sound_detected(ui=None):
     ) as stream:
 
         while True:
-
             audio, overflowed = stream.read(blocksize)
 
             if overflowed:
@@ -85,14 +72,14 @@ def record_when_sound_detected(ui=None):
                 print("Nivel:", level)
 
                 if level > SILENCE_THRESHOLD:
-
                     print("Sonido detectado. Grabando...")
                     recording = True
                     start_time = time.time()
                     frames.extend(pre_buffer)
                     pre_buffer.clear()
+
                     if ui:
-                        ui.set_state(ui.RECORDING)
+                        ui.request_state(ui.RECORDING)
 
             else:
                 frames.append(audio.copy())
@@ -105,22 +92,27 @@ def record_when_sound_detected(ui=None):
                         if silence_start is None:
                             silence_start = time.time()
                         elif time.time() - silence_start >= SILENCE_SECONDS:
-                            print("Silencio detectado. Grabación terminada.")
-                            if ui:
-                                ui.set_state(ui.RESPONDING)
-                            break
+                            print("Silencio detectado. Grabacion terminada.")
 
+                            if ui:
+                                ui.request_state(ui.RESPONDING)
+
+                            break
                     else:
                         silence_start = None
 
                 if elapsed >= MAX_RECORD_SECONDS:
-                    print("Tiempo máximo alcanzado.")
+                    print("Tiempo maximo alcanzado.")
+
+                    if ui:
+                        ui.request_state(ui.RESPONDING)
+
                     break
 
     recording_audio = np.concatenate(frames, axis=0)
 
     if len(recording_audio) == 0:
-        print("No se grabó audio.")
+        print("No se grabo audio.")
         return None
 
     recording_int16 = np.int16(recording_audio * 32767)
@@ -128,11 +120,11 @@ def record_when_sound_detected(ui=None):
     write(AUDIO_FILE, SAMPLE_RATE, recording_int16)
 
     print("Audio guardado en:", os.path.abspath(AUDIO_FILE))
-    print("Duración aproximada:", len(recording_audio) / SAMPLE_RATE, "segundos")
+    print("Duracion aproximada:", len(recording_audio) / SAMPLE_RATE, "segundos")
 
     return AUDIO_FILE
 
-# Usar el modelo de Whisper para transcribir el audio y guardarlo como texto
+
 def transcribe_audio(audio_file):
     print("Transcribiendo audio...")
 
@@ -149,22 +141,21 @@ def transcribe_audio(audio_file):
 
     return text
 
-# Extracion a partir de la respuesta de Ollama y conversion en JSON
+
 def extract_json(text):
     match = re.search(r"\{.*\}", text, re.DOTALL)
 
     if not match:
-        raise ValueError("No se encontró JSON en la respuesta de Ollama.")
+        raise ValueError("No se encontro JSON en la respuesta de Ollama.")
 
     return match.group(0)
 
-# Analizar la intencion de la transcripcion de Whsisper usando el modelo de Ollama.
-def analyze_search_intent(text):
-    print("Analizando intención con Ollama...")
 
-    # Reglas de Ollama (Prompt dado al modelo)
+def analyze_search_intent(text):
+    print("Analizando intencion con Ollama...")
+
     prompt = f"""
-Devuelve solo un JSON válido para una búsqueda web.
+Devuelve solo un JSON valido para una busqueda web.
 
 Texto del usuario:
 {text}
@@ -182,9 +173,9 @@ Reglas:
 - No expliques nada.
 - El campo intent debe ser "search".
 - El campo engine solo puede ser "google" o "youtube".
-- El campo query nunca puede ser una explicación.
-- El campo query debe contener únicamente la búsqueda final.
-- Si el usuario dice "en YouTube", "youtube", "vídeo" o "videos", usa "engine": "youtube".
+- El campo query nunca puede ser una explicacion.
+- El campo query debe contener unicamente la busqueda final.
+- Si el usuario dice "en YouTube", "youtube", "video" o "videos", usa "engine": "youtube".
 - Si el usuario dice "en Google", "google" o no especifica plataforma, usa "engine": "google".
 - En query elimina palabras como "busca", "buscar", "abre", "abrir", "en Google", "en YouTube", "youtube", "google" o "en internet".
 - Si el usuario dice "Abre YouTube en Google", devuelve query "YouTube" y engine "google".
@@ -217,7 +208,7 @@ Reglas:
 
     return data
 
-# Metodo para reducir la complejidad y el tiempo de respuesta de Ollama mediantee reglas senciallas.
+
 def quick_intent(text):
     clean = text.lower().strip()
 
@@ -250,15 +241,14 @@ def quick_intent(text):
 
     if not query:
         return None
-    
-    # Return de la intencion
+
     return {
         "intent": "search",
         "query": query,
         "engine": engine
     }
 
-# Construir la URL a partir de la intencion lanazada por ollama y el JSON
+
 def build_search_url(intent_data):
     query = intent_data.get("query", "").strip()
     engine = intent_data.get("engine", "google").strip().lower()
@@ -271,18 +261,18 @@ def build_search_url(intent_data):
 
     return "https://www.google.com/search?q=" + quote_plus(query)
 
-# Abrir la URL en el navegador 
+
 def open_search(intent_data):
     url = build_search_url(intent_data)
 
     if not url:
-        print("No hay búsqueda válida.")
+        print("No hay busqueda valida.")
         return
 
-    print("Abriendo búsqueda:", url)
+    print("Abriendo busqueda:", url)
     webbrowser.open(url)
 
-# Bucle principal que se devuelve a app.py para lanzar el proceso completo
+
 def run_orion(ui=None):
     audio_file = record_when_sound_detected(ui=ui)
 
@@ -290,7 +280,7 @@ def run_orion(ui=None):
         return None
 
     if ui:
-        ui.set_state(ui.RESPONDING)
+        ui.request_state(ui.RESPONDING)
 
     text = transcribe_audio(audio_file)
 
