@@ -9,20 +9,20 @@ def controller_run_orion(self):
         print("ORION is already running")
         return
 
-  
     def task():
 
         try:
+            self.set_state(self.SEARCHING)
 
-            result = run_orion(ui=None)
+            result = run_orion(ui=self)
 
             print(result)
 
             if result:
+                self.set_state(self.RESPONDING)
                 open_search(result["intent"])
 
         except Exception as e:
-
             print("Error:", e)
 
         finally:

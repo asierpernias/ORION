@@ -284,10 +284,13 @@ def open_search(intent_data):
 
 # Bucle principal que se devuelve a app.py para lanzar el proceso completo
 def run_orion(ui=None):
-    audio_file = record_when_sound_detected(ui=None)
+    audio_file = record_when_sound_detected(ui=ui)
 
     if not audio_file:
         return None
+
+    if ui:
+        ui.set_state(ui.RESPONDING)
 
     text = transcribe_audio(audio_file)
 
