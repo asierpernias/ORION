@@ -283,8 +283,8 @@ def open_search(intent_data):
     webbrowser.open(url)
 
 # Bucle principal que se devuelve a app.py para lanzar el proceso completo
-def run_orion():
-    audio_file = record_when_sound_detected()
+def run_orion(ui=None):
+    audio_file = record_when_sound_detected(ui=None)
 
     if not audio_file:
         return None

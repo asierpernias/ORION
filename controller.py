@@ -14,7 +14,7 @@ def controller_run_orion(self):
 
         try:
 
-            result = run_orion(self)
+            result = run_orion(ui=None)
 
             print(result)
 
