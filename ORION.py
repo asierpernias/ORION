@@ -45,6 +45,8 @@ def get_audio_level(audio):
 # Funcion que comprueba el nivel de audio y graba al detectar sonido
 # Guarda el audio como un .wav que se edita sobre si mismo
 def record_when_sound_detected(ui=None):
+
+    
     print("Esperando sonido...")
 
     frames = []
@@ -104,7 +106,10 @@ def record_when_sound_detected(ui=None):
                             silence_start = time.time()
                         elif time.time() - silence_start >= SILENCE_SECONDS:
                             print("Silencio detectado. Grabación terminada.")
+                            if ui:
+                                ui.set_state(ui.RESPONDING)
                             break
+
                     else:
                         silence_start = None
 
@@ -301,11 +306,3 @@ def run_orion():
         "intent": intent_data,
         "url": url
     }
-
-
-if __name__ == "__main__":
-    result = run_orion()
-
-    if result:
-        print("Resultado final:", result)
-        open_search(result["intent"])

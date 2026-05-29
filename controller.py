@@ -1,42 +1,37 @@
-from ORION import run_orion, open_search
 import threading
 
-lock = threading.Lock()
+from ORION import run_orion, open_search
+
 
 def controller_run_orion(self):
-        
-        if not self.lock.acquire(blocking = False):
-            print("ORION is already running")
-            return
-        
-        
-        
 
-        self.set_state(self.SEARCHING)
-        def task():
+    if not self.lock.acquire(blocking=False):
+        print("ORION is already running")
+        return
 
-            try:
+  
+    def task():
 
-                result = run_orion()
+        try:
 
+            result = run_orion(self)
 
-                print(result)
+            print(result)
 
-                if result:
-                    self.set_state(self.RESPONDING)
-                    open_search(result["intent"])
+            if result:
+                open_search(result["intent"])
 
-            except Exception as e:
+        except Exception as e:
 
-                print("Error:", e)
+            print("Error:", e)
 
-            finally:
-                self.set_state(self.IDLE)
-                self.lock.realase()
+        finally:
+            self.set_state(self.IDLE)
+            self.lock.release()
 
-        thread = threading.Thread(
-            target=task,
-            daemon=True
+    thread = threading.Thread(
+        target=task,
+        daemon=True
     )
 
-        thread.start()
+    thread.start()
