@@ -1,6 +1,8 @@
 from ORION import run_orion, open_search
 import threading
 
+lock = threading.Lock()
+
 def controller_run_orion(self):
         
         if not self.lock.acquire(blocking = False):
@@ -8,7 +10,7 @@ def controller_run_orion(self):
             return
         
         
-        threading.Lock() = True 
+        
 
         self.set_state(self.SEARCHING)
         def task():
