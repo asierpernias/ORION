@@ -1,4 +1,3 @@
-
 from PyQt6.QtWidgets import QWidget, QLabel
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt, pyqtSignal
@@ -23,11 +22,9 @@ class AvatarWindow(QWidget):
     SEARCHING = "SEARCHING"
     RESPONDING = "RESPONDING"
 
-    def request_state(self, new_state):
-        self.state_requested.emit(new_state)
-
     def __init__(self):
         super().__init__()
+
         self.state_requested.connect(self.set_state)
 
         self.drag_position = None
@@ -42,9 +39,7 @@ class AvatarWindow(QWidget):
         self.set_state(self.IDLE)
 
     def setup_window(self):
-
         self.setWindowTitle("ORION")
-
         self.resize(4096, 4096)
 
         self.setWindowFlags(
@@ -52,25 +47,18 @@ class AvatarWindow(QWidget):
             Qt.WindowType.WindowStaysOnTopHint
         )
 
-        self.setAttribute(
-            Qt.WidgetAttribute.WA_TranslucentBackground
-        )
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
     def setup_avatar(self):
-
         self.avatar = QLabel(self)
-
         pixmap = QPixmap("assets/idle/idle_1.png")
-
         self.avatar.setPixmap(pixmap)
+        self.avatar.resize(pixmap.width(), pixmap.height())
 
-        self.avatar.resize(
-            pixmap.width(),
-            pixmap.height()
-        )
+    def request_state(self, new_state):
+        self.state_requested.emit(new_state)
 
     def set_state(self, new_state):
-
         if self.state == new_state:
             return
 
@@ -82,7 +70,6 @@ class AvatarWindow(QWidget):
         self.update_animation()
 
     def stop_all_animations(self):
-
         if hasattr(self, "idle_timer"):
             self.idle_timer.stop()
 
@@ -96,7 +83,6 @@ class AvatarWindow(QWidget):
             self.responding_timer.stop()
 
     def update_animation(self):
-
         if self.state == self.IDLE:
             start_idle_animation(self)
 
@@ -110,9 +96,7 @@ class AvatarWindow(QWidget):
             start_responding_animation(self)
 
     def mousePressEvent(self, event):
-
         if event.button() == Qt.MouseButton.LeftButton:
-
             self.drag_position = (
                 event.globalPosition().toPoint()
                 - self.frameGeometry().topLeft()
@@ -121,9 +105,7 @@ class AvatarWindow(QWidget):
             event.accept()
 
     def mouseMoveEvent(self, event):
-
         if self.drag_position is not None:
-
             self.move(
                 event.globalPosition().toPoint()
                 - self.drag_position
@@ -132,10 +114,7 @@ class AvatarWindow(QWidget):
             event.accept()
 
     def mouseReleaseEvent(self, event):
-
         self.drag_position = None
 
     def mouseDoubleClickEvent(self, event):
-
         controller_run_orion(self)
-

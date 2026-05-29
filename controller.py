@@ -1,4 +1,5 @@
 import threading
+import time
 
 from ORION import run_orion, open_search
 
@@ -12,15 +13,15 @@ def controller_run_orion(self):
     def task():
 
         try:
-            self.request_state(self.SEARCHING)
-
             result = run_orion(ui=self)
 
             print(result)
 
             if result:
-                self.request_state(self.RESPONDING)
                 open_search(result["intent"])
+
+                self.request_state(self.RESPONDING)
+                time.sleep(1.5)
 
         except Exception as e:
             print("Error:", e)

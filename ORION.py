@@ -1,4 +1,3 @@
-
 import whisper
 import sounddevice as sd
 import numpy as np
@@ -73,6 +72,7 @@ def record_when_sound_detected(ui=None):
 
                 if level > SILENCE_THRESHOLD:
                     print("Sonido detectado. Grabando...")
+
                     recording = True
                     start_time = time.time()
                     frames.extend(pre_buffer)
@@ -93,20 +93,12 @@ def record_when_sound_detected(ui=None):
                             silence_start = time.time()
                         elif time.time() - silence_start >= SILENCE_SECONDS:
                             print("Silencio detectado. Grabacion terminada.")
-
-                            if ui:
-                                ui.request_state(ui.RESPONDING)
-
                             break
                     else:
                         silence_start = None
 
                 if elapsed >= MAX_RECORD_SECONDS:
                     print("Tiempo maximo alcanzado.")
-
-                    if ui:
-                        ui.request_state(ui.RESPONDING)
-
                     break
 
     recording_audio = np.concatenate(frames, axis=0)
@@ -280,7 +272,7 @@ def run_orion(ui=None):
         return None
 
     if ui:
-        ui.request_state(ui.RESPONDING)
+        ui.request_state(ui.SEARCHING)
 
     text = transcribe_audio(audio_file)
 
