@@ -44,7 +44,7 @@ def get_audio_level(audio):
 
 # Funcion que comprueba el nivel de audio y graba al detectar sonido
 # Guarda el audio como un .wav que se edita sobre si mismo
-def record_when_sound_detected():
+def record_when_sound_detected(ui=None):
     print("Esperando sonido...")
 
     frames = []
@@ -66,6 +66,7 @@ def record_when_sound_detected():
     ) as stream:
 
         while True:
+
             audio, overflowed = stream.read(blocksize)
 
             if overflowed:
@@ -82,11 +83,14 @@ def record_when_sound_detected():
                 print("Nivel:", level)
 
                 if level > SILENCE_THRESHOLD:
+
                     print("Sonido detectado. Grabando...")
                     recording = True
                     start_time = time.time()
                     frames.extend(pre_buffer)
                     pre_buffer.clear()
+                    if ui:
+                        ui.set_state(ui.RECORDING)
 
             else:
                 frames.append(audio.copy())

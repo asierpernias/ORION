@@ -2,9 +2,8 @@ from PyQt6.QtWidgets import QWidget, QLabel
 from PyQt6.QtGui import QPixmap 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
+from controller import controller_run_orion
 import threading
-
-from ORION import run_orion, open_search
 from animations import start_idle_animation
 
 
@@ -23,6 +22,7 @@ class AvatarWindow(QWidget):
         start_idle_animation(self)
         self.setWindowIcon(QIcon(r"assets/icon.ico"))
         self.processing = False
+        self.lock = threading.Lock()
 
     def setup_window(self):
 
@@ -78,35 +78,4 @@ class AvatarWindow(QWidget):
         self.drag_position = None
 
     def mouseDoubleClickEvent(self, event):
-
-
-            
-        if self.processing == True:
-            print("ORION is already running")
-            return
-            
-        def task():
-
-            try:
-
-                result = run_orion()
-
-                print(result)
-
-                if result:
-                    open_search(result["intent"])
-
-            except Exception as e:
-
-                print("Error:", e)
-
-            finally:
-
-                self.processing = False
-
-        thread = threading.Thread(
-            target=task,
-            daemon=True
-    )
-
-        thread.start()
+        controller_run_orion(self)
