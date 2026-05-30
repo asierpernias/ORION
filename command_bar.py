@@ -71,7 +71,7 @@ class CommandBar(QWidget):
         )
 
     def layout_input(self):
-        padding_x = 76
+        padding_x = 30
 
         self.input.setGeometry(
             padding_x,
@@ -89,6 +89,9 @@ class CommandBar(QWidget):
         self.input.clear()
         self.hide()
 
+        if self.parent():
+            self.parent().setFocus()
+
     def toggle(self):
         if self.isVisible():
             self.hide_bar()
@@ -103,6 +106,9 @@ class CommandBar(QWidget):
 
         self.input.clear()
         self.hide()
+
+        if self.parent():
+            self.parent().setFocus()
 
         self.submitted.emit(text)
 

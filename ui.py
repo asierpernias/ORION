@@ -58,6 +58,7 @@ class AvatarWindow(QWidget):
         self.setAttribute(
             Qt.WidgetAttribute.WA_TranslucentBackground
         )
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
     def setup_avatar(self):
         self.avatar = QLabel(self)
@@ -157,6 +158,7 @@ class AvatarWindow(QWidget):
         self.bubble.move(x, y)
 
     def mousePressEvent(self, event):
+        self.setFocus()
         if event.button() == Qt.MouseButton.LeftButton:
             self.drag_position = (
                 event.globalPosition().toPoint()
