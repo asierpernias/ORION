@@ -42,7 +42,15 @@ class AvatarWindow(QWidget):
 
     def setup_bubble(self):
         self.bubble = SpeechBubble(self)
-        self.bubble.move(260, 40)
+
+        avatar_x = self.avatar.x()
+        avatar_y = self.avatar.y()
+        avatar_width = self.avatar.widht()
+        
+        self.bubble.move(
+            avatar_x - avatar_width - 20,
+            avatar_y + 20
+            )
         self.bubble.hide()
         
 
