@@ -208,4 +208,6 @@ class AvatarWindow(QWidget):
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Space:
             self.command_bar.toggle()
-            
+
+    def handle_text_command(self, text):
+        controller_run_text(self, text)
