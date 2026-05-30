@@ -1,6 +1,6 @@
 import os
 
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QPainter, QPixmap, QFont
 from PyQt6.QtWidgets import QWidget, QLineEdit
 
@@ -14,37 +14,38 @@ class CommandBar(QWidget):
         parent=None,
         assets_dir="assets/input_bar",
         scale=4,
-        width=672,
-        height=64
+        width=640
     ):
         super().__init__(parent)
 
         self.assets_dir = assets_dir
         self.scale = scale
         self.bar_width = width
-        self.bar_height = height
 
-        
-        
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
         self.left = self.load_part("bar_left.png")
         self.center = self.load_part("bar_center.png")
         self.right = self.load_part("bar_right.png")
 
-        self.setFixedSize(self.bar_width, self.bar_height)
-        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        
-        if not self.center.isNull():
+        if self.center.isNull():
+            self.bar_height = 32
+        else:
             self.bar_height = self.center.height()
+
+        self.setFixedSize(self.bar_width, self.bar_height)
+
         self.input = QLineEdit(self)
         self.input.setPlaceholderText("Escribe una indicacion...")
-        self.input.setFont(QFont("Inter", 12))
+        self.input.setFont(QFont("Inter", 9))
         self.input.setFrame(False)
+        self.input.setTextMargins(0, 0, 0, 0)
         self.input.setStyleSheet("""
             QLineEdit {
                 color: #1b1b1b;
                 background: transparent;
                 border: none;
+                padding: 0px;
                 selection-background-color: #7aa2ff;
             }
         """)
@@ -70,16 +71,13 @@ class CommandBar(QWidget):
         )
 
     def layout_input(self):
-        padding_x = 28
-        input_height = 36
-        input_y = 8
-
+        padding_x = 76
 
         self.input.setGeometry(
             padding_x,
-            input_y,
+            -2,
             self.width() - padding_x * 2,
-            input_height
+            self.height()
         )
 
     def show_bar(self):
@@ -117,25 +115,21 @@ class CommandBar(QWidget):
 
         left_width = self.left.width()
         right_width = self.right.width()
-        center_width = self.center.width()
+        center_width = self.width() - left_width - right_width
 
         painter.drawPixmap(0, 0, self.left)
 
-        x = left_width
-        end_x = self.width() - right_width
+        center_rect = QRect(
+            left_width,
+            0,
+            center_width,
+            self.height()
+        )
 
-        while x < end_x:
-            draw_width = min(center_width, end_x - x)
+        painter.drawTiledPixmap(center_rect, self.center)
 
-            if draw_width == center_width:
-                painter.drawPixmap(x, 0, self.center)
-            else:
-                painter.drawPixmap(
-                    x,
-                    0,
-                    self.center.copy(0, 0, draw_width, self.center.height())
-                )
-
-            x += draw_width
-
-        painter.drawPixmap(end_x, 0, self.right)
+        painter.drawPixmap(
+            self.width() - right_width,
+            0,
+            self.right
+        )
