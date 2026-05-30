@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 import threading
 
 from controller import controller_run_orion
-from bubble import SpeechBubble
+from bubbles import SpeechBubble
 
 from animations import (
     start_idle_animation,
