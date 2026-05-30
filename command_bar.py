@@ -14,7 +14,7 @@ class CommandBar(QWidget):
         parent=None,
         assets_dir="assets/input_bar",
         scale=4,
-        width=640,
+        width=672,
         height=64
     ):
         super().__init__(parent)
@@ -66,7 +66,8 @@ class CommandBar(QWidget):
 
     def layout_input(self):
         padding_x = 28
-        padding_y = 10
+        padding_y = 0
+        
 
         self.input.setGeometry(
             padding_x,
