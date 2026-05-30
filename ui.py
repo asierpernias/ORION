@@ -18,6 +18,7 @@ from animations import (
 class AvatarWindow(QWidget):
 
     state_requested = pyqtSignal(str)
+    bubble_requested = pyqtSignal(str)
 
     IDLE = "IDLE"
     RECORDING = "RECORDING"
@@ -28,6 +29,7 @@ class AvatarWindow(QWidget):
         super().__init__()
 
         self.state_requested.connect(self.set_state)
+        self.bubble_requested.connect(self.set_bubble_text)
 
         self.drag_position = None
         self.lock = threading.Lock()
@@ -175,3 +177,13 @@ class AvatarWindow(QWidget):
 
     def mouseDoubleClickEvent(self, event):
         controller_run_orion(self)
+
+    def request_bubble(self, text):
+        self.bubble_requested.emit(text)
+
+    def set_bubble_text(self, text):
+        if not text:
+            self.bubble.hide()
+            return
+        self.bubble.set_text(text)
+        self.position_bubble()

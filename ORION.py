@@ -80,6 +80,7 @@ def record_when_sound_detected(ui=None):
 
                     if ui:
                         ui.request_state(ui.RECORDING)
+                        ui.request_bubble("Escuchando")
 
             else:
                 frames.append(audio.copy())
@@ -273,18 +274,33 @@ def run_orion(ui=None):
 
     if ui:
         ui.request_state(ui.SEARCHING)
+        ui.request_bubble("Transcribiendo...")
 
     text = transcribe_audio(audio_file)
 
     if not text:
+        if ui:
+            ui.request_bubble("No he entendiod el audio")
         return None
 
+    if ui:
+        ui.request_bubble(f'He escuchado: "{text}"')
+        time.sleep(1.2)
+        ui.request_bubble("Preparando busqueda...")
     intent_data = quick_intent(text)
 
     if not intent_data:
+        if ui:
+            ui.request_bubble("Consultado a Ollama...")    
+
         intent_data = analyze_search_intent(text)
 
     url = build_search_url(intent_data)
+
+    if ui:
+        query = intent_data.get("query", "")
+        engine = intent_data.get("engine", engine)
+        ui.request_bubble(f"Buscando: {query} en {engine}")
 
     return {
         "text": text,

@@ -18,13 +18,19 @@ def controller_run_orion(self):
             print(result)
 
             if result:
+                engine = result["intent"].get("engine", engine)
+                query = result["intent"].get("query", "")
+
+                self.request_bubble(f"Abriendo {engine}: {query}")
                 open_search(result["intent"])
 
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)
 
         except Exception as e:
+            self.request_bubble("Ocurrio un error.")
             print("Error:", e)
+            time.sleep(1.5)
 
         finally:
             self.request_state(self.IDLE)
