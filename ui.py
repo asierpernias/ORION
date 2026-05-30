@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 import threading
 
 from controller import controller_run_orion
+from bubbles import SpeechBubble
 
 from animations import (
     start_idle_animation,
@@ -32,11 +33,18 @@ class AvatarWindow(QWidget):
 
         self.setup_window()
         self.setup_avatar()
+        self.setup_bubble()
 
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
         self.state = None
         self.set_state(self.IDLE)
+
+    def setup_bubble(self):
+        self.bubble = SpeechBubble(self)
+        self.bubble.move(260, 40)
+        self.bubble.hide()
+        
 
     def setup_window(self):
         self.setWindowTitle("ORION")
@@ -68,6 +76,7 @@ class AvatarWindow(QWidget):
 
         self.stop_all_animations()
         self.update_animation()
+        self.update_bubble()
 
     def stop_all_animations(self):
         if hasattr(self, "idle_timer"):
@@ -118,3 +127,13 @@ class AvatarWindow(QWidget):
 
     def mouseDoubleClickEvent(self, event):
         controller_run_orion(self)
+
+    def update_bubble(self):
+        if self.state == self.IDLE:
+            self.bubble.hide()
+        elif self.state == self.RECORDING:
+            self.bubble.set_text("Escuchando...")
+        elif self.state == self.SEARCHING:
+            self.bubble.set_text("Pensando...")
+        elif self.state == self.RESPONDING:
+            self.bubble.set_text("Abriendo...")
