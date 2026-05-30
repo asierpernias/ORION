@@ -299,7 +299,7 @@ def run_orion(ui=None):
 
     if ui:
         query = intent_data.get("query", "")
-        engine = intent_data.get("engine", engine)
+        engine = intent_data.get("engine", "google")
         ui.request_bubble(f"Buscando: {query} en {engine}")
 
     return {

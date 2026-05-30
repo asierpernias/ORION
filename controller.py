@@ -18,7 +18,7 @@ def controller_run_orion(self):
             print(result)
 
             if result:
-                engine = result["intent"].get("engine", engine)
+                engine = result["intent"].get("engine", "google")
                 query = result["intent"].get("query", "")
 
                 self.request_bubble(f"Abriendo {engine}: {query}")
