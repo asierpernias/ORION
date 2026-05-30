@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QLabel
-from PyQt6.QtGui import QPixmap, QIcon
+from PyQt6.QtGui import QPixmap, QIcon, QGuiApplication
 from PyQt6.QtCore import Qt, pyqtSignal
+
 import threading
 
 from controller import controller_run_orion
@@ -65,6 +66,13 @@ class AvatarWindow(QWidget):
             pixmap.width(),
             pixmap.height()
         )
+
+        screen = QGuiApplication.primaryScreen().availableGeometry()
+
+        x = screen.width() - pixmap.width() - 80
+        y = screen.height() - pixmap.height() - 80
+
+        self.avatar.move(x, y)
 
     def setup_bubble(self):
         self.bubble = SpeechBubble(self)
