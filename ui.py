@@ -4,8 +4,9 @@ from PyQt6.QtCore import Qt, pyqtSignal
 
 import threading
 
-from controller import controller_run_orion
+from controller import controller_run_orion, controller_run_text
 from bubbles import SpeechBubble
+from command_bar import CommandBar
 
 from animations import (
     start_idle_animation,
@@ -37,6 +38,7 @@ class AvatarWindow(QWidget):
         self.setup_window()
         self.setup_avatar()
         self.setup_bubble()
+        self.setup_command_bar()
 
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
@@ -187,3 +189,23 @@ class AvatarWindow(QWidget):
             return
         self.bubble.set_text(text)
         self.position_bubble()
+
+    def setup_command_bar(self):
+        self.command_bar = CommandBar(self)
+        self.command_bar.submitted.connect(self.handle_text_command)
+        self.position_command_bar()
+        self.command_bar.hide()
+    def position_command_bar(self):
+        screen = QGuiApplication.primaryScreen().availableGeometry()
+
+        x = (screen.width() - self.command_bar.width()) // 2
+        y = screen.height() - self.command_bar.height() - 80
+
+        self.command_bar.move(x, y)
+
+    
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Space:
+            self.command_bar.toggle()
+            

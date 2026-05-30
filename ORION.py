@@ -307,3 +307,29 @@ def run_orion(ui=None):
         "intent": intent_data,
         "url": url
     }
+def run_text_command(text, ui = None):
+    text = text.strip()
+
+    if not text: 
+        return None
+    if ui:
+        ui.request_state(ui.SEARCHING)
+        ui.request_bubble(f'Comando: "{text}"')
+    intent_data = quick_intent(text)
+
+    if not intent_data:
+        if ui:
+            ui.request_bubble("Consultado a Ollama...")
+        intent_data = analyze_search_intent(text)
+
+    url = build_search_url(intent_data)
+
+    if ui:
+        query = intent_data.get("query", "")
+        engine = intent_data.get("engine", "google")
+        ui.request_bubble(f"Buscando: {query} en {engine}")
+    return {
+        "text": text,
+        "intent": intent_data,
+        "url": url
+    }

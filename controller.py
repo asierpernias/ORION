@@ -1,10 +1,10 @@
 import threading
 import time
 
-from ORION import run_orion, open_search
+from ORION import run_orion, open_search, run_text_command
 
 
-def controller_run_orion(self):
+def controller_run_orion(self, text):
 
     if not self.lock.acquire(blocking=False):
         print("ORION is already running")
@@ -13,7 +13,10 @@ def controller_run_orion(self):
     def task():
 
         try:
-            result = run_orion(ui=self)
+            self.request_state(self.SEARCHING)
+            self.request_bubble("Procesando...")
+            
+            result = run_text_command(text, ui=self)
 
             print(result)
 
