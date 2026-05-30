@@ -75,7 +75,7 @@ class CommandBar(QWidget):
 
         self.input.setGeometry(
             padding_x,
-            -2,
+            0,
             self.width() - padding_x * 2,
             self.height()
         )
