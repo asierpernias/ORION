@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 import threading
 
 from controller import controller_run_orion
-from bubbles import SpeechBubble
+from bubble import SpeechBubble
 
 from animations import (
     start_idle_animation,
@@ -40,22 +40,9 @@ class AvatarWindow(QWidget):
         self.state = None
         self.set_state(self.IDLE)
 
-    def setup_bubble(self):
-        self.bubble = SpeechBubble(self)
-
-        avatar_x = self.avatar.x()
-        avatar_y = self.avatar.y()
-        avatar_width = self.avatar.width()
-        
-        self.bubble.move(
-            avatar_x - avatar_width - 20,
-            avatar_y + 20
-            )
-        self.bubble.hide()
-        
-
     def setup_window(self):
         self.setWindowTitle("ORION")
+
         self.resize(4096, 4096)
 
         self.setWindowFlags(
@@ -63,13 +50,25 @@ class AvatarWindow(QWidget):
             Qt.WindowType.WindowStaysOnTopHint
         )
 
-        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        self.setAttribute(
+            Qt.WidgetAttribute.WA_TranslucentBackground
+        )
 
     def setup_avatar(self):
         self.avatar = QLabel(self)
+
         pixmap = QPixmap("assets/idle/idle_1.png")
+
         self.avatar.setPixmap(pixmap)
-        self.avatar.resize(pixmap.width(), pixmap.height())
+
+        self.avatar.resize(
+            pixmap.width(),
+            pixmap.height()
+        )
+
+    def setup_bubble(self):
+        self.bubble = SpeechBubble(self)
+        self.bubble.hide()
 
     def request_state(self, new_state):
         self.state_requested.emit(new_state)
@@ -112,6 +111,39 @@ class AvatarWindow(QWidget):
         elif self.state == self.RESPONDING:
             start_responding_animation(self)
 
+    def update_bubble(self):
+        if self.state == self.IDLE:
+            self.bubble.hide()
+            return
+
+        if self.state == self.RECORDING:
+            self.bubble.set_text("Escuchando...")
+
+        elif self.state == self.SEARCHING:
+            self.bubble.set_text("Pensando...")
+
+        elif self.state == self.RESPONDING:
+            self.bubble.set_text("Abriendo...")
+
+        self.position_bubble()
+
+    def position_bubble(self):
+        margin = 20
+
+        avatar_x = self.avatar.x()
+        avatar_y = self.avatar.y()
+        avatar_width = self.avatar.width()
+
+        bubble_width = self.bubble.width()
+
+        x = avatar_x - bubble_width - margin
+        y = avatar_y + 20
+
+        if x < 0:
+            x = avatar_x + avatar_width + margin
+
+        self.bubble.move(x, y)
+
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             self.drag_position = (
@@ -135,13 +167,3 @@ class AvatarWindow(QWidget):
 
     def mouseDoubleClickEvent(self, event):
         controller_run_orion(self)
-
-    def update_bubble(self):
-        if self.state == self.IDLE:
-            self.bubble.hide()
-        elif self.state == self.RECORDING:
-            self.bubble.set_text("Escuchando...")
-        elif self.state == self.SEARCHING:
-            self.bubble.set_text("Pensando...")
-        elif self.state == self.RESPONDING:
-            self.bubble.set_text("Abriendo...")
