@@ -45,7 +45,7 @@ class AvatarWindow(QWidget):
 
         avatar_x = self.avatar.x()
         avatar_y = self.avatar.y()
-        avatar_width = self.avatar.widht()
+        avatar_width = self.avatar.width()
         
         self.bubble.move(
             avatar_x - avatar_width - 20,
