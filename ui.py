@@ -160,14 +160,14 @@ class AvatarWindow(QWidget):
         if event.button() == Qt.MouseButton.LeftButton:
             self.drag_position = (
                 event.globalPosition().toPoint()
-                - self.frameGeometry().topLeft()
+                - self.avatar.pos()
             )
 
             event.accept()
 
     def mouseMoveEvent(self, event):
         if self.drag_position is not None:
-            self.move(
+            self.avatar.move(
                 event.globalPosition().toPoint()
                 - self.drag_position
             )
@@ -193,7 +193,8 @@ class AvatarWindow(QWidget):
     def setup_command_bar(self):
         self.command_bar = CommandBar(self)
         self.command_bar.submitted.connect(self.handle_text_command)
-        self.position_command_bar()
+        self.command_bar_position = self.calculate_command_bar_position()
+        self.command_bar.move(*self.command_bar_position)
         self.command_bar.hide()
     def position_command_bar(self):
         screen = QGuiApplication.primaryScreen().availableGeometry()
@@ -211,3 +212,10 @@ class AvatarWindow(QWidget):
 
     def handle_text_command(self, text):
         controller_run_text(self, text)
+    def calculate_command_bar_position(self):
+        screen = QGuiApplication.primaryScreen().availableGeometry()
+
+        x = (screen.width() - self.command_bar.width()) // 2
+        y = screen.height() - self.command_bar.height() - 80
+
+        return x, y 
