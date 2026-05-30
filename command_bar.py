@@ -24,13 +24,18 @@ class CommandBar(QWidget):
         self.bar_width = width
         self.bar_height = height
 
-        self.setFixedSize(self.bar_width, self.bar_height)
-        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        
+        
 
         self.left = self.load_part("bar_left.png")
         self.center = self.load_part("bar_center.png")
         self.right = self.load_part("bar_right.png")
 
+        self.setFixedSize(self.bar_width, self.bar_height)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        
+        if not self.center.isNull():
+            self.bar_height = self.center.height()
         self.input = QLineEdit(self)
         self.input.setPlaceholderText("Escribe una indicacion...")
         self.input.setFont(QFont("Inter", 12))
@@ -66,14 +71,15 @@ class CommandBar(QWidget):
 
     def layout_input(self):
         padding_x = 28
-        padding_y = 0
-        
+        input_height = 36
+        input_y = 8
+
 
         self.input.setGeometry(
             padding_x,
-            padding_y,
+            input_y,
             self.width() - padding_x * 2,
-            self.height() - padding_y * 2
+            input_height
         )
 
     def show_bar(self):
