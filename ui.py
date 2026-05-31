@@ -247,7 +247,7 @@ class AvatarWindow(QWidget):
         self.input_button.raise_()
 
     def toggle_command_bar(self):
-        if self.lock.clocked():
+        if self.lock.locked():
             self.request_bubble("Ya estoy procesando algo...")
             return
-        self.command_bar.toogle()
+        self.command_bar.toggle()
