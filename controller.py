@@ -1,13 +1,13 @@
 import threading
 import time
 
-from ORION import run_orion, open_search, run_text_command
+from ORION import run_orion, open_search, run_text_command, OrionError
 
 
 def controller_run_orion(self, text):
 
     if not self.lock.acquire(blocking=False):
-        print("ORION is already running")
+        self.request_bubble("ORION is already running")
         return
 
     def task():
@@ -30,11 +30,14 @@ def controller_run_orion(self, text):
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)
 
-        except Exception as e:
-            self.request_bubble("Ocurrio un error.")
-            print("Error:", e)
+        except OrionError as e:
+            self.request_bubble(str(e))
+            print("Orion error:", e)
             time.sleep(1.5)
-
+        except Exception as e:
+                self.request_bubble("Ocurrio un error inesperado.")
+                print("Error:", e)
+                time.sleep(1.5)
         finally:
             self.request_state(self.IDLE)
             self.lock.release()
@@ -49,7 +52,7 @@ def controller_run_orion(self, text):
 def controller_run_text(self, text):
 
     if not self.lock.acquire(blocking=False):
-        print("ORION is already running")
+        self.request_bubble("ORION is already running")
         return
 
     def task():
@@ -73,11 +76,14 @@ def controller_run_text(self, text):
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)
 
+        except OrionError as e:
+            self.request_bubble(str(e))
+            print("Orion error:", e)
+            time.sleep(1.5)
         except Exception as e:
-            self.request_bubble("Ocurrio un error.")
+            self.request_bubble("Ocurrio un error inesperado.")
             print("Error:", e)
             time.sleep(1.5)
-
         finally:
             self.request_state(self.IDLE)
             self.lock.release()

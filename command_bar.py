@@ -5,6 +5,15 @@ from PyQt6.QtGui import QPainter, QPixmap, QFont
 from PyQt6.QtWidgets import QWidget, QLineEdit
 
 
+class CommandLineEdit(QLineEdit):
+    escape_pressed = pyqtSignal    
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Escape:
+            self.hide_bar()
+            event.accept()
+            return
+        super().keyPressEvent(event)
+
 class CommandBar(QWidget):
 
     submitted = pyqtSignal(str)
@@ -35,7 +44,7 @@ class CommandBar(QWidget):
 
         self.setFixedSize(self.bar_width, self.bar_height)
 
-        self.input = QLineEdit(self)
+        self.input = CommandLineEdit(self)
         self.input.setPlaceholderText("Escribe una indicacion...")
         self.input.setFont(QFont("Inter", 9))
         self.input.setFrame(False)
@@ -51,6 +60,7 @@ class CommandBar(QWidget):
         """)
 
         self.input.returnPressed.connect(self.submit)
+        self.input.escape_pressed.connect(self.hide_bar)
 
         self.layout_input()
         self.hide()

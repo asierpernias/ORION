@@ -215,9 +215,12 @@ class AvatarWindow(QWidget):
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Space:
-            self.command_bar.toggle()
+            self.toggle_command_bar()
 
     def handle_text_command(self, text):
+        if self.lock.locked():
+            self.request_bubble("Ya estoy procesando algo...")
+            return
         controller_run_text(self, text)
     def calculate_command_bar_position(self):
         screen = QGuiApplication.primaryScreen().availableGeometry()
@@ -229,7 +232,7 @@ class AvatarWindow(QWidget):
     
     def setup_input_button(self):
         self.input_button = inputButton(self)
-        self.input_button.clicked.connect(self.command_bar.toggle)
+        self.input_button.clicked.connect(self.toogle_command_bar)
         self.position_input_button()
         self.input_button.show()
 
@@ -242,3 +245,9 @@ class AvatarWindow(QWidget):
 
         self.input_button.move(x, y)
         self.input_button.raise_()
+
+    def toggle_command_bar(self):
+        if self.lock.clocked():
+            self.request_bubble("Ya estoy procesando algo...")
+            return
+        self.command_bar.toogle()

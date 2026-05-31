@@ -8,7 +8,7 @@ class inputButton(QLabel):
     clicked = pyqtSignal()
 
     def __init__(
-            self, parent = None, assets_dir="assets/button", scale = 4
+            self, parent = None, assets_dir="assets/button", scale = 1
     ):
         super(). __init__(parent)
 

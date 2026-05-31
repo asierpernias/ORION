@@ -25,6 +25,17 @@ BLOCK_SECONDS = 0.2
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "phi3:latest"
 
+class OrionError(Exception):
+    pass
+class MicrophoneError(OrionError):
+    pass
+class TranscriptionError(OrionError):
+    pass
+class IntentError(OrionError):
+    pass
+class BrowserSearchError(OrionError):
+    pass
+
 model = whisper.load_model("medium")
 
 
@@ -46,62 +57,67 @@ def record_when_sound_detected(ui=None):
 
     blocksize = int(BLOCK_SECONDS * SAMPLE_RATE)
 
-    with sd.InputStream(
+    try:
+        stream_context = sd.InputStream(
         samplerate=SAMPLE_RATE,
         channels=CHANNELS,
         dtype="float32",
         device=DEVICE_ID,
         blocksize=blocksize
-    ) as stream:
+    ) 
+        with stream_context as stream:
+            while True:
+                    audio, overflowed = stream.read(blocksize)
 
-        while True:
-            audio, overflowed = stream.read(blocksize)
+                    if overflowed:
+                        print("Aviso: overflow de audio")
 
-            if overflowed:
-                print("Aviso: overflow de audio")
+                    level = get_audio_level(audio)
 
-            level = get_audio_level(audio)
+                    if not recording:
+                        pre_buffer.append(audio.copy())
 
-            if not recording:
-                pre_buffer.append(audio.copy())
+                        if len(pre_buffer) > max_pre_buffer_chunks:
+                            pre_buffer.pop(0)
 
-                if len(pre_buffer) > max_pre_buffer_chunks:
-                    pre_buffer.pop(0)
+                        print("Nivel:", level)
 
-                print("Nivel:", level)
+                        if level > SILENCE_THRESHOLD:
+                            print("Sonido detectado. Grabando...")
 
-                if level > SILENCE_THRESHOLD:
-                    print("Sonido detectado. Grabando...")
+                            recording = True
+                            start_time = time.time()
+                            frames.extend(pre_buffer)
+                            pre_buffer.clear()
 
-                    recording = True
-                    start_time = time.time()
-                    frames.extend(pre_buffer)
-                    pre_buffer.clear()
+                            if ui:
+                                ui.request_state(ui.RECORDING)
+                                ui.request_bubble("Escuchando")
 
-                    if ui:
-                        ui.request_state(ui.RECORDING)
-                        ui.request_bubble("Escuchando")
-
-            else:
-                frames.append(audio.copy())
-
-                elapsed = time.time() - start_time
-                print("Grabando nivel:", level)
-
-                if elapsed >= MIN_RECORD_SECONDS:
-                    if level < SILENCE_THRESHOLD:
-                        if silence_start is None:
-                            silence_start = time.time()
-                        elif time.time() - silence_start >= SILENCE_SECONDS:
-                            print("Silencio detectado. Grabacion terminada.")
-                            break
                     else:
-                        silence_start = None
+                        frames.append(audio.copy())
 
-                if elapsed >= MAX_RECORD_SECONDS:
-                    print("Tiempo maximo alcanzado.")
-                    break
+                        elapsed = time.time() - start_time
+                        print("Grabando nivel:", level)
 
+                        if elapsed >= MIN_RECORD_SECONDS:
+                            if level < SILENCE_THRESHOLD:
+                                if silence_start is None:
+                                    silence_start = time.time()
+                                elif time.time() - silence_start >= SILENCE_SECONDS:
+                                    print("Silencio detectado. Grabacion terminada.")
+                                    break
+                            else:
+                                silence_start = None
+
+                        if elapsed >= MAX_RECORD_SECONDS:
+                            print("Tiempo maximo alcanzado.")
+                            break
+    
+    except Exception as e:
+        raise MicrophoneError("No encuentro el microfono") from e
+    if not frames:
+        raise MicrophoneError("No he detectado audio")
     recording_audio = np.concatenate(frames, axis=0)
 
     if len(recording_audio) == 0:
@@ -121,16 +137,23 @@ def record_when_sound_detected(ui=None):
 def transcribe_audio(audio_file):
     print("Transcribiendo audio...")
 
-    result = model.transcribe(
-        audio_file,
-        language="es",
-        fp16=False,
-        condition_on_previous_text=False
-    )
+    try:
+        result = model.transcribe(
+            audio_file,
+            language="es",
+            fp16=False,
+            condition_on_previous_text=False
+        )
+
+    except Exception as e:
+        raise TranscriptionError("No pude transcribir el audio") from e
 
     text = result["text"].strip()
 
     print("Texto detectado:", text)
+
+    if not text:
+        raise TranscriptionError("No he entendido el audio")
 
     return text
 
@@ -173,30 +196,34 @@ Reglas:
 - En query elimina palabras como "busca", "buscar", "abre", "abrir", "en Google", "en YouTube", "youtube", "google" o "en internet".
 - Si el usuario dice "Abre YouTube en Google", devuelve query "YouTube" y engine "google".
 """
+    try:
+        response = requests.post(
+            f"{OLLAMA_URL}/api/generate",
+            json={
+                "model": OLLAMA_MODEL,
+                "prompt": prompt,
+                "stream": False,
+                "format": "json",
+                "options": {
+                    "temperature": 0,
+                    "num_predict": 80
+                }
+            },
+            timeout=180
+        )
 
-    response = requests.post(
-        f"{OLLAMA_URL}/api/generate",
-        json={
-            "model": OLLAMA_MODEL,
-            "prompt": prompt,
-            "stream": False,
-            "format": "json",
-            "options": {
-                "temperature": 0,
-                "num_predict": 80
-            }
-        },
-        timeout=180
-    )
-
-    response.raise_for_status()
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        raise IntentError("Ollama no responde") from e
 
     raw_response = response.json()["response"].strip()
     print("Respuesta de Ollama:", raw_response)
 
-    json_text = extract_json(raw_response)
-    data = json.loads(json_text)
-
+    try:
+        json_text = extract_json(raw_response)
+        data = json.loads(json_text)
+    except Exception as e:
+        raise IntentError("Ollama devolvio una respuesta invalida") from e
     print("JSON interpretado:", data)
 
     return data
@@ -247,7 +274,7 @@ def build_search_url(intent_data):
     engine = intent_data.get("engine", "google").strip().lower()
 
     if not query:
-        return None
+        raise IntentError("No hay busqueda valida")
 
     if engine == "youtube":
         return "https://www.youtube.com/results?search_query=" + quote_plus(query)
@@ -263,7 +290,10 @@ def open_search(intent_data):
         return
 
     print("Abriendo busqueda:", url)
-    webbrowser.open(url)
+    try:
+        webbrowser.open(url)
+    except Exception as e:
+        raise BrowserSearchError("No se pudo abrir el navegador") from e
 
 
 def run_orion(ui=None):
@@ -287,6 +317,7 @@ def run_orion(ui=None):
         ui.request_bubble(f'He escuchado: "{text}"')
         time.sleep(1.2)
         ui.request_bubble("Preparando busqueda...")
+
     intent_data = quick_intent(text)
 
     if not intent_data:
@@ -311,7 +342,7 @@ def run_text_command(text, ui = None):
     text = text.strip()
 
     if not text: 
-        return None
+        raise IntentError("No hay comando para procesar")
     if ui:
         ui.request_state(ui.SEARCHING)
         ui.request_bubble(f'Comando: "{text}"')
