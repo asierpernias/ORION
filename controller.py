@@ -4,7 +4,7 @@ import time
 from ORION import run_orion, open_search, run_text_command, OrionError
 
 
-def controller_run_orion(self, text):
+def controller_run_orion(self):
 
     if not self.lock.acquire(blocking=False):
         self.request_bubble("ORION is already running")
