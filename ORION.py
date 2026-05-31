@@ -252,7 +252,7 @@ def quick_intent(text):
         "en internet",
         "google",
         "por favor",
-        "SEARCH",
+        "search",
         "look for",
         "open", 
         "in google",

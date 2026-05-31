@@ -4,6 +4,8 @@ from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QIcon
 from ui import AvatarWindow
 
+from start_window import StartWindow
+
 
 if __name__ == "__main__":
 
@@ -13,7 +15,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("assets\icon.ico"))
 
-    window = AvatarWindow()
+    window = StartWindow()
     window.setWindowIcon(QIcon("assets\icon.ico"))
     window.show()
 
