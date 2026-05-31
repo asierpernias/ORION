@@ -1,6 +1,8 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont, QIcon
+from PyQt6.QtGui import QGuiApplication, QIcon
 from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+
+from ui import AvatarWindow
 
 from config import WHISPER_MODEL, WHISPER_LANGUAGE, OLLAMA_MODEL, OLLAMA_URL, APP_LANGUAGE
 
@@ -15,7 +17,18 @@ class StartWindow(QWidget):
 
     def setup_window(self):
         self.setWindowTitle("ORION Launcher")
-        self.resize(760, 460)
+        screen = QGuiApplication.primaryScreen().availableGeometry()
+
+        width = int(screen.width() * 0.62)
+        height = int(screen.height() * 0.58)
+
+        width = max(720, min(width, 980))
+        height = max(440, min(height, 640))
+
+        x = (screen.width() - width) // 2
+        y = (screen.height() - height) // 2
+
+        self.setGeometry(x, y, width, height)
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
         self.setStyleSheet(
@@ -112,6 +125,6 @@ class StartWindow(QWidget):
         )
     
     def launch_orion(self):
-        self.avatar_window = StartWindow()
+        self.avatar_window = AvatarWindow()
         self.avatar_window.show()
         self.close()
