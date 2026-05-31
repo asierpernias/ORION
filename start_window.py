@@ -86,7 +86,7 @@ class StartWindow(QWidget):
 
         terminal = QLabel(self.build_status_text())
         terminal.setObjectName("terminal")
-        terminal.setAligment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        terminal.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
 
         launch_button = QPushButton("Lanunc ORION")
         launch_button.clicked.connect(self.launch_orion)
