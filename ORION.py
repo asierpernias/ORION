@@ -10,21 +10,24 @@ import re
 import webbrowser
 from urllib.parse import quote_plus
 
-DEVICE_ID = 1
-SAMPLE_RATE = 48000
-CHANNELS = 2
+from config import(
+    DEVICE_ID,
+    SAMPLE_RATE,
+    CHANNELS,
+    AUDIO_FILE,
+    SILENCE_THRESHOLD,
+    SILENCE_SECONDS,
+    MIN_RECORD_SECONDS,
+    MAX_RECORD_SECONDS,
+    BLOCK_SECONDS,
+    OLLAMA_MODEL,
+    OLLAMA_URL,
+    WHISPER_MODEL,
+    WHISPER_LANGUAGE,
+    APP_LANGUAGE
+)
 
-AUDIO_FILE = "grabacion.wav"
-
-SILENCE_THRESHOLD = 0.00002
-SILENCE_SECONDS = 2.5
-MIN_RECORD_SECONDS = 4
-MAX_RECORD_SECONDS = 15
-BLOCK_SECONDS = 0.2
-
-OLLAMA_URL = "http://localhost:11434"
-OLLAMA_MODEL = "phi3:latest"
-
+MODEL = whisper.load_model(WHISPER_MODEL)
 class OrionError(Exception):
     pass
 class MicrophoneError(OrionError):
@@ -140,7 +143,7 @@ def transcribe_audio(audio_file):
     try:
         result = model.transcribe(
             audio_file,
-            language="es",
+            language=WHISPER_LANGUAGE,
             fp16=False,
             condition_on_previous_text=False
         )
@@ -248,7 +251,18 @@ def quick_intent(text):
         "en youtube",
         "en internet",
         "google",
-        "por favor"
+        "por favor",
+        "SEARCH",
+        "look for",
+        "open", 
+        "in google",
+        "on google",
+        "in youtube",
+        "on youtube",
+        "in internet",
+        "on internet",
+        "please"
+        ""
     ]
 
     for word in words_to_remove:
