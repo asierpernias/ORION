@@ -229,7 +229,7 @@ class AvatarWindow(QWidget):
     
     def setup_input_button(self):
         self.input_button = inputButton(self)
-        self.input_button.cicked.connect(self.command_bar.toggle)
+        self.input_button.clicked.connect(self.command_bar.toggle)
         self.position_input_button()
         self.input_button.show()
 
