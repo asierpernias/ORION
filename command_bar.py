@@ -6,10 +6,10 @@ from PyQt6.QtWidgets import QWidget, QLineEdit
 
 
 class CommandLineEdit(QLineEdit):
-    escape_pressed = pyqtSignal    
+    escape_pressed = pyqtSignal()  
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Escape:
-            self.hide_bar()
+            self.escape_pressed.emit()
             event.accept()
             return
         super().keyPressEvent(event)
@@ -118,7 +118,7 @@ class CommandBar(QWidget):
         self.hide()
 
         if self.parent():
-            self.parent().setFocus
+            self.parent().setFocus()
 
         self.submitted.emit(text)
 
