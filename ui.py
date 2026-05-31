@@ -40,7 +40,7 @@ class AvatarWindow(QWidget):
         self.setup_avatar()
         self.setup_bubble()
         self.setup_command_bar()
-        self.setup_input_buttom()
+        self.setup_input_button()
 
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
