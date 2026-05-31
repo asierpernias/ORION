@@ -108,7 +108,7 @@ class CommandBar(QWidget):
         self.hide()
 
         if self.parent():
-            self.parent().setFocus()
+            self.parent().setFocus
 
         self.submitted.emit(text)
 

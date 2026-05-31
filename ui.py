@@ -7,6 +7,7 @@ import threading
 from controller import controller_run_orion, controller_run_text
 from bubbles import SpeechBubble
 from command_bar import CommandBar
+from input_button import inputButton
 
 from animations import (
     start_idle_animation,
@@ -39,6 +40,7 @@ class AvatarWindow(QWidget):
         self.setup_avatar()
         self.setup_bubble()
         self.setup_command_bar()
+        self.setup_input_buttom()
 
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
@@ -174,6 +176,9 @@ class AvatarWindow(QWidget):
                 - self.drag_position
             )
 
+            self.position_input_button()
+            self.position_bubble()
+
             event.accept()
 
     def mouseReleaseEvent(self, event):
@@ -221,3 +226,19 @@ class AvatarWindow(QWidget):
         y = screen.height() - self.command_bar.height() - 80
 
         return x, y 
+    
+    def setup_input_button(self):
+        self.input_button = inputButton(self)
+        self.input_button.cicked.connect(self.command_bar.toggle)
+        self.position_input_button()
+        self.input_button.show()
+
+    def position_input_button(self):
+        magin_x = 12
+        margin_y = 12
+
+        x = self.avatar.x() + self.avatar.width() -self.input_button.width() - magin_x
+        y = self.avatar.y() - self.input_button.height() + margin_y
+
+        self.input_button.move(x, y)
+        self.input_button.raise_()
