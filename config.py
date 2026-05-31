@@ -13,6 +13,6 @@ BLOCK_SECONDS = 0.2
 OLLAMA_URL = "http://localhost:11434"
 OLLAMA_MODEL = "phi3:latest"
 
-WHISPER_MODEL = "MEDIUM"
+WHISPER_MODEL = "medium"
 WHISPER_LANGUAGE = "es"
 APP_LANGUAGE = "es"
