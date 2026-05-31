@@ -16,7 +16,7 @@ def controller_run_orion(self, text):
             self.request_state(self.SEARCHING)
             self.request_bubble("Procesando...")
             
-            result = run_text_command(text, ui=self)
+            result = run_orion(ui=self)
 
             print(result)
 
