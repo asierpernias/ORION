@@ -112,6 +112,6 @@ class StartWindow(QWidget):
         )
     
     def launch_orion(self):
-        self.avatar_window = AvatarWindow()
+        self.avatar_window = StartWindow()
         self.avatar_window.show()
         self.close()
