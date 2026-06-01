@@ -249,10 +249,13 @@ class StartWindow(QWidget):
             + row(t("input modes"), "voice + text")
             + f'<br><span style="color:{o}; font-family:Courier New,monospace;">&gt; status: </span>'
             + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">ready</span>'
-        )
+            )
     def _refresh_terminal(self):
         self.terminal_label.setText(self.build_status_text())
-
+        self.subtitle_label.setText(t("subtitle"))
+        self.launch_button.setText(t("launch"))
+        self.prompt_label.setText(t("prompt") + "\u2588")
+        
     def start_cursor_blink(self):
         self._cursor_timer = QTimer(self)
         self._cursor_timer.timeout.connect(self._blink_cursor)
