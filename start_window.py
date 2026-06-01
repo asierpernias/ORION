@@ -3,14 +3,12 @@ from PyQt6.QtGui import QGuiApplication, QIcon
 from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QFrame
 
 from ui import AvatarWindow
-
 from config import WHISPER_MODEL, WHISPER_LANGUAGE, OLLAMA_MODEL, OLLAMA_URL, APP_LANGUAGE
 
 class StartWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-
         self.avatar_window = None
         self._cursor_visible = True
         self.setup_window()
@@ -23,7 +21,6 @@ class StartWindow(QWidget):
 
         width = int(screen.width() * 0.62)
         height = int(screen.height() * 0.58)
-
         width = max(720, min(width, 980))
         height = max(440, min(height, 640))
 
@@ -33,93 +30,92 @@ class StartWindow(QWidget):
         self.setGeometry(x, y, width, height)
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
-        self.setStyleSheet(
-            """
-            Qwidget{
-            background-color: #101010;
-            color: #FFF9E2;
-            font-family: "Courier New", Courier, monospace;
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #0d0d0d;
+                color: #FFF9E2;
+                font-family: "Courier New", Courier, monospace;
             }
 
-            QLabel#title{
-            color: #FFEFAD;
-            font-size: 58px;
-            font-weight: bold;
-            font-family: "Courier New", Courier, monospace;
-            letter-spacing:3px;
+            QLabel#title {
+                color: #FFEFAD;
+                font-size: 58px;
+                font-weight: bold;
+                font-family: "Courier New", Courier, monospace;
+                letter-spacing: 3px;
             }
 
-            QLabel#subtitle{
-            color: #FFEFAD;
-            font-size: 15px
-            letter-spacing: 1px;
-            font-family: "Courier New", Courier, monospace;
+            QLabel#subtitle {
+                color: #FFEFAD;
+                font-size: 15px;
+                letter-spacing: 1px;
+                font-family: "Courier New", Courier, monospace;
             }
 
-            QLabel#ascii{
-            color: #3666CB;
-            font-size:10px
-            font-family: "Courier New", Courier, monospace;
-            liner-height: 1.2;
+            QLabel#ascii {
+                color: #3666CB;
+                font-size: 10px;
+                font-family: "Courier New", Courier, monospace;
+                line-height: 1.2;
             }
 
-            QFrame#terminal_box{
-            border: 2px solid #414245;
-            background-color: #111214
+            QFrame#terminal_box {
+                border: 2px solid #414245;
+                background-color: #111214;
             }
 
-            QLabel#terminal{
-            color: #FFF9E2;
-            font-size: 13px;
-            font-family: "Courier New", Courier, monospace
-            border: none;
-            padding: 0px;
-            background-color: transparent;
+            QLabel#terminal {
+                color: #FFF9E2;
+                font-size: 13px;
+                font-family: "Courier New", Courier, monospace;
+                border: none;
+                padding: 0px;
+                background-color: transparent;
             }
 
-            QLabel#prompt{
-            color: #FFEFAD;
-            font-size: 13px;
-            font-family: "Courier New", Courier, monospace;
+            QLabel#prompt {
+                color: #FFEFAD;
+                font-size: 13px;
+                font-family: "Courier New", Courier, monospace;
             }
 
-            QLabel#model_tag{
-            color: #414245;
-            font-size:11px;
-            font-family: "Courier New", Courier, monospace;
+            QLabel#model_tag {
+                color: #414245;
+                font-size: 11px;
+                font-family: "Courier New", Courier, monospace;
             }
 
-            QLabel#agent_tag{
-            color: #0d0d0d;
-            background-color: #3666CB;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 4px 8px;
-            font-family: "Courier New", Courier, monospace;
-            letter-spacing: 1px;
+            QLabel#agent_tag {
+                color: #0d0d0d;
+                background-color: #3666CB;
+                font-size: 10px;
+                font-weight: bold;
+                padding: 4px 8px;
+                font-family: "Courier New", Courier, monospace;
+                letter-spacing: 1px;
             }
 
-            QPushButton{
-            color: #0d0d0d;
-            backgroun-color: #FFEFAD;
-            border: none;
-            padding: 12px 12px;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            font-family: "Courier New", Courier, monospace;
+            QPushButton {
+                color: #0d0d0d;
+                background-color: #FFEFAD;
+                border: none;
+                padding: 12px 22px;
+                font-size: 11px;
+                font-weight: bold;
+                letter-spacing: 2px;
+                font-family: "Courier New", Courier, monospace;
             }
 
-            QPushButton:hover{
-            background-color: #FFF9E2;
+            QPushButton:hover {
+                background-color: #FFF9E2;
             }
 
-            QPushButton:hover{
-            backgroun-color: #e8d88a;
-            padding: 14px 20px 10px 24px;
+            QPushButton:pressed {
+                background-color: #e8d88a;
+                padding: 14px 20px 10px 24px;
             }
-            """
-        )
+        """)
+
     def setup_ui(self):
         root = QVBoxLayout()
         root.setContentsMargins(32, 28, 32, 28)
@@ -129,6 +125,7 @@ class StartWindow(QWidget):
 
         title_box = QVBoxLayout()
         title_box.setSpacing(4)
+
         title = QLabel("ORION")
         title.setObjectName("title")
 
@@ -139,15 +136,14 @@ class StartWindow(QWidget):
         title_box.addWidget(subtitle)
 
         ascii_art = QLabel(
-             "     .---.  \n"
-            "       [*] [*] \n"
-            "       |[___]| \n"
-            "  [-]  | ### |   [-] \n"
-            "       |_____| \n"
-            "         \n"
-            
+            "  .---.  \n"
+            " [*] [*] \n"
+            " |[___]| \n"
+            " | ### | \n"
+            " |_____| \n"
+            "  /   \  \n"
+            " [_] [_] "
         )
-
         ascii_art.setObjectName("ascii")
         ascii_art.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
@@ -161,8 +157,14 @@ class StartWindow(QWidget):
         terminal_layout.setContentsMargins(20, 18, 20, 18)
         terminal_layout.setSpacing(0)
 
-        self.prompt_label = QLabel("> ask orion anything... /u2588")
-        self.prompt_label.setObjectName("name")
+        terminal = QLabel(self.build_status_text())
+        terminal.setObjectName("terminal")
+        terminal.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        terminal.setTextFormat(Qt.TextFormat.RichText)
+        terminal_layout.addWidget(terminal)
+
+        self.prompt_label = QLabel("> ask orion anything...\u2588")
+        self.prompt_label.setObjectName("prompt")
 
         footer = QHBoxLayout()
         footer.setSpacing(10)
@@ -170,7 +172,7 @@ class StartWindow(QWidget):
         left_footer = QVBoxLayout()
         left_footer.setSpacing(4)
 
-        model_tag = QLabel(f"{OLLAMA_MODEL} · ollama/{OLLAMA_MODEL} ")
+        model_tag = QLabel(f"{OLLAMA_MODEL} · ollama/{OLLAMA_MODEL}")
         model_tag.setObjectName("model_tag")
 
         agent_tag = QLabel("◆ agent mode")
@@ -188,7 +190,6 @@ class StartWindow(QWidget):
         footer.addStretch()
         footer.addWidget(launch_button, alignment=Qt.AlignmentFlag.AlignBottom)
 
-
         root.addLayout(header)
         root.addWidget(terminal_frame)
         root.addWidget(self.prompt_label)
@@ -198,20 +199,18 @@ class StartWindow(QWidget):
         self.setLayout(root)
 
     def build_status_text(self):
-
         o = "#FFEFAD"
         g = "#3666CB"
         w = "#FFF9E2"
 
         def row(key, val):
-            return(
-                f'<span style="color:{w}; font-family: Courier New, monospace;>'
-                f'<span style="display:inline-block; min-width:180px;">{key} </span>'
-                f'<span style="color:{w}; ">{val}</span><br>'
-
+            return (
+                f'<span style="color:{w}; font-family:Courier New,monospace;">'
+                f'<span style="display:inline-block; min-width:180px;">{key}</span>'
+                f'<span style="color:{w};">{val}</span></span><br>'
             )
-        
-        return(
+
+        return (
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; booting ORION</span><br>'
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; checking local configuration</span><br><br>'
             + row("voice engine", f"whisper {WHISPER_MODEL}")
@@ -223,7 +222,7 @@ class StartWindow(QWidget):
             + f'<br><span style="color:{o}; font-family:Courier New,monospace;">&gt; status: </span>'
             + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">ready</span>'
         )
-        
+
     def start_cursor_blink(self):
         self._cursor_timer = QTimer(self)
         self._cursor_timer.timeout.connect(self._blink_cursor)
@@ -231,13 +230,9 @@ class StartWindow(QWidget):
 
     def _blink_cursor(self):
         self._cursor_visible = not self._cursor_visible
-        cursor = "\u2588" if self._cursor_visible else ""
-        self.prompt_label.setText(f">ask orion anything... {cursor}")
-                      
+        cursor = "\u2588" if self._cursor_visible else " "
+        self.prompt_label.setText(f"> ask orion anything...{cursor}")
 
-
-    
-    
     def launch_orion(self):
         self.avatar_window = AvatarWindow()
         self.avatar_window.show()
