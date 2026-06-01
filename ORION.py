@@ -239,12 +239,14 @@ def quick_intent(text):
 
     if ("en youtube" in clean or "youtube" in clean) and "en google" not in clean:
         engine = "youtube"
+    elif ("on youtube" in clean or "in youtube" in clean) and "on google" not in clean:
+        engine = "youtube"
     else:
         engine = "google"
 
     query = clean
 
-    words_to_remove = [
+    words_es = [
         "busca",
         "buscar",
         "abre",
@@ -254,6 +256,9 @@ def quick_intent(text):
         "en internet",
         "google",
         "por favor",
+        ""
+    ]
+    words_en = [
         "search",
         "look for",
         "open", 
@@ -264,9 +269,19 @@ def quick_intent(text):
         "in internet",
         "on internet",
         "please"
-        ""
     ]
 
+    words_common = [ 
+        "youtube", "google", ""
+    ]
+
+
+
+    import config
+    if config.APP_LANGUAGE == "en":
+        words_to_remove = words_en + words_common
+    else:
+        words_to_remove = words_es + words_common
     for word in words_to_remove:
         query = query.replace(word, "")
 
