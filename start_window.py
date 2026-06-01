@@ -193,7 +193,7 @@ class StartWindow(QWidget):
         root.addWidget(terminal_frame)
         root.addWidget(self.prompt_label)
         root.addStretch()
-        root.addWidget(footer)
+        root.addLayout(footer)
 
         self.setLayout(root)
 
