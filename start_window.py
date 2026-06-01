@@ -361,4 +361,3 @@ class StartWindow(QWidget):
         self.avatar_window = AvatarWindow()
         self.avatar_window.show()
         self.close()
-```
