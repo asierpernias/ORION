@@ -2,19 +2,19 @@ import threading
 import time
 
 from ORION import run_orion, open_search, run_text_command, OrionError
-
+from i18n import t
 
 def controller_run_orion(self):
 
     if not self.lock.acquire(blocking=False):
-        self.request_bubble("ORION is already running")
+        self.request_bubble(t("already_running"))
         return
 
     def task():
 
         try:
             self.request_state(self.SEARCHING)
-            self.request_bubble("Procesando...")
+            self.request_bubble(t("processing"))
             
             result = run_orion(ui=self)
 
@@ -35,7 +35,7 @@ def controller_run_orion(self):
             print("Orion error:", e)
             time.sleep(1.5)
         except Exception as e:
-                self.request_bubble("Ocurrio un error inesperado.")
+                self.request_bubble(t("unexpected"))
                 print("Error:", e)
                 time.sleep(1.5)
         finally:

@@ -3,6 +3,8 @@ from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QFrame
 
+from i18n import t
+
 from ui import AvatarWindow
 from config import WHISPER_MODEL, WHISPER_LANGUAGE, OLLAMA_MODEL, OLLAMA_URL, APP_LANGUAGE
 
@@ -146,7 +148,7 @@ class StartWindow(QWidget):
         title = QLabel("ORION")
         title.setObjectName("title")
 
-        subtitle = QLabel("local AI powered desktop assistant")
+        subtitle = QLabel(t("subtitle"))
         subtitle.setObjectName("subtitle")
 
         title_box.addWidget(title)
@@ -181,14 +183,14 @@ class StartWindow(QWidget):
         terminal_layout.addWidget(terminal)
         self.terminal_label = terminal
 
-        config_button = QPushButton("⚙ config")
+        config_button = QPushButton(t("config_btn"))
         config_button.setObjectName("config_btn")
         config_button.setFixedHeight(28)
         config_button.clicked.connect(self.open_config)
         terminal_layout.addSpacing(10)
         terminal_layout.addWidget(config_button, alignment=Qt.AlignmentFlag.AlignRight)
 
-        self.prompt_label = QLabel("> ask orion anything...\u2588")
+        self.prompt_label = QLabel(t("prompt") + "\u2588")
         self.prompt_label.setObjectName("prompt")
 
         footer = QHBoxLayout()
@@ -207,7 +209,7 @@ class StartWindow(QWidget):
         left_footer.addWidget(model_tag)
         left_footer.addWidget(agent_tag)
 
-        launch_button = QPushButton("▶  Launch ORION")
+        launch_button = QPushButton(t("launch"))
         launch_button.setFixedHeight(42)
         launch_button.clicked.connect(self.launch_orion)
 
@@ -239,12 +241,12 @@ class StartWindow(QWidget):
         return (
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; booting ORION</span><br>'
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; checking local configuration</span><br><br>'
-            + row("voice engine", f"whisper {config.WHISPER_MODEL}")
-            + row("voice language", config.WHISPER_LANGUAGE)
-            + row("intent engine", config.OLLAMA_MODEL)
-            + row("ollama endpoint", config.OLLAMA_URL)
-            + row("app language",config. APP_LANGUAGE)
-            + row("input modes", "voice + text")
+            + row(t("voice engine"), f"whisper {config.WHISPER_MODEL}")
+            + row(t("voice language"), config.WHISPER_LANGUAGE)
+            + row(t("intent engine"), config.OLLAMA_MODEL)
+            + row(t("endpoint"), config.OLLAMA_URL)
+            + row(t("app language"),config. APP_LANGUAGE)
+            + row(t("input modes"), "voice + text")
             + f'<br><span style="color:{o}; font-family:Courier New,monospace;">&gt; status: </span>'
             + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">ready</span>'
         )

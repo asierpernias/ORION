@@ -2,6 +2,8 @@ from PyQt6.QtWidgets import QWidget, QLabel
 from PyQt6.QtGui import QPixmap, QIcon, QGuiApplication
 from PyQt6.QtCore import Qt, pyqtSignal
 
+from i18n import t
+
 import threading
 
 from controller import controller_run_orion, controller_run_text
@@ -132,13 +134,13 @@ class AvatarWindow(QWidget):
             return
 
         if self.state == self.RECORDING:
-            self.bubble.set_text("Escuchando...")
+            self.bubble.set_text(t("listening"))
 
         elif self.state == self.SEARCHING:
-            self.bubble.set_text("Pensando...")
+            self.bubble.set_text(t("thinking"))
 
         elif self.state == self.RESPONDING:
-            self.bubble.set_text("Abriendo...")
+            self.bubble.set_text(t("opening"))
 
         self.position_bubble()
 

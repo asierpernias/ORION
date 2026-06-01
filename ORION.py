@@ -10,6 +10,7 @@ import re
 import webbrowser
 from urllib.parse import quote_plus
 import config
+from i18n import t
 
 from config import(
     DEVICE_ID,
@@ -96,7 +97,7 @@ def record_when_sound_detected(ui=None):
 
                             if ui:
                                 ui.request_state(ui.RECORDING)
-                                ui.request_bubble("Escuchando")
+                                ui.request_bubble(t("listening"))
 
                     else:
                         frames.append(audio.copy())
@@ -325,25 +326,25 @@ def run_orion(ui=None):
 
     if ui:
         ui.request_state(ui.SEARCHING)
-        ui.request_bubble("Transcribiendo...")
+        ui.request_bubble(t("transcribing"))
 
     text = transcribe_audio(audio_file)
 
     if not text:
         if ui:
-            ui.request_bubble("No he entendiod el audio")
+            ui.request_bubble(t("no_audio"))
         return None
 
     if ui:
-        ui.request_bubble(f'He escuchado: "{text}"')
+        ui.request_bubble(f'{t("heard") } " {text}"')
         time.sleep(1.2)
-        ui.request_bubble("Preparando busqueda...")
+        ui.request_bubble(t("preparing"))
 
     intent_data = quick_intent(text)
 
     if not intent_data:
         if ui:
-            ui.request_bubble("Consultado a Ollama...")    
+            ui.request_bubble(t("asking_ollama"))    
 
         intent_data = analyze_search_intent(text)
 
@@ -352,7 +353,7 @@ def run_orion(ui=None):
     if ui:
         query = intent_data.get("query", "")
         engine = intent_data.get("engine", "google")
-        ui.request_bubble(f"Buscando: {query} en {engine}")
+        ui.request_bubble(f'{t("searching")} {query} — {engine}')
 
     return {
         "text": text,
@@ -366,12 +367,12 @@ def run_text_command(text, ui = None):
          raise IntentError("No hay comando para procesar")
     if ui:
         ui.request_state(ui.SEARCHING)
-        ui.request_bubble(f'Comando: "{text}"')
+        ui.request_bubblef(f'{t("searching")} {text}')
     intent_data = quick_intent(text)
 
     if not intent_data:
         if ui:
-            ui.request_bubble("Consultado a Ollama...")
+            ui.request_bubble(t("asking_ollama"))
         intent_data = analyze_search_intent(text)
 
     url = build_search_url(intent_data)
@@ -379,7 +380,7 @@ def run_text_command(text, ui = None):
     if ui:
         query = intent_data.get("query", "")
         engine = intent_data.get("engine", "google")
-        ui.request_bubble(f"Buscando: {query} en {engine}")
+        ui.request_bubble(f'{t("searching")} {query} — {engine}')
     return {
         "text": text,
         "intent": intent_data,
