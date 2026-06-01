@@ -28,7 +28,7 @@ from config import(
     APP_LANGUAGE
 )
 
-MODEL = whisper.load_model(WHISPER_MODEL)
+
 class OrionError(Exception):
     pass
 class MicrophoneError(OrionError):
@@ -314,7 +314,7 @@ def open_search(intent_data):
 def reload_model():
     global model
     import config
-    print(f"Recargando modelo whisper: {WHISPER_MODEL}")
+    print(f"Recargando modelo whisper: {config.WHISPER_MODEL}")
     model = whisper.load_model(config.WHISPER_MODEL)
 
 def run_orion(ui=None):
