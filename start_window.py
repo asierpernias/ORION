@@ -179,6 +179,7 @@ class StartWindow(QWidget):
         terminal.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         terminal.setTextFormat(Qt.TextFormat.RichText)
         terminal_layout.addWidget(terminal)
+        self.terminal_label = terminal
 
         config_button = QPushButton("⚙ config")
         config_button.setObjectName("config_btn")
@@ -223,6 +224,7 @@ class StartWindow(QWidget):
         self.setLayout(root)
 
     def build_status_text(self):
+        import config
         o = "#FFEFAD"
         g = "#3666CB"
         w = "#FFF9E2"
@@ -237,15 +239,17 @@ class StartWindow(QWidget):
         return (
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; booting ORION</span><br>'
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; checking local configuration</span><br><br>'
-            + row("voice engine", f"whisper {WHISPER_MODEL}")
-            + row("voice language", WHISPER_LANGUAGE)
-            + row("intent engine", OLLAMA_MODEL)
-            + row("ollama endpoint", OLLAMA_URL)
-            + row("app language", APP_LANGUAGE)
+            + row("voice engine", f"whisper {config.WHISPER_MODEL}")
+            + row("voice language", config.WHISPER_LANGUAGE)
+            + row("intent engine", config.OLLAMA_MODEL)
+            + row("ollama endpoint", config.OLLAMA_URL)
+            + row("app language",config. APP_LANGUAGE)
             + row("input modes", "voice + text")
             + f'<br><span style="color:{o}; font-family:Courier New,monospace;">&gt; status: </span>'
             + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">ready</span>'
         )
+    def _refresh_terminal(self):
+        self.terminal_label.setText(self.build_status_text)
 
     def start_cursor_blink(self):
         self._cursor_timer = QTimer(self)
@@ -337,6 +341,7 @@ class StartWindow(QWidget):
                 config.WHISPER_LANGUAGE,
                 config.APP_LANGUAGE
             )
+            self._refresh_terminal()
 
     def _write_config(self, whisper_model, whisper_language, app_language):
         import re
