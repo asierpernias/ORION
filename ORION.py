@@ -9,6 +9,7 @@ import json
 import re
 import webbrowser
 from urllib.parse import quote_plus
+import config
 
 from config import(
     DEVICE_ID,
@@ -39,7 +40,7 @@ class IntentError(OrionError):
 class BrowserSearchError(OrionError):
     pass
 
-model = whisper.load_model("medium")
+model = whisper.load_model(WHISPER_MODEL)
 
 
 def get_audio_level(audio):
@@ -143,7 +144,7 @@ def transcribe_audio(audio_file):
     try:
         result = model.transcribe(
             audio_file,
-            language=WHISPER_LANGUAGE,
+            language= config.WHISPER_LANGUAGE,
             fp16=False,
             condition_on_previous_text=False
         )
@@ -309,6 +310,12 @@ def open_search(intent_data):
     except Exception as e:
         raise BrowserSearchError("No se pudo abrir el navegador") from e
 
+
+def reload_model():
+    global model
+    import config
+    print(f"Recargando modelo whisper: {WHISPER_MODEL}")
+    model = whisper.load_model(config.WHISPER_MODEL)
 
 def run_orion(ui=None):
     audio_file = record_when_sound_detected(ui=ui)
