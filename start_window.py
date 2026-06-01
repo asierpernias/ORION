@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtGui import QGuiApplication, QIcon
+from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QFrame
 
 from ui import AvatarWindow
@@ -14,6 +14,7 @@ class StartWindow(QWidget):
         self.setup_window()
         self.setup_ui()
         self.start_cursor_blink()
+        QFontDatabase.addApplicationFont("assets\fonts\press-start-2p.ttf")
 
     def setup_window(self):
         self.setWindowTitle("ORION Launcher")
@@ -39,9 +40,9 @@ class StartWindow(QWidget):
 
             QLabel#title {
                 color: #FFEFAD;
-                font-size: 58px;
+                font-size: 28px;
                 font-weight: bold;
-                font-family: "Courier New", Courier, monospace;
+                font-family: "Press Start 2P", Courier, monospace;
                 letter-spacing: 3px;
             }
 
@@ -54,8 +55,8 @@ class StartWindow(QWidget):
 
             QLabel#ascii {
                 color: #3666CB;
-                font-size: 10px;
-                font-family: "Courier New", Courier, monospace;
+                font-size: 8px;
+                font-family: "Press Start 2P", Courier, monospace;
                 line-height: 1.2;
             }
 
@@ -100,10 +101,10 @@ class StartWindow(QWidget):
                 background-color: #FFEFAD;
                 border: none;
                 padding: 12px 22px;
-                font-size: 11px;
+                font-size: 8px;
                 font-weight: bold;
                 letter-spacing: 2px;
-                font-family: "Courier New", Courier, monospace;
+                font-family: "Press Start 2P", Courier, monospace;
             }
 
             QPushButton:hover {
