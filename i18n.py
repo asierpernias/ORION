@@ -59,4 +59,4 @@ STRINGS = {
 def t(key):
     import config
     lang = getattr(config, "APP_LANGUAGE", "es")
-    return STRINGS.get(lang, STRINGS["es"].get(key, key))
+    return STRINGS.get(lang, STRINGS["es"]).get(key, key)
