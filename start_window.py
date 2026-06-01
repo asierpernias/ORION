@@ -249,7 +249,7 @@ class StartWindow(QWidget):
             + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">ready</span>'
         )
     def _refresh_terminal(self):
-        self.terminal_label.setText(self.build_status_text)
+        self.terminal_label.setText(self.build_status_text())
 
     def start_cursor_blink(self):
         self._cursor_timer = QTimer(self)
