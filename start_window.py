@@ -256,106 +256,106 @@ class StartWindow(QWidget):
         self._cursor_visible = not self._cursor_visible
         cursor = "\u2588" if self._cursor_visible else " "
         self.prompt_label.setText(f"> ask orion anything...{cursor}")
-    
-def open_config(self):
-    from PyQt6.QtWidgets import QDialog, QComboBox, QFormLayout, QDialogButtonBox
+        
+    def open_config(self):
+        from PyQt6.QtWidgets import QDialog, QComboBox, QFormLayout, QDialogButtonBox
 
-    dialog = QDialog(self)
-    dialog.setWindowTitle("ORION config")
-    dialog.setFixedWidth(360)
-    dialog.setStyleSheet("""
-        QDialog {
-            background-color: #0d0d0d;
-            color: #FFF9E2;
-            font-family: "Press Start 2P", "Courier New", monospace;
-        }
-        QLabel {
-            color: #FFEFAD;
-            font-size: 8px;
-            font-family: "Press Start 2P", "Courier New", monospace;
-        }
-        QComboBox {
-            background-color: #111214;
-            color: #FFF9E2;
-            border: 1px solid #414245;
-            padding: 6px;
-            font-size: 8px;
-            font-family: "Press Start 2P", "Courier New", monospace;
-        }
-        QComboBox:hover { border-color: #FFEFAD; }
-        QComboBox QAbstractItemView {
-            background-color: #111214;
-            color: #FFF9E2;
-            selection-background-color: #3666CB;
-        }
-        QPushButton {
-            color: #0d0d0d;
-            background-color: #FFEFAD;
-            border: none;
-            padding: 8px 16px;
-            font-size: 8px;
-            font-family: "Press Start 2P", "Courier New", monospace;
-        }
-        QPushButton:hover { background-color: #FFF9E2; }
-    """)
+        dialog = QDialog(self)
+        dialog.setWindowTitle("ORION config")
+        dialog.setFixedWidth(360)
+        dialog.setStyleSheet("""
+            QDialog {
+                background-color: #0d0d0d;
+                color: #FFF9E2;
+                font-family: "Press Start 2P", "Courier New", monospace;
+            }
+            QLabel {
+                color: #FFEFAD;
+                font-size: 8px;
+                font-family: "Press Start 2P", "Courier New", monospace;
+            }
+            QComboBox {
+                background-color: #111214;
+                color: #FFF9E2;
+                border: 1px solid #414245;
+                padding: 6px;
+                font-size: 8px;
+                font-family: "Press Start 2P", "Courier New", monospace;
+            }
+            QComboBox:hover { border-color: #FFEFAD; }
+            QComboBox QAbstractItemView {
+                background-color: #111214;
+                color: #FFF9E2;
+                selection-background-color: #3666CB;
+            }
+            QPushButton {
+                color: #0d0d0d;
+                background-color: #FFEFAD;
+                border: none;
+                padding: 8px 16px;
+                font-size: 8px;
+                font-family: "Press Start 2P", "Courier New", monospace;
+            }
+            QPushButton:hover { background-color: #FFF9E2; }
+        """)
 
-    form = QFormLayout(dialog)
-    form.setSpacing(14)
-    form.setContentsMargins(20, 20, 20, 20)
+        form = QFormLayout(dialog)
+        form.setSpacing(14)
+        form.setContentsMargins(20, 20, 20, 20)
 
-    combo_model = QComboBox()
-    combo_model.addItems(["small", "medium", "large"])
-    combo_model.setCurrentText(WHISPER_MODEL)
+        combo_model = QComboBox()
+        combo_model.addItems(["small", "medium", "large"])
+        combo_model.setCurrentText(WHISPER_MODEL)
 
-    combo_whisper_lang = QComboBox()
-    combo_whisper_lang.addItems(["es", "en"])
-    combo_whisper_lang.setCurrentText(WHISPER_LANGUAGE)
+        combo_whisper_lang = QComboBox()
+        combo_whisper_lang.addItems(["es", "en"])
+        combo_whisper_lang.setCurrentText(WHISPER_LANGUAGE)
 
-    combo_app_lang = QComboBox()
-    combo_app_lang.addItems(["es", "en"])
-    combo_app_lang.setCurrentText(APP_LANGUAGE)
+        combo_app_lang = QComboBox()
+        combo_app_lang.addItems(["es", "en"])
+        combo_app_lang.setCurrentText(APP_LANGUAGE)
 
-    form.addRow("whisper model", combo_model)
-    form.addRow("whisper lang", combo_whisper_lang)
-    form.addRow("app language", combo_app_lang)
+        form.addRow("whisper model", combo_model)
+        form.addRow("whisper lang", combo_whisper_lang)
+        form.addRow("app language", combo_app_lang)
 
-    buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
-    buttons.accepted.connect(dialog.accept)
-    buttons.rejected.connect(dialog.reject)
-    form.addRow(buttons)
+        buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        form.addRow(buttons)
 
-    if dialog.exec() == QDialog.DialogCode.Accepted:
-        import config
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            import config
 
-        config.WHISPER_MODEL    = combo_model.currentText()
-        config.WHISPER_LANGUAGE = combo_whisper_lang.currentText()
-        config.APP_LANGUAGE     = combo_app_lang.currentText()
+            config.WHISPER_MODEL    = combo_model.currentText()
+            config.WHISPER_LANGUAGE = combo_whisper_lang.currentText()
+            config.APP_LANGUAGE     = combo_app_lang.currentText()
 
-        self._write_config(
-            config.WHISPER_MODEL,
-            config.WHISPER_LANGUAGE,
-            config.APP_LANGUAGE
-        )
+            self._write_config(
+                config.WHISPER_MODEL,
+                config.WHISPER_LANGUAGE,
+                config.APP_LANGUAGE
+            )
 
-def _write_config(self, whisper_model, whisper_language, app_language):
-    import re
+    def _write_config(self, whisper_model, whisper_language, app_language):
+        import re
 
-    path = "config.py"
-    with open(path, "r", encoding="utf-8") as f:
-        content = f.read()
+        path = "config.py"
+        with open(path, "r", encoding="utf-8") as f:
+            content = f.read()
 
-    content = re.sub(r'WHISPER_MODEL\s*=\s*".*?"',  f'WHISPER_MODEL = "{whisper_model}"',   content)
-    content = re.sub(r'WHISPER_LANGUAGE\s*=\s*".*?"', f'WHISPER_LANGUAGE = "{whisper_language}"', content)
-    content = re.sub(r'APP_LANGUAGE\s*=\s*".*?"',   f'APP_LANGUAGE = "{app_language}"',     content)
+        content = re.sub(r'WHISPER_MODEL\s*=\s*".*?"',  f'WHISPER_MODEL = "{whisper_model}"',   content)
+        content = re.sub(r'WHISPER_LANGUAGE\s*=\s*".*?"', f'WHISPER_LANGUAGE = "{whisper_language}"', content)
+        content = re.sub(r'APP_LANGUAGE\s*=\s*".*?"',   f'APP_LANGUAGE = "{app_language}"',     content)
 
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
 
-    import threading 
-    from ORION import reload_model
-    threading.Thread(target=reload_model, daemon=True.start())
+        import threading 
+        from ORION import reload_model
+        threading.Thread(target=reload_model, daemon=True.start())
 
-    def launch_orion(self):
-        self.avatar_window = AvatarWindow()
-        self.avatar_window.show()
-        self.close()
+        def launch_orion(self):
+            self.avatar_window = AvatarWindow()
+            self.avatar_window.show()
+            self.close()
