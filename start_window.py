@@ -213,11 +213,11 @@ class StartWindow(QWidget):
         return (
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; booting ORION</span><br>'
             f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; checking local configuration</span><br><br>'
-            + row("voice engine", f"whisper {WHISPER_MODEL}")
-            + row("voice language", WHISPER_LANGUAGE)
-            + row("intent engine", OLLAMA_MODEL)
-            + row("ollama endpoint", OLLAMA_URL)
-            + row("app language", APP_LANGUAGE)
+            + row("voice engine: ", f"whisper {WHISPER_MODEL}")
+            + row("voice language: ", WHISPER_LANGUAGE)
+            + row("intent engine: ", OLLAMA_MODEL)
+            + row("ollama endpoint: ", OLLAMA_URL)
+            + row("app language: ", APP_LANGUAGE)
             + row("input modes", "voice + text")
             + f'<br><span style="color:{o}; font-family:Courier New,monospace;">&gt; status: </span>'
             + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">ready</span>'
