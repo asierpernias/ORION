@@ -4,9 +4,8 @@ from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
 from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QFrame
 
 from i18n import t
-
 from ui import AvatarWindow
-from config import WHISPER_MODEL, WHISPER_LANGUAGE, OLLAMA_MODEL, OLLAMA_URL, APP_LANGUAGE
+from config import OLLAMA_MODEL, OLLAMA_URL
 
 
 class StartWindow(QWidget):
@@ -214,7 +213,7 @@ class StartWindow(QWidget):
         launch_button.setFixedHeight(42)
         launch_button.clicked.connect(self.launch_orion)
         self.launch_button = launch_button
-        
+
         footer.addLayout(left_footer)
         footer.addStretch()
         footer.addWidget(launch_button, alignment=Qt.AlignmentFlag.AlignBottom)
@@ -241,23 +240,24 @@ class StartWindow(QWidget):
             )
 
         return (
-            f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; booting ORION</span><br>'
-            f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; checking local configuration</span><br><br>'
-            + row(t("voice engine"), f"whisper {config.WHISPER_MODEL}")
-            + row(t("voice language"), config.WHISPER_LANGUAGE)
-            + row(t("intent engine"), config.OLLAMA_MODEL)
-            + row(t("endpoint"), config.OLLAMA_URL)
-            + row(t("app language"),config. APP_LANGUAGE)
-            + row(t("input modes"), "voice + text")
+            f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; {t("booting")}</span><br>'
+            f'<span style="color:{o}; font-family:Courier New,monospace;">&gt; {t("checking")}</span><br><br>'
+            + row(t("voice_engine"),   f"whisper {config.WHISPER_MODEL}")
+            + row(t("voice_language"), config.WHISPER_LANGUAGE)
+            + row(t("intent_engine"),  config.OLLAMA_MODEL)
+            + row(t("endpoint"),       config.OLLAMA_URL)
+            + row(t("app_language"),   config.APP_LANGUAGE)
+            + row(t("input_modes"),    "voice + text")
             + f'<br><span style="color:{o}; font-family:Courier New,monospace;">&gt; status: </span>'
-            + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">ready</span>'
-            )
+            + f'<span style="color:{g}; font-weight:bold; font-family:Courier New,monospace;">{t("status_ready")}</span>'
+        )
+
     def _refresh_terminal(self):
         self.terminal_label.setText(self.build_status_text())
         self.subtitle_label.setText(t("subtitle"))
         self.launch_button.setText(t("launch"))
         self.prompt_label.setText(t("prompt") + "\u2588")
-        
+
     def start_cursor_blink(self):
         self._cursor_timer = QTimer(self)
         self._cursor_timer.timeout.connect(self._blink_cursor)
@@ -266,10 +266,11 @@ class StartWindow(QWidget):
     def _blink_cursor(self):
         self._cursor_visible = not self._cursor_visible
         cursor = "\u2588" if self._cursor_visible else " "
-        self.prompt_label.setText(f"> ask orion anything...{cursor}")
+        self.prompt_label.setText(t("prompt") + cursor)
 
     def open_config(self):
         from PyQt6.QtWidgets import QDialog, QComboBox, QFormLayout, QDialogButtonBox
+        import config
 
         dialog = QDialog(self)
         dialog.setWindowTitle("ORION config")
@@ -316,15 +317,15 @@ class StartWindow(QWidget):
 
         combo_model = QComboBox()
         combo_model.addItems(["small", "medium", "large"])
-        combo_model.setCurrentText(WHISPER_MODEL)
+        combo_model.setCurrentText(config.WHISPER_MODEL)
 
         combo_whisper_lang = QComboBox()
         combo_whisper_lang.addItems(["es", "en"])
-        combo_whisper_lang.setCurrentText(WHISPER_LANGUAGE)
+        combo_whisper_lang.setCurrentText(config.WHISPER_LANGUAGE)
 
         combo_app_lang = QComboBox()
         combo_app_lang.addItems(["es", "en"])
-        combo_app_lang.setCurrentText(APP_LANGUAGE)
+        combo_app_lang.setCurrentText(config.APP_LANGUAGE)
 
         form.addRow("whisper model", combo_model)
         form.addRow("whisper lang", combo_whisper_lang)
@@ -338,7 +339,6 @@ class StartWindow(QWidget):
         form.addRow(buttons)
 
         if dialog.exec() == QDialog.DialogCode.Accepted:
-            import config
             config.WHISPER_MODEL    = combo_model.currentText()
             config.WHISPER_LANGUAGE = combo_whisper_lang.currentText()
             config.APP_LANGUAGE     = combo_app_lang.currentText()
@@ -352,6 +352,8 @@ class StartWindow(QWidget):
 
     def _write_config(self, whisper_model, whisper_language, app_language):
         import re
+        import threading
+        from ORION import reload_model
 
         path = "config.py"
         with open(path, "r", encoding="utf-8") as f:
@@ -364,10 +366,8 @@ class StartWindow(QWidget):
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
 
-        import threading
-        from ORION import reload_model
-        t = threading.Thread(target=reload_model, daemon=True)
-        t.start()
+        thread = threading.Thread(target=reload_model, daemon=True)
+        thread.start()
 
     def launch_orion(self):
         self.avatar_window = AvatarWindow()
