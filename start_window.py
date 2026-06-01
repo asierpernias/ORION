@@ -150,6 +150,7 @@ class StartWindow(QWidget):
 
         subtitle = QLabel(t("subtitle"))
         subtitle.setObjectName("subtitle")
+        self.subtitle_label = subtitle
 
         title_box.addWidget(title)
         title_box.addWidget(subtitle)
@@ -212,7 +213,8 @@ class StartWindow(QWidget):
         launch_button = QPushButton(t("launch"))
         launch_button.setFixedHeight(42)
         launch_button.clicked.connect(self.launch_orion)
-
+        self.launch_button = launch_button
+        
         footer.addLayout(left_footer)
         footer.addStretch()
         footer.addWidget(launch_button, alignment=Qt.AlignmentFlag.AlignBottom)
