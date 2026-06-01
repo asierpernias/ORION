@@ -363,7 +363,7 @@ def run_text_command(text, ui = None):
     text = text.strip()
 
     if not text: 
-        raise IntentError("No hay comando para procesar")
+         raise IntentError("No hay comando para procesar")
     if ui:
         ui.request_state(ui.SEARCHING)
         ui.request_bubble(f'Comando: "{text}"')
