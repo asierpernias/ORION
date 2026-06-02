@@ -279,7 +279,8 @@ class AvatarWindow(QWidget):
         print("comprove 3")
         if not hasattr(self, "history_window") or self.history_window is None:
             self.history_window = HistoryWindow()
-        self.history_window.refresh()
+        self.history_window.load_history()
+        self.history_window.render_entries()
         self.history_window.show()
         self.history_window.raise_()
         self.history_window.activateWindow()

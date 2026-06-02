@@ -29,7 +29,7 @@ class HistoryWindow(QWidget):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
         self.setWindowFlags(
-            Qt.WindowType.Window |
+            Qt.WindowType.FramelessWindowHint |
             Qt.WindowType.WindowStaysOnTopHint
         )
 
@@ -200,6 +200,7 @@ class HistoryWindow(QWidget):
     def refresh(self):
         self.load_history()
         self.render_entries()
+        self.update()
     
     def paintEvent(self, event):
         painter = QPainter(self)
