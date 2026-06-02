@@ -3,7 +3,7 @@ from PyQt6.QtGui import QPixmap, QIcon, QGuiApplication
 from PyQt6.QtCore import Qt, pyqtSignal
 
 from i18n import t
-from history_button import HistoryButtonn
+from history_button import HistoryButton
 
 import threading
 
