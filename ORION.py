@@ -11,6 +11,7 @@ import webbrowser
 from urllib.parse import quote_plus
 import config
 from i18n import t
+from datetime import datetime
 
 from config import(
     DEVICE_ID,
@@ -42,7 +43,7 @@ class BrowserSearchError(OrionError):
     pass
 
 model = whisper.load_model(WHISPER_MODEL)
-
+HISTORY_FILE = "history.json"
 
 def get_audio_level(audio):
     volume = np.linalg.norm(audio) / len(audio)
@@ -333,6 +334,41 @@ def reload_model():
     print(f"Recargando modelo whisper: {config.WHISPER_MODEL}")
     model = whisper.load_model(config.WHISPER_MODEL)
 
+def load_history():
+    if not os.path.exists(HISTORY_FILE):
+        return []
+    try:
+        with open(HISTORY_FILE, "r", encoding="utf-8") as file:
+            data = json.load(file)
+        if isinstance(data, list):
+            return data
+        return []
+    except Exception as error:
+        print("No se pudo cargar el historial: ", error)
+        return []
+    
+def save_history_entry(command_type, text, intent_data, url):
+    history = load_history()
+
+    entry = {
+        "created_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "type": command_type,
+        "text": text,
+        "intent": intent_data.get("intent", ""),
+        "query": intent_data.get("query", ""),
+        "engine": intent_data.get("eengine", ""),
+        "url": url
+    }
+    history.append(entry)
+    history = history[-50:]
+
+    try:
+        with open(HISTORY_FILE, "w", encoding="utf-8") as file:
+            json.dump(history, file, ensure_ascii=False, ident=2)
+    except Exception as error:
+        print("No se ha podido guardar el historial: ", error)
+
+
 def run_orion(ui=None):
     audio_file = record_when_sound_detected(ui=ui)
 
@@ -364,6 +400,7 @@ def run_orion(ui=None):
         intent_data = analyze_search_intent(text)
 
     url = build_search_url(intent_data)
+    save_history_entry("voice", text, intent_data, url)
 
     if ui:
         query = intent_data.get("query", "")
@@ -382,7 +419,7 @@ def run_text_command(text, ui = None):
          raise IntentError("No hay comando para procesar")
     if ui:
         ui.request_state(ui.SEARCHING)
-        ui.request_bubblef(f'{t("searching")} {text}')
+        ui.request_bubble(f'{t("searching")} {text}')
     intent_data = quick_intent(text)
 
     if not intent_data:
@@ -391,6 +428,8 @@ def run_text_command(text, ui = None):
         intent_data = analyze_search_intent(text)
 
     url = build_search_url(intent_data)
+
+    save_history_entry("text", text, intent_data, url)
 
     if ui:
         query = intent_data.get("query", "")

@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 
 from i18n import t
 from history_button import HistoryButton
+from history_window import HistoryWindow
 
 import threading
 
@@ -182,6 +183,7 @@ class AvatarWindow(QWidget):
 
             self.position_input_button()
             self.position_bubble()
+            self.position_history_button()
 
             event.accept()
 
@@ -242,7 +244,7 @@ class AvatarWindow(QWidget):
 
     def setup_history_button(self):
         self.history_button = HistoryButton(self)
-        self.history_button.clicked.connect(self.open_history)
+        self.history_button.clicked.connect(self.open_history_window)
         self.position_history_button()
         self.input_button.show()
 
@@ -272,3 +274,11 @@ class AvatarWindow(QWidget):
             self.request_bubble("Ya estoy procesando algo...")
             return
         self.command_bar.toggle()
+
+    def open_history_window(self):
+        if not hasattr(self, "history_window") or self.history_window is None:
+            self.history_window = HistoryWindow(parent=self)
+        self.history_window.refresh()
+        self.history_window.show()
+        self.history_window.raise_()
+        self.history_window.activateWindow()
