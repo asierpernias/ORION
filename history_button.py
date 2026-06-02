@@ -52,8 +52,10 @@ class HistoryButton(QLabel):
                 self.setPixmap(self.pressed_pixmap)
             event.accept()
     def mouseReleaseEvent(self, event):
+        print("comprov 1")
         if event.button() == Qt.MouseButton.LeftButton:
             if not self.hover_pixmap.isNull():
                 self.setPixmap(self.hover_pixmap)
+            print("comprove 2")
             self.clicked.emit()
             event.accept()

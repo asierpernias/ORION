@@ -46,6 +46,7 @@ class AvatarWindow(QWidget):
         self.setup_command_bar()
         self.setup_input_button()
         self.setup_history_button()
+        
 
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
@@ -275,8 +276,9 @@ class AvatarWindow(QWidget):
         self.command_bar.toggle()
 
     def open_history_window(self):
+        print("comprove 3")
         if not hasattr(self, "history_window") or self.history_window is None:
-            self.history_window = HistoryWindow(parent=self)
+            self.history_window = HistoryWindow()
         self.history_window.refresh()
         self.history_window.show()
         self.history_window.raise_()

@@ -13,8 +13,8 @@ class HistoryWindow(QWidget):
         self.history_path = history_path
         self.entries = []
 
-        self.window_pixmap = QPixmap("history_window\pixil-frame-0 (2).png")        
-
+        self.window_pixmap = QPixmap("history_window/pixil-frame-0 (2).png")
+        
         font_id = QFontDatabase.addApplicationFont("assets\fonts\press-start-2p.ttf")
 
         self.setup_window()
