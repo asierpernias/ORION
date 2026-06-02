@@ -3,6 +3,7 @@ from PyQt6.QtGui import QPixmap, QIcon, QGuiApplication
 from PyQt6.QtCore import Qt, pyqtSignal
 
 from i18n import t
+from history_button import HistoryButtonn
 
 import threading
 
@@ -43,6 +44,7 @@ class AvatarWindow(QWidget):
         self.setup_bubble()
         self.setup_command_bar()
         self.setup_input_button()
+        self.setup_history_button()
 
         self.setWindowIcon(QIcon("assets/icon.ico"))
 
@@ -237,6 +239,23 @@ class AvatarWindow(QWidget):
         self.input_button.clicked.connect(self.toggle_command_bar)
         self.position_input_button()
         self.input_button.show()
+
+    def setup_history_button(self):
+        self.history_button = HistoryButton(self)
+        self.history_button.clicked.connect(self.open_history)
+        self.position_history_button()
+        self.input_button.show()
+
+    def position_history_button(self):
+        margin_x = 28
+        margin_y = 12
+        
+        x = self.avatar.x() + self.avatar.width() -self.input_button.width() - margin_x
+        y = self.avatar.y() - self.input_button.height() + margin_y
+
+        self.input_button.move(x, y)
+        self.input_button.raise_()
+
 
     def position_input_button(self):
         magin_x = 12
