@@ -11,7 +11,7 @@ TRIGGER_WORDS = {
     },
     "timer": {
         "es": ["timer", "temporizador", "pon un timer", "avisame en"],
-        "en": ["timer", "set a timer", "remaind me in"]
+        "en": ["timer", "set a timer", "remind me in"]
     },
     "open_app": {
         "es": ["abre", "lanza", "ejecuta"],
@@ -20,16 +20,29 @@ TRIGGER_WORDS = {
     "search": {
         "es": ["busca", "buscar"],
         "en": ["search", "look for", "find"]
+    },
+    "note_list":{
+        "es": ["lee mis notas", "mostrar notas", "muestra mis notas", "ver notas", "listar notas"],
+        "en": ["read my notes", "show notes", "show my notes", "view notes", "list notes"]
     }
     
 }
 
+TRIGGER_ORDER = [
+    "timer",
+    "note_list",
+    "note",
+    "help",
+    "open_app",
+    "search"
+]
+
 def parse_intent(text):
     clean = text.lower().strip()
     lang = getattr(config, "APP_LANGUAGE", "es")
+    for intent in TRIGGER_ORDER:
+        triggers = TRIGGER_WORDS[intent].get(lang, [])
 
-    for intent, langs in TRIGGER_WORDS.items():
-        triggers = langs.get(lang, [])
         for trigger in triggers:
             if trigger in clean:
                 payload = clean

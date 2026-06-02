@@ -1,5 +1,5 @@
 from i18n import t
-from notes import save_notes
+from notes import save_note, load_notes
 
 ACTION_REGISTRY = []
 
@@ -47,3 +47,22 @@ def action_timer(intent_data, ui=None):
 @register("open_app")
 def action_oppen_app(intent_data, ui=None):
     pass
+
+@register("note")
+def action_note(intent_data, ui=None):
+    text = intent_data.get("text", "")
+    text = text.strip() if isinstance(text, str) else ""
+
+    if not text: 
+        if ui:
+            ui.request_bubble("error")
+        return None
+    total = save_note(text)
+
+    if ui:
+        ui.request_bubble(f"Nota guardada ({total})")
+
+    return {
+        "saved": True,
+        "count": total
+    }

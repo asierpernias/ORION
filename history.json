@@ -16,5 +16,32 @@
     "query": "algooooo",
     "engine": "google",
     "url": "https://www.google.com/search?q=algooooo"
+  },
+  {
+    "created_at": "2026-06-02 16:19",
+    "type": "text",
+    "text": "help",
+    "intent": "search",
+    "query": "help",
+    "engine": "google",
+    "url": "https://www.google.com/search?q=help"
+  },
+  {
+    "created_at": "2026-06-02 16:19",
+    "type": "text",
+    "text": "comandos",
+    "intent": "search",
+    "query": "comandos",
+    "engine": "google",
+    "url": "https://www.google.com/search?q=comandos"
+  },
+  {
+    "created_at": "2026-06-02 17:44",
+    "type": "text",
+    "text": "añade a notas 7 de diciembre",
+    "intent": "search",
+    "query": "añade a notas 7 de diciembre",
+    "engine": "google",
+    "url": "https://www.google.com/search?q=a%C3%B1ade+a+notas+7+de+diciembre"
   }
 ]

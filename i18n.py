@@ -28,7 +28,7 @@ STRINGS = {
         "notes_saved": "Anotado",
         "notes_empty": "No he entendido que anotar",
         "help_text": "Comandos: buscar, anotar, timer, abre",
-        "uknown_intent": "No he entendido el comando",
+        "unknown_intent": "No he entendido el comando",
 
     },
 
