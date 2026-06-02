@@ -356,7 +356,7 @@ def save_history_entry(command_type, text, intent_data, url):
         "text": text,
         "intent": intent_data.get("intent", ""),
         "query": intent_data.get("query", ""),
-        "engine": intent_data.get("eengine", ""),
+        "engine": intent_data.get("engine", ""),
         "url": url
     }
     history.append(entry)
@@ -364,7 +364,7 @@ def save_history_entry(command_type, text, intent_data, url):
 
     try:
         with open(HISTORY_FILE, "w", encoding="utf-8") as file:
-            json.dump(history, file, ensure_ascii=False, ident=2)
+            json.dump(history, file, ensure_ascii=False, indent=2)
     except Exception as error:
         print("No se ha podido guardar el historial: ", error)
 
