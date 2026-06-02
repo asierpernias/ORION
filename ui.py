@@ -252,8 +252,8 @@ class AvatarWindow(QWidget):
         margin_x = 52
         margin_y = 12
         
-        x = self.avatar.x() + self.avatar.width() -self.input_button.width() - margin_x
-        y = self.avatar.y() - self.input_button.height() + margin_y
+        x = self.avatar.x() + self.avatar.width() - self.history_button.width() - margin_x
+        y = self.avatar.y() - self.history_button.height() + margin_y
 
         self.input_button.move(x, y)
         self.input_button.raise_()
