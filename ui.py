@@ -251,13 +251,12 @@ class AvatarWindow(QWidget):
     def position_history_button(self):
         margin_x = 52
         margin_y = 12
-        
+
         x = self.avatar.x() + self.avatar.width() - self.history_button.width() - margin_x
         y = self.avatar.y() - self.history_button.height() + margin_y
 
-        self.input_button.move(x, y)
-        self.input_button.raise_()
-
+        self.history_button.move(x, y)
+        self.history_button.raise_()
 
     def position_input_button(self):
         magin_x = 12
