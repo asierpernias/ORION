@@ -24,7 +24,12 @@ STRINGS = {
         "searching": "Buscando:",
         "already_running": "Ya estoy procesando algo...",
         "no_audio": "No he entendido el audio",
-        "unexpected": "Ocurrio un error inesperado"
+        "unexpected": "Ocurrio un error inesperado",
+        "notes_saved": "Anotado",
+        "notes_empty": "No he entendido que anotar",
+        "help_text": "Comandos: buscar, anotar, timer, abre",
+        "uknown_intent": "No he entendido el comando",
+
     },
 
     "en": {
@@ -53,6 +58,10 @@ STRINGS = {
         "already_running": "Already processing something...",
         "no_audio": "I didn't understand the audio",
         "unexpected": "An unexpected error ocurred.",
+        "notes_saved": "Noted: ",
+        "notes_empty": "I didnt catch what to note",
+        "help_text": "Commands: search, note, timer, open",
+        "uknown_intent": "I didn't understadn the command",
     }
 }
 

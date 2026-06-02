@@ -359,6 +359,7 @@ def save_history_entry(command_type, text, intent_data, url):
         "engine": intent_data.get("engine", ""),
         "url": url
     }
+    
     history.append(entry)
     history = history[-50:]
 
