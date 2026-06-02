@@ -246,10 +246,10 @@ class AvatarWindow(QWidget):
         self.history_button = HistoryButton(self)
         self.history_button.clicked.connect(self.open_history_window)
         self.position_history_button()
-        self.input_button.show()
+        self.history_button.show()
 
     def position_history_button(self):
-        margin_x = 28
+        margin_x = 52
         margin_y = 12
         
         x = self.avatar.x() + self.avatar.width() -self.input_button.width() - margin_x

@@ -1,7 +1,7 @@
 import json
 import os
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFontDatabase
+from PyQt6.QtGui import QFontDatabase, QPixmap, QPainter
 from PyQt6.QtWidgets import(
     QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QScrollArea, QFrame
 )
@@ -13,6 +13,8 @@ class HistoryWindow(QWidget):
         self.history_path = history_path
         self.entries = []
 
+        self.window_pixmap = QPixmap("history_window\pixil-frame-0 (2).png")        
+
         font_id = QFontDatabase.addApplicationFont("assets\fonts\press-start-2p.ttf")
 
         self.setup_window()
@@ -23,6 +25,8 @@ class HistoryWindow(QWidget):
     def setup_window(self):
         self.setWindowTitle("Orion Histoy")
         self.setFixedSize(320, 280)
+
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
         self.setWindowFlags(
             Qt.WindowType.Window |
@@ -100,20 +104,20 @@ class HistoryWindow(QWidget):
         root.setContentsMargins(12,12,12,12)
         root.setSpacing(8)
 
-        header = QHBoxLayout
+        header = QHBoxLayout()
 
         title = QLabel("HISTORY")
         title.setObjectName("title")
 
         close_button = QPushButton("X")
-        close_button.setFixedHeight(28, 24)
+        close_button.setFixedSize(28, 24)
         close_button.clicked.connect(self.close)
 
         header.addWidget(title)
         header.addStretch()
         header.addWidget(close_button)
 
-        self.scroll = QScrollArea
+        self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
 
         self.content = QWidget()
@@ -150,7 +154,7 @@ class HistoryWindow(QWidget):
             empty = QLabel("No hay historial todavia")
             empty.setObjectName("empty")
             empty.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.content_layout.addWidget("empty")
+            self.content_layout.addWidget(empty)
             self.content_layout.addStretch()
             return
         for entry in reversed(self.entries[-20:]):
@@ -162,7 +166,7 @@ class HistoryWindow(QWidget):
             item = self.content_layout.takeAt(0)
             widget = item.widget()
             if widget:
-                widget.deletLater()
+                widget.deleteLater()
 
     def create_entry_widget(self, entry):
         frame = QFrame()
@@ -196,3 +200,9 @@ class HistoryWindow(QWidget):
     def refresh(self):
         self.load_history()
         self.render_entries()
+    
+    def paintEvent(self, event):
+        painter = QPainter(self)
+
+        if not self.window_pixmap.isNull():
+            painter.drawPixmap(0,0, self.window_pixmap)
