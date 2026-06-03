@@ -14,6 +14,7 @@ def register(intent_name):
         return fn
     return decorator
 def execute(intent_data, ui=None):
+    print("execute")
     intent = intent_data.get("intent")
     handler = ACTION_REGISTRY.get(intent)
 
@@ -26,12 +27,14 @@ def execute(intent_data, ui=None):
 @register("help")
 
 def action_help(intent_data, ui=None):
+    print("1")
     if ui:
         ui.request_bubble(t("help_text"))
     return intent_data
 
 @register("search")
 def action_search(intent_data, ui=None):
+    print("2")
     from ORION import quick_intent, analyze_search_intent, build_search_url, open_search
     text = intent_data.get("raw", "")
     result = quick_intent(text)
@@ -47,6 +50,7 @@ def action_search(intent_data, ui=None):
 
 @register("timer")
 def action_timer(intent_data, ui=None):
+    print("3")
     text = intent_data.get("text", "")
     seconds = parse_duration(text)
 
@@ -96,7 +100,7 @@ def action_note(intent_data, ui=None):
         "count": total
     }
 
-@register("notel_ist")
+@register("notel_list")
 def action_note_list(intent_data, ui=None):
     notes = load_notes()
 
@@ -134,7 +138,7 @@ def parse_duration(text):
     patterns_en = [
         (r'(\d+)\s*hour', 3600),
         (r'(\d+)\s*minute', 60),
-        (r'(\d+)s*second', 1), 
+        (r'(\d+)\s*second', 1), 
     ]
 
     import config

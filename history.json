@@ -142,5 +142,59 @@
     "query": "",
     "engine": "",
     "url": null
+  },
+  {
+    "created_at": "2026-06-03 17:45",
+    "type": "text",
+    "text": "help",
+    "intent": "help",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 17:46",
+    "type": "text",
+    "text": "lee notas",
+    "intent": "note",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 17:46",
+    "type": "text",
+    "text": "lee mis notas",
+    "intent": "note_list",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 17:46",
+    "type": "text",
+    "text": "lee nota",
+    "intent": "note",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 17:46",
+    "type": "text",
+    "text": "command",
+    "intent": "search",
+    "query": "",
+    "engine": "",
+    "url": "https://www.google.com/search?q=command"
+  },
+  {
+    "created_at": "2026-06-03 17:47",
+    "type": "text",
+    "text": "timer 5 segundos",
+    "intent": "timer",
+    "query": "",
+    "engine": "",
+    "url": null
   }
 ]
