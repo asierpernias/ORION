@@ -61,7 +61,7 @@ def controller_run_text(self, text):
             print(result)
 
             if result:
-                self.request_state(self.RESPONDING)
+                
                 time.sleep(1.5)
 
         except OrionError as e:
