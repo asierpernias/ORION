@@ -304,5 +304,23 @@
     "query": "",
     "engine": "",
     "url": null
+  },
+  {
+    "created_at": "2026-06-03 18:52",
+    "type": "text",
+    "text": "timer 5 segundos",
+    "intent": "timer",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 18:53",
+    "type": "text",
+    "text": "sad",
+    "intent": "search",
+    "query": "",
+    "engine": "",
+    "url": "https://www.google.com/search?q=sad"
   }
 ]

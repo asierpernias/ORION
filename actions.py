@@ -4,6 +4,7 @@ import re
 import winsound
 import threading
 
+import os
 
 active_timers = []
 ACTION_REGISTRY = {}
@@ -78,7 +79,89 @@ def action_timer(intent_data, ui=None):
 
 @register("open_app")
 def action_oppen_app(intent_data, ui=None):
-    pass
+    import subprocess
+    import shutil
+    import glob
+    import platform
+
+    app_name = intent_data.get("text", "").strip()
+    if not app_name:
+        if ui: 
+            ui.request_bubble(t("open_app_empty"))
+        return None
+    query = app_name.lower()
+    system = platform.system()
+    found = shutil.which(app_name)
+    
+    if found:
+        subprocess.Popen([app_name])
+        if ui:
+            ui.request_bubble(f'{t("open_app_opening")} {app_name}')
+        return {"opened": app_name}
+    if system == "Windows":
+        search_dirs = [
+            os.path.expandvars(r"%APPDATA%\Microsoft\Windows\Start Menu\Programs"),
+            os.path.expandvars(r"%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs"),
+            os.path.expanduser("~/Desktop"),
+        ]
+        for directory in search_dirs:
+            matches = glob.glob(os.path.join(directory, "**", "*.lnk"), recursive=True)
+            for match in matches:
+                filename = os.path.splitext(os.path.basename(match))[0].lower()
+                if query in filename:
+                    os.startfile(match)
+                    if ui:
+                        ui.request_bubble(f'{t("open_app_opening")} {filename}')
+                    return {"opened": filename}  
+        program_dirs = [
+            os.path.expandvars("%PROGRAMFILES%"),
+            os.path.expandvars("%PROGRAMFILES(X86)%"),
+            os.path.expandvars("%LOCALAPPDATA%"),
+        ]
+        for directory in program_dirs:
+            matches = glob.glob(os.path.join(directory, "**", f"*{query}*.exe"), recursive=True)
+            if matches:
+                subprocess.Popen([matches[0]])
+                name = os.path.basename(matches[0])
+                if ui:
+                    ui.request_bubble(f'{t("open_app_opening")} {name}')
+                return {"opened": name}
+            
+    elif system == "Darwin":
+        matches = glob.glob(f"/Applications/**/*{app_name}*.app", recursive=True)
+        matches += glob.glob(os.path.expanduser(f"~/Applications/**/*{app_name}*.app"), recursive=True)
+        if matches:
+            subprocess.Popen(["open", matches[0]])
+            name = os.path.splitext(os.path.basename(matches[0]))[0]
+            if ui:
+                ui.request_bubble(f'{t("open_app_opening")} {name}')
+            return {"opened": name}
+    elif system == "Linux":
+        desktop_dirs = [
+            "/usr/share/applications",
+            "/usr/local/share/applications",
+            os.path.expanduser("~/.local/share/applications"),
+        ]
+        for directory in desktop_dirs:
+            matches = glob.glob(os.path.join(directory, "*.desktop"))
+            for match in matches:
+                try:
+                    with open(match, "r", encoding="utf-8", errors="ignore") as f:
+                        content = f.read().lower()
+                    if query in content:
+                        for line in content.splitlines():
+                                if line.startswith("exec="):
+                                    cmd = line.split("=", 1)[1].split()[0]
+                                    subprocess.Popen([cmd])
+                                    name = os.path.splitext(os.path.basename(match))[0]
+                                    if ui:
+                                        ui.request_bubble(f'{t("open_app_opening")} {name}')
+                                    return {"opened": name}
+                except Exception:
+                    continue
+    if ui:
+        ui.request_bubble(f'{t("open_app_not_found")} {app_name}')
+    return None
 
 @register("note")
 def action_note(intent_data, ui=None):

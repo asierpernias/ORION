@@ -33,6 +33,9 @@ STRINGS = {
         "timer_done": "Timer terminado",
         "timer_invalid": "No he encontrado la duracion",
         "note_empty": "No hay notas guardadas",
+        "open_app_empty": "No has dicho que app abrir",
+        "open_app_opening": "Abriendo",
+        "open_app_not_found": "No he encontado la app",
 
     },
 
@@ -70,6 +73,9 @@ STRINGS = {
         "timer_done": "Timer done",
         "timer_invalid": "I didnt understand the duration",
         "note_empty": "No notes saved yet",
+        "open_app_empty": "No app name provided",
+        "open_app_opening": "Opening",
+        "open_app_not found": "App not found",
     }
 }
 
