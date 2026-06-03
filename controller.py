@@ -1,7 +1,7 @@
 import threading
 import time
-from intent_router import route_intent
-from ORION import run_orion, open_search, run_text_command, OrionError
+
+from ORION import run_orion, run_text_command, OrionError
 from i18n import t
 
 def controller_run_orion(self):
@@ -21,7 +21,6 @@ def controller_run_orion(self):
             print(result)
 
             if result:
-                route_intent(result, ui=self)
 
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)
@@ -63,7 +62,7 @@ def controller_run_text(self, text):
 
             if result:
                
-                route_intent(result, ui=self)
+                
 
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)

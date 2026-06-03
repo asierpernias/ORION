@@ -12,6 +12,8 @@ from urllib.parse import quote_plus
 import config
 from i18n import t
 from datetime import datetime
+from intent_parser import parse_intent
+from actions import execute
 
 from config import(
     DEVICE_ID,
@@ -392,26 +394,19 @@ def run_orion(ui=None):
         time.sleep(1.2)
         ui.request_bubble(t("preparing"))
 
-    intent_data = quick_intent(text)
+    intent_data = parse_intent(text)
+    result = execute(intent_data, ui=ui)
 
-    if not intent_data:
-        if ui:
-            ui.request_bubble(t("asking_ollama"))    
-
-        intent_data = analyze_search_intent(text)
-
-    url = build_search_url(intent_data)
-    save_history_entry("voice", text, intent_data, url)
-
-    if ui:
-        query = intent_data.get("query", "")
-        engine = intent_data.get("engine", "google")
-        ui.request_bubble(f'{t("searching")} {query} — {engine}')
-
+    save_history_entry(
+        "voice",
+        text,
+        intent_data,
+        result.get("url") if isinstance(result, dict) else None
+    )
     return {
         "text": text,
         "intent": intent_data,
-        "url": url
+        "result": result
     }
 def run_text_command(text, ui = None):
     text = text.strip()
@@ -420,24 +415,14 @@ def run_text_command(text, ui = None):
          raise IntentError("No hay comando para procesar")
     if ui:
         ui.request_state(ui.SEARCHING)
-        ui.request_bubble(f'{t("searching")} {text}')
-    intent_data = quick_intent(text)
+        ui.request_bubble(f'{t("processing")} {text}')
+    intent_data = parse_intent(text)
+    result = execute(intent_data, ui=ui)
 
-    if not intent_data:
-        if ui:
-            ui.request_bubble(t("asking_ollama"))
-        intent_data = analyze_search_intent(text)
+    save_history_entry("text", text, intent_data, result.get("url") if isinstance(result, dict) else None)
 
-    url = build_search_url(intent_data)
-
-    save_history_entry("text", text, intent_data, url)
-
-    if ui:
-        query = intent_data.get("query", "")
-        engine = intent_data.get("engine", "google")
-        ui.request_bubble(f'{t("searching")} {query} — {engine}')
     return {
         "text": text,
         "intent": intent_data,
-        "url": url
+        "result": result
     }
