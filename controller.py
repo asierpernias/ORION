@@ -21,10 +21,6 @@ def controller_run_orion(self):
             print(result)
 
             if result:
-                engine = result["intent"].get("engine", "google")
-                query = result["intent"].get("query", "")
-
-                self.request_bubble(f"Abriendo {engine}: {query}")
                 route_intent(result, ui=self)
 
                 self.request_state(self.RESPONDING)
@@ -66,11 +62,7 @@ def controller_run_text(self, text):
             print(result)
 
             if result:
-                engine = result["intent"].get("engine", "google")
-                query = result["intent"].get("query", "")
-
-                self.request_bubble(f"Abriendo {engine}: {query}")
-
+               
                 route_intent(result, ui=self)
 
                 self.request_state(self.RESPONDING)
