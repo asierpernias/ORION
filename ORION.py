@@ -418,7 +418,7 @@ def run_text_command(text, ui = None):
         ui.request_bubble(f'{t("processing")} {text}')
     intent_data = parse_intent(text)
     result = execute(intent_data, ui=ui)
-
+    print("llego?")
     save_history_entry("text", text, intent_data, result.get("url") if isinstance(result, dict) else None)
 
     return {

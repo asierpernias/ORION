@@ -205,5 +205,14 @@
     "query": "",
     "engine": "",
     "url": null
+  },
+  {
+    "created_at": "2026-06-03 18:02",
+    "type": "text",
+    "text": "help",
+    "intent": "help",
+    "query": "",
+    "engine": "",
+    "url": null
   }
 ]
