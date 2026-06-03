@@ -88,7 +88,8 @@ def action_note(intent_data, ui=None):
     total = save_note(text)
 
     if ui:
-        ui.request_bubble(f"{t("note_saved")} ({total})")
+        svg_msg = t("note_saved")
+        ui.request_bubble(f"{svg_msg} ({total})")
 
     return {
         "saved": True,
