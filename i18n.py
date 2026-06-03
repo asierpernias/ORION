@@ -32,6 +32,7 @@ STRINGS = {
         "timer_set": "Timer iniciado",
         "timer_done": "Timer terminado",
         "timer_invalid": "No he encontrado la duracion",
+        "note_empty": "No hay notas guardadas",
 
     },
 
@@ -68,6 +69,7 @@ STRINGS = {
         "timer_set": "Timer started",
         "timer_done": "Timer done",
         "timer_invalid": "I didnt understand the duration",
+        "note_empty": "No notes saved yet",
     }
 }
 

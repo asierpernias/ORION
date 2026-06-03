@@ -1,6 +1,10 @@
 import config
 
-TRIGGER_WORDS = {
+TRIGGER_WORDS = { "note_list":{
+        "es": ["lee mis notas", "mostrar notas", "muestra mis notas", "ver notas", "listar notas"],
+        "en": ["read my notes", "show notes", "show my notes", "view notes", "list notes"]
+    },
+    
     "note": {
         "es": ["anota", "guarda", "nota", "apunta", "recuerda"],
         "en": ["note", "save", "remember", "write down", "jot"]
@@ -21,11 +25,7 @@ TRIGGER_WORDS = {
         "es": ["busca", "buscar"],
         "en": ["search", "look for", "find"]
     },
-    "note_list":{
-        "es": ["lee mis notas", "mostrar notas", "muestra mis notas", "ver notas", "listar notas"],
-        "en": ["read my notes", "show notes", "show my notes", "view notes", "list notes"]
-    }
-    
+   
 }
 
 TRIGGER_ORDER = [

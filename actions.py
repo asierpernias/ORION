@@ -21,7 +21,7 @@ def execute(intent_data, ui=None):
         return handler(intent_data, ui=ui)
     if ui:
         ui.request_bubble(t("unknown_intent"))
-        return None
+    return None
     
 @register("help")
 
@@ -64,7 +64,7 @@ def action_timer(intent_data, ui=None):
         if ui:
             ui.request_bubble(t("timer_done"))
 
-    timer = threading.timer(seconds, timer_callback)
+    timer = threading.Timer(seconds, timer_callback)
     timer.daemon = True
     timer.start()
     active_timers.append(timer)
@@ -83,25 +83,25 @@ def action_note(intent_data, ui=None):
 
     if not text: 
         if ui:
-            ui.request_bubble("error")
+            ui.request_bubble(t("note_empty"))
         return None
     total = save_note(text)
 
     if ui:
-        ui.request_bubble(f"Nota guardada ({total})")
+        ui.request_bubble(f"{t("note_saved")} ({total})")
 
     return {
         "saved": True,
         "count": total
     }
 
-@register("note list")
+@register("notel_ist")
 def action_note_list(intent_data, ui=None):
     notes = load_notes()
 
     if not notes:
         if ui:
-            ui.request_bubble("No hay notas guardadas")
+            ui.request_bubble(t("notes_empty"))
         return {
             "count": 0,
             "notes": []
@@ -128,7 +128,7 @@ def parse_duration(text):
     patterns_es = [
         (r'(\d+)\s*hora', 3600),
         (r'(\d+)\s*minuto', 60),
-        (r'(\d+)s*second', 1), 
+        (r'(\d+)s*segundo', 1), 
     ]
     patterns_en = [
         (r'(\d+)\s*hour', 3600),
