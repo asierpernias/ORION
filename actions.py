@@ -1,7 +1,7 @@
 from i18n import t
 from notes import save_note, load_notes
 
-ACTION_REGISTRY = []
+ACTION_REGISTRY = {}
 
 def register(intent_name):
     def decorator(fn):
