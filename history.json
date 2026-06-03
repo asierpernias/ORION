@@ -259,5 +259,50 @@
     "query": "",
     "engine": "",
     "url": null
+  },
+  {
+    "created_at": "2026-06-03 18:45",
+    "type": "text",
+    "text": "help",
+    "intent": "help",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 18:45",
+    "type": "text",
+    "text": "help",
+    "intent": "help",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 18:45",
+    "type": "text",
+    "text": "guarda comer en listas",
+    "intent": "note",
+    "query": "",
+    "engine": "",
+    "url": null
+  },
+  {
+    "created_at": "2026-06-03 18:45",
+    "type": "text",
+    "text": "dame la lista",
+    "intent": "search",
+    "query": "",
+    "engine": "",
+    "url": "https://www.google.com/search?q=dame+la+lista"
+  },
+  {
+    "created_at": "2026-06-03 18:48",
+    "type": "voice",
+    "text": "Ayuda.",
+    "intent": "help",
+    "query": "",
+    "engine": "",
+    "url": null
   }
 ]

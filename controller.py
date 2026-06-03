@@ -21,7 +21,7 @@ def controller_run_orion(self):
             print(result)
 
             if result:
-
+                time.sleep(3)
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)
 
