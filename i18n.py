@@ -29,6 +29,9 @@ STRINGS = {
         "notes_empty": "No he entendido que anotar",
         "help_text": "Comandos: buscar, anotar, timer, abre",
         "unknown_intent": "No he entendido el comando",
+        "timer_set": "Timer iniciado",
+        "timer_done": "Timer terminado",
+        "timer_invalid": "No he encontrado la duracion",
 
     },
 
@@ -62,6 +65,9 @@ STRINGS = {
         "notes_empty": "I didnt catch what to note",
         "help_text": "Commands: search, note, timer, open",
         "uknown_intent": "I didn't understadn the command",
+        "timer_set": "Timer started",
+        "timer_done": "Timer done",
+        "timer_invalid": "I didnt understand the duration",
     }
 }
 

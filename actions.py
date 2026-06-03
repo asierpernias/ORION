@@ -1,6 +1,11 @@
 from i18n import t
 from notes import save_note, load_notes
+import re
+import winsound
+import threading
 
+
+active_timers = []
 ACTION_REGISTRY = {}
 
 def register(intent_name):
@@ -15,7 +20,7 @@ def execute(intent_data, ui=None):
     if handler:
         return handler(intent_data, ui=ui)
     if ui:
-        ui.request_bubble(t("uknown_intent"))
+        ui.request_bubble(t("unknown_intent"))
         return None
     
 @register("help")
@@ -42,7 +47,30 @@ def action_search(intent_data, ui=None):
 
 @register("timer")
 def action_timer(intent_data, ui=None):
-    pass
+    text = intent_data.get("text", "")
+    seconds = parse_duration(text)
+
+    if not seconds:
+        if ui:
+            ui.request_bubble(t("timer_invalid"))
+        return None
+    label =  f"{seconds}s"
+
+    if ui: 
+        ui.request_bubble(f'{t("timer_set")} {label}')
+
+    def timer_callback():
+        winsound.Beep(1000, 800)
+        if ui:
+            ui.request_bubble(t("timer_done"))
+
+    timer = threading.timer(seconds, timer_callback)
+    timer.daemon = True
+    timer.start()
+    active_timers.append(timer)
+
+    return {"intent": "timer", "seconds": seconds}
+    
 
 @register("open_app")
 def action_oppen_app(intent_data, ui=None):
@@ -96,3 +124,25 @@ def action_note_list(intent_data, ui=None):
     }
 
 
+def parse_duration(text):
+    patterns_es = [
+        (r'(\d+)\s*hora', 3600),
+        (r'(\d+)\s*minuto', 60),
+        (r'(\d+)s*second', 1), 
+    ]
+    patterns_en = [
+        (r'(\d+)\s*hour', 3600),
+        (r'(\d+)\s*minute', 60),
+        (r'(\d+)s*second', 1), 
+    ]
+
+    import config
+    patterns = patterns_en if config.APP_LANGUAGE == "en" else patterns_es
+
+    total = 0
+
+    for pattern, multiplier, in patterns:
+        match = re.search(pattern, text.lower())
+        if match:
+            total += int(match.group(1)) * multiplier
+    return total if total > 0 else None
