@@ -4,10 +4,13 @@ import re
 import winsound
 import threading
 
+from ORION import save_history_entry
+
 import os
 
 active_timers = []
 ACTION_REGISTRY = {}
+
 
 def register(intent_name):
     def decorator(fn):
@@ -18,11 +21,18 @@ def execute(intent_data, ui=None):
     print("execute")
     intent = intent_data.get("intent")
     handler = ACTION_REGISTRY.get(intent)
-
+    result = None
     if handler:
         return handler(intent_data, ui=ui)
-    if ui:
-        ui.request_bubble(t("unknown_intent"))
+    save_history_entry(        command_type="intent",
+        text=intent_data.get("raw", ""),
+        intent_data=intent_data,
+        result=result
+    )
+
+    if not handler:
+        if ui:
+            ui.request_bubble(t("unknown_intent"))
     return None
     
 @register("help")

@@ -397,12 +397,7 @@ def run_orion(ui=None):
     intent_data = parse_intent(text)
     result = execute(intent_data, ui=ui)
     print("despues")
-    save_history_entry(
-        "voice",
-        text,
-        intent_data,
-        result.get("url") if isinstance(result, dict) else None
-    )
+
     return {
         "text": text,
         "intent": intent_data,
@@ -421,7 +416,6 @@ def run_text_command(text, ui = None):
     print("About to call", intent_data)
     result = execute(intent_data, ui=ui)
     print("posterior,", result)
-    save_history_entry("text", text, intent_data, result.get("url") if isinstance(result, dict) else None)
 
     return {
         "text": text,
