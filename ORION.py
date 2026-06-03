@@ -393,10 +393,10 @@ def run_orion(ui=None):
         ui.request_bubble(f'{t("heard") } " {text}"')
         time.sleep(1.2)
         ui.request_bubble(t("preparing"))
-
+    print("ANTES")
     intent_data = parse_intent(text)
     result = execute(intent_data, ui=ui)
-
+    print("despues")
     save_history_entry(
         "voice",
         text,
