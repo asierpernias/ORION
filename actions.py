@@ -100,7 +100,7 @@ def action_note(intent_data, ui=None):
         "count": total
     }
 
-@register("notel_list")
+@register("note_list")
 def action_note_list(intent_data, ui=None):
     notes = load_notes()
 
@@ -133,7 +133,7 @@ def parse_duration(text):
     patterns_es = [
         (r'(\d+)\s*hora', 3600),
         (r'(\d+)\s*minuto', 60),
-        (r'(\d+)s*segundo', 1), 
+        (r'(\d+)\s*segundo', 1), 
     ]
     patterns_en = [
         (r'(\d+)\s*hour', 3600),

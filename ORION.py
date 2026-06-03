@@ -416,9 +416,11 @@ def run_text_command(text, ui = None):
     if ui:
         ui.request_state(ui.SEARCHING)
         ui.request_bubble(f'{t("processing")} {text}')
+    
     intent_data = parse_intent(text)
+    print("About to call", intent_data)
     result = execute(intent_data, ui=ui)
-    print("llego?")
+    print("posterior,", result)
     save_history_entry("text", text, intent_data, result.get("url") if isinstance(result, dict) else None)
 
     return {
