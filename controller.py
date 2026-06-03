@@ -1,6 +1,6 @@
 import threading
 import time
-
+from intent_router import route_intent
 from ORION import run_orion, open_search, run_text_command, OrionError
 from i18n import t
 
@@ -25,7 +25,7 @@ def controller_run_orion(self):
                 query = result["intent"].get("query", "")
 
                 self.request_bubble(f"Abriendo {engine}: {query}")
-                open_search(result["intent"])
+                route_intent(result, ui=self)
 
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)
@@ -71,7 +71,7 @@ def controller_run_text(self, text):
 
                 self.request_bubble(f"Abriendo {engine}: {query}")
 
-                open_search(result["intent"])
+                route_intent(result, ui=self)
 
                 self.request_state(self.RESPONDING)
                 time.sleep(1.5)
