@@ -66,3 +66,33 @@ def action_note(intent_data, ui=None):
         "saved": True,
         "count": total
     }
+
+@register("note list")
+def action_note_list(intent_data, ui=None):
+    notes = load_notes()
+
+    if not notes:
+        if ui:
+            ui.request_bubble("No hay notas guardadas")
+        return {
+            "count": 0,
+            "notes": []
+        }
+    lines = []
+
+    for note in notes:
+        text = note.get("text", "")
+        timestamp = note.get("timestamp", "")
+        lines.append(f"• {text} ({timestamp}) ")
+
+    message = "\n".join(lines)
+
+    if ui:
+        ui.request_bubble(message)
+
+    return {
+        "count": len(notes),
+        "notes": notes
+    }
+
+
