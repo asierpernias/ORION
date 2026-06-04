@@ -16,7 +16,7 @@ def predict_intent(text: str):
     classes = model.classes_
 
     best_idx = probs.argmax()
-    intent = classes[best_idx]
+    intent = str(classes[best_idx])
     confidence = probs[best_idx]
 
     return { "intent": intent, "confidence": float(confidence), "text": text, "source": "ml"}

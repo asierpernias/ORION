@@ -143,3 +143,108 @@
 2026-06-04 20:13:26,611 - INFO - {'text': 'film', 'intent': {'intent': 'search', 'text': 'film', 'raw': 'film'}, 'result': {'intent': {'intent': 'search', 'query': 'film', 'engine': 'google'}, 'url': 'https://www.google.com/search?q=film'}}
 2026-06-04 20:13:29,612 - INFO - New state = RESPONDING
 2026-06-04 20:13:31,114 - INFO - New state = IDLE
+2026-06-04 20:23:58,773 - INFO - New state = IDLE
+2026-06-04 20:24:00,514 - INFO - New state = SEARCHING
+2026-06-04 20:24:00,517 - INFO - Esperando sonido...
+2026-06-04 20:24:01,689 - INFO - Nivel: 2.111766e-07
+2026-06-04 20:24:01,882 - INFO - Nivel: 8.860564e-07
+2026-06-04 20:24:02,082 - INFO - Nivel: 1.1956805e-05
+2026-06-04 20:24:02,282 - INFO - Nivel: 1.271572e-05
+2026-06-04 20:24:02,482 - INFO - Nivel: 4.6106077e-05
+2026-06-04 20:24:02,681 - INFO - Nivel: 3.002869e-05
+2026-06-04 20:24:02,881 - INFO - Nivel: 0.0007808412
+2026-06-04 20:24:02,881 - INFO - Sonido detectado. Grabando...
+2026-06-04 20:24:02,881 - INFO - New state = RECORDING
+2026-06-04 20:24:03,081 - INFO - Grabando nivel: 0.0008973191
+2026-06-04 20:24:03,282 - INFO - Grabando nivel: 9.5424264e-05
+2026-06-04 20:24:03,482 - INFO - Grabando nivel: 2.1227437e-07
+2026-06-04 20:24:03,682 - INFO - Grabando nivel: 2.2976317e-07
+2026-06-04 20:24:03,882 - INFO - Grabando nivel: 2.1471207e-07
+2026-06-04 20:24:04,082 - INFO - Grabando nivel: 2.170293e-07
+2026-06-04 20:24:04,281 - INFO - Grabando nivel: 2.0509551e-05
+2026-06-04 20:24:04,481 - INFO - Grabando nivel: 1.611534e-05
+2026-06-04 20:24:04,681 - INFO - Grabando nivel: 1.2938592e-05
+2026-06-04 20:24:04,881 - INFO - Grabando nivel: 0.0007709145
+2026-06-04 20:24:05,081 - INFO - Grabando nivel: 0.0021086251
+2026-06-04 20:24:05,281 - INFO - Grabando nivel: 0.002646633
+2026-06-04 20:24:05,482 - INFO - Grabando nivel: 0.002910994
+2026-06-04 20:24:05,681 - INFO - Grabando nivel: 0.0017098427
+2026-06-04 20:24:05,881 - INFO - Grabando nivel: 0.002577468
+2026-06-04 20:24:06,082 - INFO - Grabando nivel: 0.0013545171
+2026-06-04 20:24:06,281 - INFO - Grabando nivel: 2.1996434e-06
+2026-06-04 20:24:06,481 - INFO - Grabando nivel: 2.1324806e-07
+2026-06-04 20:24:06,681 - INFO - Grabando nivel: 2.1108086e-07
+2026-06-04 20:24:06,882 - INFO - Grabando nivel: 2.1096115e-07
+2026-06-04 20:24:07,081 - INFO - Grabando nivel: 2.1038555e-07
+2026-06-04 20:24:07,281 - INFO - Grabando nivel: 2.5287474e-05
+2026-06-04 20:24:07,481 - INFO - Grabando nivel: 1.6302843e-06
+2026-06-04 20:24:07,681 - INFO - Grabando nivel: 3.490587e-07
+2026-06-04 20:24:07,882 - INFO - Grabando nivel: 3.2896773e-07
+2026-06-04 20:24:08,082 - INFO - Grabando nivel: 2.9542737e-06
+2026-06-04 20:24:08,282 - INFO - Grabando nivel: 2.4673086e-06
+2026-06-04 20:24:08,481 - INFO - Grabando nivel: 3.266706e-05
+2026-06-04 20:24:08,681 - INFO - Grabando nivel: 5.108638e-06
+2026-06-04 20:24:08,881 - INFO - Grabando nivel: 2.1572161e-07
+2026-06-04 20:24:09,081 - INFO - Grabando nivel: 2.1036152e-07
+2026-06-04 20:24:09,281 - INFO - Grabando nivel: 2.108893e-07
+2026-06-04 20:24:09,482 - INFO - Grabando nivel: 2.1093719e-07
+2026-06-04 20:24:09,482 - INFO - Silencio detectado. Grabacion terminada.
+2026-06-04 20:24:09,533 - INFO - Audio guardado en: C:\Users\ague_\Desktop\programacion\macondo_hackclub\ORION\grabacion.wav
+2026-06-04 20:24:09,533 - INFO - Duracion aproximada: 8.0 segundos
+2026-06-04 20:24:09,534 - INFO - Transcribiendo audio...
+2026-06-04 20:24:09,535 - INFO - New state = SEARCHING
+2026-06-04 20:24:18,930 - INFO - Texto detectado: Busca ayuda.
+2026-06-04 20:24:22,125 - INFO - {'text': 'Busca ayuda.', 'intent': {'intent': 'help', 'text': 'busca ayuda.', 'raw': 'Busca ayuda.'}, 'result': {'intent': 'help', 'text': 'busca ayuda.', 'raw': 'Busca ayuda.'}}
+2026-06-04 20:24:25,127 - INFO - New state = RESPONDING
+2026-06-04 20:24:26,628 - INFO - New state = IDLE
+2026-06-04 20:24:28,044 - INFO - Esperando sonido...
+2026-06-04 20:24:28,045 - INFO - New state = SEARCHING
+2026-06-04 20:24:28,925 - INFO - Nivel: 2.11033e-07
+2026-06-04 20:24:29,125 - INFO - Nivel: 2.1768021e-07
+2026-06-04 20:24:29,325 - INFO - Nivel: 0.00011177582
+2026-06-04 20:24:29,525 - INFO - Nivel: 0.0007488668
+2026-06-04 20:24:29,525 - INFO - Sonido detectado. Grabando...
+2026-06-04 20:24:29,526 - INFO - New state = RECORDING
+2026-06-04 20:24:29,726 - INFO - Grabando nivel: 0.00079047034
+2026-06-04 20:24:29,925 - INFO - Grabando nivel: 0.00071549497
+2026-06-04 20:24:30,126 - INFO - Grabando nivel: 5.626602e-05
+2026-06-04 20:24:30,325 - INFO - Grabando nivel: 2.6990836e-07
+2026-06-04 20:24:30,525 - INFO - Grabando nivel: 2.2060841e-07
+2026-06-04 20:24:30,725 - INFO - Grabando nivel: 8.174061e-05
+2026-06-04 20:24:30,925 - INFO - Grabando nivel: 1.5335727e-05
+2026-06-04 20:24:31,125 - INFO - Grabando nivel: 1.5182903e-06
+2026-06-04 20:24:31,325 - INFO - Grabando nivel: 6.7136835e-07
+2026-06-04 20:24:31,526 - INFO - Grabando nivel: 3.8501628e-07
+2026-06-04 20:24:31,726 - INFO - Grabando nivel: 3.0013396e-07
+2026-06-04 20:24:31,925 - INFO - Grabando nivel: 2.3508927e-07
+2026-06-04 20:24:32,125 - INFO - Grabando nivel: 0.003315701
+2026-06-04 20:24:32,325 - INFO - Grabando nivel: 0.004394513
+2026-06-04 20:24:32,526 - INFO - Grabando nivel: 0.0014357663
+2026-06-04 20:24:32,725 - INFO - Grabando nivel: 0.002365038
+2026-06-04 20:24:32,925 - INFO - Grabando nivel: 0.00230065
+2026-06-04 20:24:33,126 - INFO - Grabando nivel: 0.004137062
+2026-06-04 20:24:33,326 - INFO - Grabando nivel: 0.0025275897
+2026-06-04 20:24:33,526 - INFO - Grabando nivel: 0.0029041946
+2026-06-04 20:24:33,726 - INFO - Grabando nivel: 1.1914999e-05
+2026-06-04 20:24:33,925 - INFO - Grabando nivel: 2.1433523e-07
+2026-06-04 20:24:34,125 - INFO - Grabando nivel: 2.1194086e-07
+2026-06-04 20:24:34,326 - INFO - Grabando nivel: 2.1112874e-07
+2026-06-04 20:24:34,525 - INFO - Grabando nivel: 5.1860167e-07
+2026-06-04 20:24:34,726 - INFO - Grabando nivel: 4.8769147e-07
+2026-06-04 20:24:34,925 - INFO - Grabando nivel: 3.3451184e-07
+2026-06-04 20:24:35,125 - INFO - Grabando nivel: 3.338768e-07
+2026-06-04 20:24:35,325 - INFO - Grabando nivel: 3.8047503e-07
+2026-06-04 20:24:35,525 - INFO - Grabando nivel: 4.948907e-07
+2026-06-04 20:24:35,725 - INFO - Grabando nivel: 5.685993e-07
+2026-06-04 20:24:35,926 - INFO - Grabando nivel: 6.326599e-07
+2026-06-04 20:24:36,126 - INFO - Grabando nivel: 6.2292935e-07
+2026-06-04 20:24:36,325 - INFO - Grabando nivel: 5.057672e-07
+2026-06-04 20:24:36,325 - INFO - Silencio detectado. Grabacion terminada.
+2026-06-04 20:24:36,376 - INFO - Audio guardado en: C:\Users\ague_\Desktop\programacion\macondo_hackclub\ORION\grabacion.wav
+2026-06-04 20:24:36,376 - INFO - Duracion aproximada: 7.6 segundos
+2026-06-04 20:24:36,376 - INFO - Transcribiendo audio...
+2026-06-04 20:24:36,377 - INFO - New state = SEARCHING
+2026-06-04 20:24:44,355 - INFO - Texto detectado: Abre Spotify.
+2026-06-04 20:26:16,165 - INFO - {'text': 'Abre Spotify.', 'intent': {'intent': np.str_('open_app'), 'text': 'abre spotify.', 'raw': 'Abre Spotify.', 'source': 'ml', 'confidence': 0.9495813350166392}, 'result': None}
+2026-06-04 20:26:19,166 - INFO - New state = RESPONDING
+2026-06-04 20:26:20,667 - INFO - New state = IDLE
