@@ -1,4 +1,7 @@
 import config
+from ml.predict import predict_intent
+
+ML_THRESHOLD = 0.70
 
 TRIGGER_WORDS = { "note_list":{
         "es": ["lee mis notas", "mostrar notas", "muestra mis notas", "ver notas", "listar notas"],
@@ -40,6 +43,18 @@ TRIGGER_ORDER = [
 def parse_intent(text):
     clean = text.lower().strip()
     lang = getattr(config, "APP_LANGUAGE", "es")
+
+
+    ml_result = predict_intent(clean)
+    if ml_result["confidence"] >= ML_THRESHOLD:
+        return{
+            "intent": ml_result["intent"],
+            "text": clean,
+            "raw": text,
+            "source": "ml",
+            "confidence": ml_result["confidence"]
+        }
+        
     for intent in TRIGGER_ORDER:
         triggers = TRIGGER_WORDS[intent].get(lang, [])
 
@@ -47,7 +62,7 @@ def parse_intent(text):
             if trigger in clean:
                 payload = clean
                 for t in triggers:
-                    payload =  payload.replace(t, "")
+                    payload =  payload.replace(trigger, "")
                 payload = payload.strip(".,;:\"'")
-                return {"intent": intent, "text": payload, "raw": text}
+                return {"intent": intent, "text": clean, "raw": text}
     return {"intent": "search", "text": clean, "raw": text}
