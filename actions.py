@@ -4,7 +4,7 @@ import re
 import winsound
 import threading
 
-from ORION import save_history_entry
+from storage import save_history_entry
 
 import os
 
