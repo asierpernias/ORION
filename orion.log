@@ -1,0 +1,145 @@
+2026-06-04 20:09:23,096 - INFO - New state = IDLE
+2026-06-04 20:09:26,170 - INFO - Esperando sonido...
+2026-06-04 20:09:26,171 - INFO - New state = SEARCHING
+2026-06-04 20:09:27,422 - INFO - Nivel: 2.1105693e-07
+2026-06-04 20:09:27,619 - INFO - Nivel: 2.1621291e-07
+2026-06-04 20:09:27,819 - INFO - Nivel: 2.1108086e-07
+2026-06-04 20:09:28,019 - INFO - Nivel: 2.1139184e-07
+2026-06-04 20:09:28,219 - INFO - Nivel: 2.1036152e-07
+2026-06-04 20:09:28,419 - INFO - Nivel: 2.1132013e-07
+2026-06-04 20:09:28,619 - INFO - Nivel: 2.1136793e-07
+2026-06-04 20:09:28,820 - INFO - Nivel: 2.1062556e-07
+2026-06-04 20:09:29,019 - INFO - Nivel: 2.1067353e-07
+2026-06-04 20:09:29,220 - INFO - Nivel: 2.1115268e-07
+2026-06-04 20:09:29,419 - INFO - Nivel: 2.1093719e-07
+2026-06-04 20:09:29,619 - INFO - Nivel: 2.1379232e-07
+2026-06-04 20:09:29,819 - INFO - Nivel: 2.1112874e-07
+2026-06-04 20:09:30,019 - INFO - Nivel: 2.1386322e-07
+2026-06-04 20:09:30,220 - INFO - Nivel: 2.1048159e-07
+2026-06-04 20:09:30,419 - INFO - Nivel: 2.1098509e-07
+2026-06-04 20:09:30,622 - INFO - Nivel: 2.111766e-07
+2026-06-04 20:09:30,821 - INFO - Nivel: 2.1134402e-07
+2026-06-04 20:09:31,020 - INFO - Nivel: 2.111766e-07
+2026-06-04 20:09:31,221 - INFO - Nivel: 2.111048e-07
+2026-06-04 20:09:31,419 - INFO - Nivel: 2.1062556e-07
+2026-06-04 20:09:31,620 - INFO - Nivel: 2.1057758e-07
+2026-06-04 20:09:31,820 - INFO - Nivel: 2.111766e-07
+2026-06-04 20:09:32,023 - INFO - Nivel: 2.112723e-07
+2026-06-04 20:09:32,221 - INFO - Nivel: 2.1045759e-07
+2026-06-04 20:09:32,420 - INFO - Nivel: 2.1733176e-07
+2026-06-04 20:09:32,621 - INFO - Nivel: 2.1143961e-07
+2026-06-04 20:09:32,821 - INFO - Nivel: 2.1146353e-07
+2026-06-04 20:09:33,020 - INFO - Nivel: 2.11033e-07
+2026-06-04 20:09:33,219 - INFO - Nivel: 2.1134402e-07
+2026-06-04 20:09:33,420 - INFO - Nivel: 2.1040957e-07
+2026-06-04 20:09:33,619 - INFO - Nivel: 2.1105693e-07
+2026-06-04 20:09:33,819 - INFO - Nivel: 2.1112874e-07
+2026-06-04 20:09:34,019 - INFO - Nivel: 2.1067353e-07
+2026-06-04 20:09:34,221 - INFO - Nivel: 2.1143961e-07
+2026-06-04 20:09:34,420 - INFO - Nivel: 2.1143961e-07
+2026-06-04 20:09:34,620 - INFO - Nivel: 2.1098509e-07
+2026-06-04 20:09:34,819 - INFO - Nivel: 2.1038555e-07
+2026-06-04 20:09:35,019 - INFO - Nivel: 2.112723e-07
+2026-06-04 20:09:35,219 - INFO - Nivel: 2.1108086e-07
+2026-06-04 20:09:35,419 - INFO - Nivel: 2.1062556e-07
+2026-06-04 20:09:35,620 - INFO - Nivel: 2.1098509e-07
+2026-06-04 20:09:35,820 - INFO - Nivel: 2.1134402e-07
+2026-06-04 20:09:36,020 - INFO - Nivel: 2.1048159e-07
+2026-06-04 20:09:36,220 - INFO - Nivel: 2.2003508e-07
+2026-06-04 20:09:36,419 - INFO - Nivel: 2.638116e-07
+2026-06-04 20:09:36,619 - INFO - Nivel: 0.0009974922
+2026-06-04 20:09:36,619 - INFO - Sonido detectado. Grabando...
+2026-06-04 20:09:36,619 - INFO - New state = RECORDING
+2026-06-04 20:09:36,819 - INFO - Grabando nivel: 0.0011049327
+2026-06-04 20:09:37,019 - INFO - Grabando nivel: 0.0004720723
+2026-06-04 20:09:37,219 - INFO - Grabando nivel: 0.0022093551
+2026-06-04 20:09:37,419 - INFO - Grabando nivel: 0.0031167704
+2026-06-04 20:09:37,619 - INFO - Grabando nivel: 0.0028809656
+2026-06-04 20:09:37,819 - INFO - Grabando nivel: 0.0036046493
+2026-06-04 20:09:38,019 - INFO - Grabando nivel: 0.00077831285
+2026-06-04 20:09:38,219 - INFO - Grabando nivel: 2.7627308e-07
+2026-06-04 20:09:38,419 - INFO - Grabando nivel: 2.1414654e-07
+2026-06-04 20:09:38,619 - INFO - Grabando nivel: 2.1298726e-07
+2026-06-04 20:09:38,820 - INFO - Grabando nivel: 8.793221e-06
+2026-06-04 20:09:39,020 - INFO - Grabando nivel: 5.456363e-06
+2026-06-04 20:09:39,219 - INFO - Grabando nivel: 2.279971e-07
+2026-06-04 20:09:39,419 - INFO - Grabando nivel: 3.4882703e-07
+2026-06-04 20:09:39,619 - INFO - Grabando nivel: 2.2338519e-07
+2026-06-04 20:09:39,819 - INFO - Grabando nivel: 2.2770881e-07
+2026-06-04 20:09:40,019 - INFO - Grabando nivel: 3.466912e-07
+2026-06-04 20:09:40,219 - INFO - Grabando nivel: 5.451259e-07
+2026-06-04 20:09:40,419 - INFO - Grabando nivel: 2.8830144e-07
+2026-06-04 20:09:40,619 - INFO - Grabando nivel: 2.2717565e-07
+2026-06-04 20:09:40,819 - INFO - Grabando nivel: 2.1132013e-07
+2026-06-04 20:09:41,019 - INFO - Grabando nivel: 2.1122445e-07
+2026-06-04 20:09:41,219 - INFO - Grabando nivel: 2.1021735e-07
+2026-06-04 20:09:41,419 - INFO - Grabando nivel: 2.1136793e-07
+2026-06-04 20:09:41,619 - INFO - Grabando nivel: 2.1115268e-07
+2026-06-04 20:09:41,819 - INFO - Grabando nivel: 2.1040957e-07
+2026-06-04 20:09:42,020 - INFO - Grabando nivel: 2.1045759e-07
+2026-06-04 20:09:42,219 - INFO - Grabando nivel: 2.1105693e-07
+2026-06-04 20:09:42,419 - INFO - Grabando nivel: 2.1100905e-07
+2026-06-04 20:09:42,619 - INFO - Grabando nivel: 2.1067353e-07
+2026-06-04 20:09:42,820 - INFO - Grabando nivel: 5.1479765e-07
+2026-06-04 20:09:43,020 - INFO - Grabando nivel: 9.54818e-07
+2026-06-04 20:09:43,219 - INFO - Grabando nivel: 8.8121885e-07
+2026-06-04 20:09:43,219 - INFO - Silencio detectado. Grabacion terminada.
+2026-06-04 20:09:43,292 - INFO - Audio guardado en: C:\Users\ague_\Desktop\programacion\macondo_hackclub\ORION\grabacion.wav
+2026-06-04 20:09:43,292 - INFO - Duracion aproximada: 9.6 segundos
+2026-06-04 20:09:43,294 - INFO - Transcribiendo audio...
+2026-06-04 20:09:43,294 - INFO - New state = SEARCHING
+2026-06-04 20:09:55,785 - INFO - Texto detectado: Abre Spotify.
+2026-06-04 20:13:02,406 - INFO - New state = IDLE
+2026-06-04 20:13:04,154 - INFO - Esperando sonido...
+2026-06-04 20:13:04,155 - INFO - New state = SEARCHING
+2026-06-04 20:13:05,440 - INFO - Nivel: 2.111048e-07
+2026-06-04 20:13:05,638 - INFO - Nivel: 2.1795856e-07
+2026-06-04 20:13:05,838 - INFO - Nivel: 2.1093719e-07
+2026-06-04 20:13:06,037 - INFO - Nivel: 2.8355538e-05
+2026-06-04 20:13:06,238 - INFO - Nivel: 0.0034175476
+2026-06-04 20:13:06,238 - INFO - Sonido detectado. Grabando...
+2026-06-04 20:13:06,238 - INFO - New state = RECORDING
+2026-06-04 20:13:06,438 - INFO - Grabando nivel: 0.0004318284
+2026-06-04 20:13:06,638 - INFO - Grabando nivel: 4.226346e-06
+2026-06-04 20:13:06,838 - INFO - Grabando nivel: 2.1452372e-07
+2026-06-04 20:13:07,038 - INFO - Grabando nivel: 2.107455e-07
+2026-06-04 20:13:07,238 - INFO - Grabando nivel: 2.111048e-07
+2026-06-04 20:13:07,438 - INFO - Grabando nivel: 2.108893e-07
+2026-06-04 20:13:07,637 - INFO - Grabando nivel: 2.1036152e-07
+2026-06-04 20:13:07,838 - INFO - Grabando nivel: 2.1124836e-07
+2026-06-04 20:13:08,037 - INFO - Grabando nivel: 2.111048e-07
+2026-06-04 20:13:08,238 - INFO - Grabando nivel: 2.1040957e-07
+2026-06-04 20:13:08,438 - INFO - Grabando nivel: 2.111048e-07
+2026-06-04 20:13:08,638 - INFO - Grabando nivel: 2.1115268e-07
+2026-06-04 20:13:08,838 - INFO - Grabando nivel: 2.1031347e-07
+2026-06-04 20:13:09,038 - INFO - Grabando nivel: 2.1093719e-07
+2026-06-04 20:13:09,238 - INFO - Grabando nivel: 2.111048e-07
+2026-06-04 20:13:09,437 - INFO - Grabando nivel: 2.1067353e-07
+2026-06-04 20:13:09,637 - INFO - Grabando nivel: 2.1060157e-07
+2026-06-04 20:13:09,838 - INFO - Grabando nivel: 2.1122445e-07
+2026-06-04 20:13:10,037 - INFO - Grabando nivel: 2.11033e-07
+2026-06-04 20:13:10,237 - INFO - Grabando nivel: 2.1045759e-07
+2026-06-04 20:13:10,437 - INFO - Grabando nivel: 2.1105693e-07
+2026-06-04 20:13:10,638 - INFO - Grabando nivel: 2.1100905e-07
+2026-06-04 20:13:10,837 - INFO - Grabando nivel: 2.1052959e-07
+2026-06-04 20:13:11,053 - INFO - Grabando nivel: 2.1093719e-07
+2026-06-04 20:13:11,238 - INFO - Grabando nivel: 2.152996e-07
+2026-06-04 20:13:11,439 - INFO - Grabando nivel: 2.1296354e-07
+2026-06-04 20:13:11,639 - INFO - Grabando nivel: 2.1132013e-07
+2026-06-04 20:13:11,838 - INFO - Grabando nivel: 2.1134402e-07
+2026-06-04 20:13:12,040 - INFO - Grabando nivel: 2.1045759e-07
+2026-06-04 20:13:12,239 - INFO - Grabando nivel: 2.1055358e-07
+2026-06-04 20:13:12,438 - INFO - Grabando nivel: 2.1120053e-07
+2026-06-04 20:13:12,639 - INFO - Grabando nivel: 2.1098509e-07
+2026-06-04 20:13:12,838 - INFO - Grabando nivel: 2.1043357e-07
+2026-06-04 20:13:13,038 - INFO - Grabando nivel: 2.111766e-07
+2026-06-04 20:13:13,038 - INFO - Silencio detectado. Grabacion terminada.
+2026-06-04 20:13:13,134 - INFO - Audio guardado en: C:\Users\ague_\Desktop\programacion\macondo_hackclub\ORION\grabacion.wav
+2026-06-04 20:13:13,134 - INFO - Duracion aproximada: 7.8 segundos
+2026-06-04 20:13:13,134 - INFO - Transcribiendo audio...
+2026-06-04 20:13:13,135 - INFO - New state = SEARCHING
+2026-06-04 20:13:23,216 - INFO - Texto detectado: film
+2026-06-04 20:13:26,306 - INFO - Abriendo busqueda: https://www.google.com/search?q=film
+2026-06-04 20:13:26,611 - INFO - {'text': 'film', 'intent': {'intent': 'search', 'text': 'film', 'raw': 'film'}, 'result': {'intent': {'intent': 'search', 'query': 'film', 'engine': 'google'}, 'url': 'https://www.google.com/search?q=film'}}
+2026-06-04 20:13:29,612 - INFO - New state = RESPONDING
+2026-06-04 20:13:31,114 - INFO - New state = IDLE

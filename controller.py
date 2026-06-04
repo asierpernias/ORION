@@ -32,9 +32,11 @@ def controller_run_orion(self):
             log("Orion error:", e)
             time.sleep(1.5)
         except Exception as e:
-                self.request_bubble(t("unexpected"))
-                log("Error:", e)
-                time.sleep(1.5)
+            import traceback
+            log("Error inesperado:", traceback.format_exc()) 
+            self.request_bubble(t("unexpected"))
+            log("Error:", e)
+            time.sleep(1.5)
         finally:
             self.request_state(self.IDLE)
             self.lock.release()
