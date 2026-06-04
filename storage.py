@@ -1,7 +1,7 @@
 import json 
 from datetime import datetime
 import os
-from logging import log
+from logger import log
 
 HISTORY_FILE = "history.json"
   

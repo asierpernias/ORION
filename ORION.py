@@ -11,7 +11,7 @@ import webbrowser
 from urllib.parse import quote_plus
 import config
 from i18n import t
-from logging import log
+from logger import log
 
 from intent_parser import parse_intent
 from actions import execute

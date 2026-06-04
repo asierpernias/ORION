@@ -3,7 +3,7 @@ import os
 from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QPainter, QPixmap, QFont, QFontMetrics
 from PyQt6.QtWidgets import QWidget, QLabel
-from logging import log
+from logger import log
 
 class SpeechBubble(QWidget):
 

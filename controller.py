@@ -4,7 +4,7 @@ import time
 from ORION import run_orion, run_text_command, OrionError
 from i18n import t
 
-from logging import log
+from logger import log
 
 def controller_run_orion(self):
 

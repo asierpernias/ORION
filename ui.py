@@ -20,7 +20,7 @@ from animations import (
     start_searching_animation,
     start_responding_animation
 )
-from logging import log
+from logger import log
 
 class AvatarWindow(QWidget):
 

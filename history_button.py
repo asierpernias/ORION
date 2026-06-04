@@ -3,7 +3,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QLabel
 
-from logging import log
+from logger import log
 
 class HistoryButton(QLabel):
     clicked = pyqtSignal()

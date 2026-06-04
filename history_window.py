@@ -5,7 +5,7 @@ from PyQt6.QtGui import QFontDatabase, QPixmap, QPainter
 from PyQt6.QtWidgets import(
     QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QScrollArea, QFrame
 )
-from logging import log
+from logger import log
 
 class HistoryWindow(QWidget):
     def __init__(self, history_path="history.json", parent=None):

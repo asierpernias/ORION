@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QIcon
 from ui import AvatarWindow
 from start_window import StartWindow
-
+import logging
 
 if __name__ == "__main__":
 
@@ -13,6 +13,12 @@ if __name__ == "__main__":
     
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("assets\icon.ico"))
+
+    logging.basicConfig(
+        filename="orion.log",
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s"
+    )
 
     window = StartWindow()
     window.setWindowIcon(QIcon("assets\icon.ico"))

@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.pipeline import Pipeline
-from logging import log
+from logger import log
 
 DATA_PATH = "ml/training_data.json"
 MODEL_PATH = "ml/model.pkl"
