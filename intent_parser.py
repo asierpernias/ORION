@@ -64,5 +64,5 @@ def parse_intent(text):
                 for t in triggers:
                     payload =  payload.replace(trigger, "")
                 payload = payload.strip(".,;:\"'")
-                return {"intent": intent, "text": clean, "raw": text}
-    return {"intent": "search", "text": clean, "raw": text}
+                return {"intent": intent, "text": payload, "raw": text, "source": "rules", "confidence": 1.0}
+    return {"intent": "search", "text": clean, "raw": text, "source": "rules", "confidence": 1.0}

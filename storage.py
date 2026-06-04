@@ -13,6 +13,8 @@ def save_history_entry(command_type, text, intent_data, url):
         "type": command_type,
         "text": text,
         "intent": intent_data.get("intent", ""),
+        "confidence": intent_data.get("confidence", None),
+        "source": intent_data.get("source", "rules"),
         "query": intent_data.get("query", ""),
         "engine": intent_data.get("engine", ""),
         "url": url
