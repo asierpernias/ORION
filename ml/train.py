@@ -1,5 +1,6 @@
 import json
 import joblib
+from collections import Counter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.calibration import CalibratedClassifierCV
@@ -12,11 +13,14 @@ def load_data():
     with open(DATA_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
     x = [item["text"] for item in data]
-    y = [item["text"] for item in data]
+    y = [item["intent"] for item in data]
     return x, y
 def train():
     x, y = load_data()
 
+    print(Counter(y))
+    print(min(Counter(y).values()))
+    
     base = Pipeline ([
         ("tfidf", TfidfVectorizer(ngram_range=(1,2))),
         ("clf", LinearSVC())
@@ -30,4 +34,6 @@ def train():
     print("Model entrendado")
 
 if __name__ == "__main__":
+    
     train()
+    
