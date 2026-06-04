@@ -11,7 +11,7 @@ import webbrowser
 from urllib.parse import quote_plus
 import config
 from i18n import t
-import logging
+from logging import log
 
 from intent_parser import parse_intent
 from actions import execute
@@ -54,7 +54,7 @@ def get_audio_level(audio):
 
 
 def record_when_sound_detected(ui=None):
-    logging.info("Esperando sonido...")
+    log.info("Esperando sonido...")
 
     frames = []
     pre_buffer = []
@@ -79,7 +79,7 @@ def record_when_sound_detected(ui=None):
                     audio, overflowed = stream.read(blocksize)
 
                     if overflowed:
-                        logging.critical("Aviso: overflow de audio")
+                        log.critical("Aviso: overflow de audio")
 
                     level = get_audio_level(audio)
 
@@ -89,10 +89,10 @@ def record_when_sound_detected(ui=None):
                         if len(pre_buffer) > max_pre_buffer_chunks:
                             pre_buffer.pop(0)
 
-                        logging.debug("Nivel:", level)
+                        log.debug("Nivel:", level)
 
                         if level > SILENCE_THRESHOLD:
-                            logging.debug("Sonido detectado. Grabando...")
+                            log.debug("Sonido detectado. Grabando...")
 
                             recording = True
                             start_time = time.time()
@@ -107,20 +107,20 @@ def record_when_sound_detected(ui=None):
                         frames.append(audio.copy())
 
                         elapsed = time.time() - start_time
-                        logging.debug("Grabando nivel:", level)
+                        log.debug("Grabando nivel:", level)
 
                         if elapsed >= MIN_RECORD_SECONDS:
                             if level < SILENCE_THRESHOLD:
                                 if silence_start is None:
                                     silence_start = time.time()
                                 elif time.time() - silence_start >= SILENCE_SECONDS:
-                                    logging.debug("Silencio detectado. Grabacion terminada.")
+                                    log.debug("Silencio detectado. Grabacion terminada.")
                                     break
                             else:
                                 silence_start = None
 
                         if elapsed >= MAX_RECORD_SECONDS:
-                            logging.info("Tiempo maximo alcanzado.")
+                            log.info("Tiempo maximo alcanzado.")
                             break
     
     except Exception as e:
@@ -130,21 +130,21 @@ def record_when_sound_detected(ui=None):
     recording_audio = np.concatenate(frames, axis=0)
 
     if len(recording_audio) == 0:
-        logging.error("No se grabo audio.")
+        log.error("No se grabo audio.")
         return None
 
     recording_int16 = np.int16(recording_audio * 32767)
 
     write(AUDIO_FILE, SAMPLE_RATE, recording_int16)
 
-    logging.info("Audio guardado en:", os.path.abspath(AUDIO_FILE))
-    logging.info("Duracion aproximada:", len(recording_audio) / SAMPLE_RATE, "segundos")
+    log.info("Audio guardado en:", os.path.abspath(AUDIO_FILE))
+    log.info("Duracion aproximada:", len(recording_audio) / SAMPLE_RATE, "segundos")
 
     return AUDIO_FILE
 
 
 def transcribe_audio(audio_file):
-    logging.debug("Transcribiendo audio...")
+    log.debug("Transcribiendo audio...")
 
     try:
         result = model.transcribe(
@@ -159,7 +159,7 @@ def transcribe_audio(audio_file):
 
     text = result["text"].strip()
 
-    logging.info("Texto detectado:", text)
+    log.info("Texto detectado:", text)
 
     if not text:
         raise TranscriptionError("No he entendido el audio")
@@ -177,7 +177,7 @@ def extract_json(text):
 
 
 def analyze_search_intent(text):
-    logging.debug("Analizando intencion con Ollama...")
+    log.debug("Analizando intencion con Ollama...")
 
     prompt = f"""
 Devuelve solo un JSON valido para una busqueda web.
@@ -226,14 +226,14 @@ Reglas:
         raise IntentError("Ollama no responde") from e
 
     raw_response = response.json()["response"].strip()
-    logging.info("Respuesta de Ollama:", raw_response)
+    log.info("Respuesta de Ollama:", raw_response)
 
     try:
         json_text = extract_json(raw_response)
         data = json.loads(json_text)
     except Exception as e:
         raise IntentError("Ollama devolvio una respuesta invalida") from e
-    logging.info("JSON interpretado:", data)
+    log.info("JSON interpretado:", data)
 
     return data
 
@@ -321,10 +321,10 @@ def open_search(intent_data):
     url = build_search_url(intent_data)
 
     if not url:
-        logging.error("No hay busqueda valida.")
+        log.error("No hay busqueda valida.")
         return
 
-    logging.info("Abriendo busqueda:", url)
+    log.info("Abriendo busqueda:", url)
     try:
         webbrowser.open(url)
     except Exception as e:
@@ -334,7 +334,7 @@ def open_search(intent_data):
 def reload_model():
     global model
     import config
-    logging.info(f"Recargando modelo whisper: {config.WHISPER_MODEL}")
+    log.info(f"Recargando modelo whisper: {config.WHISPER_MODEL}")
     model = whisper.load_model(config.WHISPER_MODEL)
 
 

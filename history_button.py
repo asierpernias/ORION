@@ -3,7 +3,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QLabel
 
-import logging
+from logging import log
 
 class HistoryButton(QLabel):
     clicked = pyqtSignal()
@@ -32,7 +32,7 @@ class HistoryButton(QLabel):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            logging.critical("Missing asset: ", path)
+            log.critical("Missing asset: ", path)
             return QPixmap()
         return pixmap.scaled(
             pixmap.width() * self.scale,

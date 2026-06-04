@@ -3,7 +3,7 @@ import os
 from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QPainter, QPixmap, QFont, QFontMetrics
 from PyQt6.QtWidgets import QWidget, QLabel
-import logging
+from logging import log
 
 class SpeechBubble(QWidget):
 
@@ -63,7 +63,7 @@ class SpeechBubble(QWidget):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            logging.warning("Missing bubble tile:", path)
+            log.warning("Missing bubble tile:", path)
             return QPixmap()
 
         return pixmap.scaled(

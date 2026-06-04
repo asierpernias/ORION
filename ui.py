@@ -8,6 +8,7 @@ from history_window import HistoryWindow
 
 import threading
 
+
 from controller import controller_run_orion, controller_run_text
 from bubbles import SpeechBubble
 from command_bar import CommandBar
@@ -19,7 +20,7 @@ from animations import (
     start_searching_animation,
     start_responding_animation
 )
-import logging
+from logging import log
 
 class AvatarWindow(QWidget):
 
@@ -100,7 +101,7 @@ class AvatarWindow(QWidget):
 
         self.state = new_state
 
-        logging.info("New state =", new_state)
+        log.info("New state =", new_state)
 
         self.stop_all_animations()
         self.update_animation()

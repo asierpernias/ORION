@@ -5,7 +5,7 @@ from PyQt6.QtGui import QFontDatabase, QPixmap, QPainter
 from PyQt6.QtWidgets import(
     QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QScrollArea, QFrame
 )
-import logging
+from logging import log
 
 class HistoryWindow(QWidget):
     def __init__(self, history_path="history.json", parent=None):
@@ -144,7 +144,7 @@ class HistoryWindow(QWidget):
             else:
                 self.entries = []
         except Exception as error:
-            logging.error("No se pudo leer el historial", error)
+            log.error("No se pudo leer el historial", error)
             self.entries = []
 
     def render_entries(self):
