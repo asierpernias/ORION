@@ -223,6 +223,39 @@ def action_note_list(intent_data, ui=None):
 
 
 def parse_duration(text):
+
+    import config
+    clean = text.lower().strip()
+
+    short = re.search(r'(\d+)\s*(h|m|s)\b', clean)
+
+    if short:
+        value = int(short.group(1))
+        unit = short.group(2)
+        return value * {"h": 3600, "m": 60, "s": 1}[unit]
+    fractions_es = {
+        "medio minuto":       30,
+        "media hora":         1800,
+        "un cuarto de hora":  900,
+        "tres cuartos de hora": 2700,
+        "hora y media":       5400,
+        "un minuto y medio":  90,
+    }
+    
+    fractions_en = {
+        "half a minute":      30,
+        "half an hour":       1800,
+        "a quarter of an hour": 900,
+        "three quarters of an hour": 2700,
+        "an hour and a half": 5400,
+        "a minute and a half": 90,
+    }
+    
+    fractions = fractions_en if config.APP_LANGUAGE == "en" else fractions_es
+    for phrase, seconds in fractions.items():
+        if phrase in clean:
+            return seconds
+        
     patterns_es = [
         (r'(\d+)\s*hora', 3600),
         (r'(\d+)\s*minuto', 60),
@@ -234,7 +267,7 @@ def parse_duration(text):
         (r'(\d+)\s*second', 1), 
     ]
 
-    import config
+    
     patterns = patterns_en if config.APP_LANGUAGE == "en" else patterns_es
 
     total = 0
