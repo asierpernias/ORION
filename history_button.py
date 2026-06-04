@@ -32,7 +32,7 @@ class HistoryButton(QLabel):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            log.critical("Missing asset: ", path)
+            log("Missing asset: ", path)
             return QPixmap()
         return pixmap.scaled(
             pixmap.width() * self.scale,

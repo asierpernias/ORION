@@ -101,7 +101,7 @@ class AvatarWindow(QWidget):
 
         self.state = new_state
 
-        log.info("New state =", new_state)
+        log("New state =", new_state)
 
         self.stop_all_animations()
         self.update_animation()

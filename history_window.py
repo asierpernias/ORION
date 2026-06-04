@@ -144,7 +144,7 @@ class HistoryWindow(QWidget):
             else:
                 self.entries = []
         except Exception as error:
-            log.error("No se pudo leer el historial", error)
+            log("No se pudo leer el historial", error)
             self.entries = []
 
     def render_entries(self):

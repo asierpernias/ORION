@@ -63,7 +63,7 @@ class SpeechBubble(QWidget):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            log.warning("Missing bubble tile:", path)
+            log("Missing bubble tile:", path)
             return QPixmap()
 
         return pixmap.scaled(

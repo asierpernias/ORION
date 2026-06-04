@@ -72,7 +72,7 @@ class CommandBar(QWidget):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            log.critical("Missing command bar asset:", path)
+            log("Missing command bar asset:", path)
             return QPixmap()
 
         return pixmap.scaled(

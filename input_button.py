@@ -33,7 +33,7 @@ class inputButton(QLabel):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            log.critical("Missing assets", path)
+            log("Missing assets", path)
             return QPixmap()
         
         return pixmap.scaled(
