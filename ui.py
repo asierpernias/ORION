@@ -19,7 +19,7 @@ from animations import (
     start_searching_animation,
     start_responding_animation
 )
-
+import logging
 
 class AvatarWindow(QWidget):
 
@@ -100,7 +100,7 @@ class AvatarWindow(QWidget):
 
         self.state = new_state
 
-        print("New state =", new_state)
+        logging.info("New state =", new_state)
 
         self.stop_all_animations()
         self.update_animation()
@@ -276,7 +276,7 @@ class AvatarWindow(QWidget):
         self.command_bar.toggle()
 
     def open_history_window(self):
-        print("comprove 3")
+        
         if not hasattr(self, "history_window") or self.history_window is None:
             self.history_window = HistoryWindow()
         self.history_window.load_history()

@@ -3,6 +3,8 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QLabel
 
+import logging
+
 class inputButton(QLabel):
 
     clicked = pyqtSignal()
@@ -32,7 +34,7 @@ class inputButton(QLabel):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            print("Missing assets", path)
+            logging.critical("Missing assets", path)
             return QPixmap()
         
         return pixmap.scaled(

@@ -18,7 +18,7 @@ def register(intent_name):
         return fn
     return decorator
 def execute(intent_data, ui=None):
-    print("execute")
+    
     intent = intent_data.get("intent")
     handler = ACTION_REGISTRY.get(intent)
     result = None
@@ -38,14 +38,14 @@ def execute(intent_data, ui=None):
 @register("help")
 
 def action_help(intent_data, ui=None):
-    print("1")
+    
     if ui:
         ui.request_bubble(t("help_text"))
     return intent_data
 
 @register("search")
 def action_search(intent_data, ui=None):
-    print("2")
+    
     from ORION import quick_intent, analyze_search_intent, build_search_url, open_search
     text = intent_data.get("raw", "")
     result = quick_intent(text)
@@ -61,7 +61,7 @@ def action_search(intent_data, ui=None):
 
 @register("timer")
 def action_timer(intent_data, ui=None):
-    print("3")
+    
     text = intent_data.get("text", "")
     seconds = parse_duration(text)
 

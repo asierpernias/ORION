@@ -1,6 +1,7 @@
 import json 
 from datetime import datetime
 import os
+import logging
 
 HISTORY_FILE = "history.json"
   
@@ -24,7 +25,7 @@ def save_history_entry(command_type, text, intent_data, url):
         with open(HISTORY_FILE, "w", encoding="utf-8") as file:
             json.dump(history, file, ensure_ascii=False, indent=2)
     except Exception as error:
-        print("No se ha podido guardar el historial: ", error)
+        logging.error("No se ha podido guardar el historial: ", error)
 def load_history():
     if not os.path.exists(HISTORY_FILE):
         return []
@@ -35,6 +36,6 @@ def load_history():
             return data
         return []
     except Exception as error:
-        print("No se pudo cargar el historial: ", error)
+        logging.error("No se pudo cargar el historial: ", error)
         return []
   

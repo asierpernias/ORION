@@ -15,11 +15,7 @@ class StartWindow(QWidget):
         self.avatar_window = None
         self._cursor_visible = True
         font_id = QFontDatabase.addApplicationFont("assets/fonts/press-start-2p.ttf")
-        if font_id == -1:
-            print("Error no se cargo la funete pixel")
-        else: 
-            print("fuente cargada", QFontDatabase.applicationFontFamilies(font_id))
-    
+        
         self.setup_window()
         self.setup_ui()
         self.start_cursor_blink()

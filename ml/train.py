@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.pipeline import Pipeline
+import logging
 
 DATA_PATH = "ml/training_data.json"
 MODEL_PATH = "ml/model.pkl"
@@ -18,9 +19,9 @@ def load_data():
 def train():
     x, y = load_data()
 
-    print(Counter(y))
-    print(min(Counter(y).values()))
-    
+    logging.info(Counter(y))
+    logging.info(min(Counter(y).values()))
+
     base = Pipeline ([
         ("tfidf", TfidfVectorizer(ngram_range=(1,2))),
         ("clf", LinearSVC())
@@ -31,7 +32,7 @@ def train():
 
     joblib.dump(model, MODEL_PATH)
 
-    print("Model entrendado")
+    logging.info("Model entrendado")
 
 if __name__ == "__main__":
     

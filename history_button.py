@@ -3,6 +3,8 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QLabel
 
+import logging
+
 class HistoryButton(QLabel):
     clicked = pyqtSignal()
 
@@ -30,7 +32,7 @@ class HistoryButton(QLabel):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            print("Missing asset: ", path)
+            logging.critical("Missing asset: ", path)
             return QPixmap()
         return pixmap.scaled(
             pixmap.width() * self.scale,
@@ -52,10 +54,10 @@ class HistoryButton(QLabel):
                 self.setPixmap(self.pressed_pixmap)
             event.accept()
     def mouseReleaseEvent(self, event):
-        print("comprov 1")
+        
         if event.button() == Qt.MouseButton.LeftButton:
             if not self.hover_pixmap.isNull():
                 self.setPixmap(self.hover_pixmap)
-            print("comprove 2")
+            
             self.clicked.emit()
             event.accept()

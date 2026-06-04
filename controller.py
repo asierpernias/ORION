@@ -4,6 +4,8 @@ import time
 from ORION import run_orion, run_text_command, OrionError
 from i18n import t
 
+import logging
+
 def controller_run_orion(self):
 
     if not self.lock.acquire(blocking=False):
@@ -18,7 +20,7 @@ def controller_run_orion(self):
             
             result = run_orion(ui=self)
 
-            print(result)
+            logging.debug(result)
 
             if result:
                 time.sleep(3)
@@ -27,11 +29,11 @@ def controller_run_orion(self):
 
         except OrionError as e:
             self.request_bubble(str(e))
-            print("Orion error:", e)
+            logging.error("Orion error:", e)
             time.sleep(1.5)
         except Exception as e:
                 self.request_bubble(t("unexpected"))
-                print("Error:", e)
+                logging.error("Error:", e)
                 time.sleep(1.5)
         finally:
             self.request_state(self.IDLE)
@@ -58,7 +60,7 @@ def controller_run_text(self, text):
 
             result = run_text_command(text, ui=self)
 
-            print(result)
+            logging.debug(result)
 
             if result:
                 
@@ -66,11 +68,11 @@ def controller_run_text(self, text):
 
         except OrionError as e:
             self.request_bubble(str(e))
-            print("Orion error:", e)
+            logging.error("Orion error:", e)
             time.sleep(1.5)
         except Exception as e:
             self.request_bubble("Ocurrio un error inesperado.")
-            print("Error:", e)
+            logging.error("Error:", e)
             time.sleep(1.5)
         finally:
             self.request_state(self.IDLE)

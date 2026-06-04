@@ -4,6 +4,8 @@ from PyQt6.QtCore import Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QPainter, QPixmap, QFont
 from PyQt6.QtWidgets import QWidget, QLineEdit
 
+import logging
+
 
 class CommandLineEdit(QLineEdit):
     escape_pressed = pyqtSignal()  
@@ -70,7 +72,7 @@ class CommandBar(QWidget):
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
-            print("Missing command bar asset:", path)
+            logging.critical("Missing command bar asset:", path)
             return QPixmap()
 
         return pixmap.scaled(
