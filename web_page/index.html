@@ -1,0 +1,123 @@
+
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ORION | Local AI Desktop Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styless.css"/>
+</head>
+<body>
+    <nav>
+        <span class="brand">✦ ORION</span>
+        <div class="links">
+            <a href="#download">Download</a>
+            <a href="#features">Features</a>
+            <a href="#setup">Setup</a>
+            <a href="#roadmap">Roadmap</a>
+        </div>
+    </nav>
+    <div class="terminal">
+        <h1>ORION</h1>
+        <p class="sub">asistente local de escritorio con ia</p>
+        <div class="line"><span class="prompt">&gt;</span>hey orion</div>
+        <p class="ans">listo. voz, texto y comandos - sin cloud, sin datos enviados</p>
+        <div class="line"><span class="prompt">&gt;</span>qué puedes hacer?</div>
+        <p class="ans">buscar, notas, timers, abrir apps y mucho mas en un futuro</p>
+        <div class="line"><span class="prompt">&gt;</span><span class="blinl">_</span></div>
+
+        <div class="btns">
+            <a class="btn btn-y" href="">▶ Download v1.0.0</a>
+            <a class="btn btn-b" href="#setup">How to run</a>
+        </div>
+
+        <div class="status">
+            <span>local mode</span> ·  <span>whisper medium</span> · <span>ollama phi3:lastest</span> · <span>es / en</span> · <span>agent mode</span>
+        </div>
+    </div>
+
+    <hr id="download"/>
+
+    <div class="section">
+        <p class="slabel">&gt; download</p>
+        <p class="stitle">última version</p>
+        <div class="dl-box">
+            <div class="os-select">
+                <button class="os-tab active" onclick="setOS('win')">[ Windows] </button>
+                <button class="os-tab" onclick="setOS('mac')">[ macOS ]</button>
+                <button class="os-tab" onclick="setOS('linux')">[ Linux ]</button>
+            </div>
+
+            <div class="dl-panel active" id="os-win">
+                <p class="dl-name">ORION_Setup_1.0.0.zip</p>
+                <div class="dl-meta">version <span>stable</span> installer incluido <span>200MB</span></div>
+                <div class="dl-reqs">requiere: Windows 10/11 Pyhton no necesario </div>
+                <a class="btn btn-y" style="font-size: 8px;padding: 10px 10px;" href="SUBIR AQUI EL ENLACE ZIP">▶ Descargar .zip (Windows)</a>
+            </div>
+            
+            <div class="dl-panel" id="os-mac">
+                <p class="dl-name">ORION_1.0.0.zip</p>
+                <div class="dl-meta"> version stable <span>installer no incluido</span></div>
+                <div class="dl-reqs">requiere: macOs 12+ Python 3.11+  </div>
+                <a class="btn btn-y" style="font-size: 8px;padding: 10px 10px;" href="">▶ Descargar </a>
+            </div>
+
+            <div class="dl-panel" id="os linux">
+                <p class="dl-name">ORION-1.0.0-linux.tar.gz</p>
+                <div class="dl-meta"> version <span>stable</span>portable</div>
+                <div class="dl-reqs">requiere: Ubuntu 20.04+/Debian Python 3.11+ </div>
+                <a class="btn btn-y" style="font-size: 8px;padding:10px 10px" href="">▶ Descargar</a>
+            </div>
+        </div>
+    </div>
+    <hr id="features"/>
+
+    <div class="section">
+        <p class="slabel">&gt; features</p>
+        <p class="stitle">qué puedes hacer ORION</p>
+        <div class="grid">
+            <div class="card"><p class="card-icon">[ VOZ ]</p><p class="card-title">Comandos por voz</p><p class="card-desc">Transcripción local con Whisper. Sin servidores externos.</p></div>
+            <div class="card"><p class="card-icon">[ TEXT ]</p><p class="card-title">Barra de texto</p><p class="card-desc">Abre con Espacio. Respuesta sin latencia de red.</p></div>
+            <div class="card"><p class="card-icon">[ SEARCH ]</p><p class="card-title">Búsqueda inteligente</p><p class="card-desc">Google y YouTube con detección automática de motor.</p></div>
+            <div class="card"><p class="card-icon">[ NOTES ]</p><p class="card-title">Notas locales</p><p class="card-desc">Guarda notas con timestamp. Sin cloud, sin cuenta.</p></div>
+            <div class="card"><p class="card-icon">[ TIMER ]</p><p class="card-title">Timers</p><p class="card-desc">Múltiples timers simultáneos. Beep al terminar.</p></div>
+            <div class="card"><p class="card-icon">[ APPS ]</p><p class="card-title">Abrir apps</p><p class="card-desc">Busca apps en Windows, macOS y Linux dinámicamente.</p></div>
+        </div>
+    </div>
+    
+<hr id="setup"/>
+
+<div class="section">
+  <p class="slabel">&gt; setup</p>
+  <p class="stitle">cómo instalarlo</p>
+  <div class="steps">
+    <div class="step"><span class="step-n">01</span><div><p class="step-title">Descarga el .zip</p><p class="step-desc">Descarga <strong>ORION_Setup_1.0.0.zip</strong>, extrae y ejecuta el installer.</p></div></div>
+    <div class="step"><span class="step-n">02</span><div><p class="step-title">Instala Ollama (opcional)</p><p class="step-desc">Para IA local, instala Ollama y ejecuta:</p><div class="code">ollama pull phi3:latest</div></div></div>
+    <div class="step"><span class="step-n">03</span><div><p class="step-title">Lanza ORION</p><p class="step-desc">Doble clic para hablar, Espacio para escribir.</p></div></div>
+    <div class="step"><span class="step-n">04</span><div><p class="step-title">Desde código fuente</p><div class="code">git clone https://github.com/asierpernias/ORION<br>pip install -r requirements.txt<br>python app.py</div></div></div>
+  </div>
+</div>
+
+<hr id="roadmap"/>
+
+<div class="section">
+  <p class="slabel">&gt; roadmap</p>
+  <p class="stitle">qué viene después</p>
+  <div class="roadmap">
+    <div class="rcard done"><p class="rphase">PHASE 1 — DONE</p><p class="rtitle">Core estable</p><ul><li>voz + texto</li><li>solo busqueda</li><li> trabajo en web</li></ul></div>
+    <div class="rcard active"><p class="rphase">PHASE 2 — DONE</p><p class="rtitle">Intents variados</p><ul><li>ui trabajada con pixel art</li><li>parser híbrido con ml</li></ul></div>
+    <div class="rcard"><p class="rphase">PHASE 3 — NEXT</p><p class="rtitle">Mayor personalizacion</p><ul><li>bubbles + botones</li><li>perfil de usuario</li></ul></div>
+    <div class="rcard"><p class="rphase">PHASE 4 — V3</p><p class="rtitle">Intents avanzados</p><ul><li>clima, calculadora</li><li>recordatorios</li></ul></div>
+  </div>
+</div>
+
+<footer>
+  <span>✦ ORION v1.0.0 · local ai · no cloud</span>
+  <div><a href="https://github.com/asierpernias/ORION">GitHub</a> · <a href="#download">Download</a> · <a href="#roadmap">Roadmap</a></div>
+</footer>
+
+</body>
+</html>
