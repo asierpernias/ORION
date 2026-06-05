@@ -1,5 +1,3 @@
-
-
 <html lang="es">
 <head>
   <meta charset="UTF-8"/>
@@ -11,9 +9,8 @@
 </head>
 
 <style>
-    
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0a;color:#c8ff00;font-family:'Share Tech Mono',monospace;min-height:100vh;padding:20px}
+body{background:#0a0a0a;color:#c8ff00;font-family:'Space Mono',monospace;min-height:100vh;padding:20px}
 a{color:inherit;text-decoration:none}
 nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #c8ff0033;margin-bottom:40px}
 .brand{font-family:'Press Start 2P',monospace;font-size:14px}
@@ -29,14 +26,13 @@ h1{font-family:'Press Start 2P',monospace;font-size:clamp(24px,5vw,52px);color:#
 .blink{animation:blink 1s step-end infinite}
 @keyframes blink{50%{opacity:0}}
 .btns{display:flex;gap:12px;margin:30px 0}
-.btn{border:2px solid currentColor;padding:10px 20px;font-family:'Press Start 2P',monospace;font-size:9px;cursor:pointer;transition:.2s;display:inline-block}
+.btn{border:2px solid currentColor;padding:10px 20px;font-family:'Press Start 2P',monospace;font-size:9px;cursor:pointer;transition:.2s;display:inline-block;background:none}
 .btn-y{color:#c8ff00}.btn-y:hover{background:#c8ff00;color:#000}
 .btn-b{color:#4af}.btn-b:hover{background:#4af;color:#000}
 .status{border-top:1px solid #c8ff0033;margin-top:20px;padding-top:12px;display:flex;gap:20px;flex-wrap:wrap;font-size:11px;color:#555}
 .status span{color:#4af}
 hr{border:none;border-top:1px solid #222;margin:40px auto;max-width:860px}
 .section{max-width:860px;margin:0 auto 40px}
-.slabel{color:#555;font-size:11px;margin-bottom:8px}
 .stitle{font-size:16px;margin-bottom:24px;color:#eee}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
 .card{border:1px solid #c8ff0022;padding:16px;font-size:12px}
@@ -45,11 +41,12 @@ hr{border:none;border-top:1px solid #222;margin:40px auto;max-width:860px}
 .card-desc{color:#555;line-height:1.6}
 .dl-box{border:1px solid #c8ff0044;padding:24px;max-width:560px}
 .os-select{display:flex;gap:0;margin-bottom:20px;border:1px solid #333}
-.os-tab{flex:1;padding:10px;font-family:'Share Tech Mono',monospace;font-size:12px;background:none;border:none;color:#555;cursor:pointer;transition:.2s;border-right:1px solid #333}
+.os-tab{flex:1;padding:10px;font-family:'Space Mono',monospace;font-size:12px;background:none;border:none;color:#555;cursor:pointer;transition:.2s;border-right:1px solid #333}
 .os-tab:last-child{border-right:none}
 .os-tab.active{background:#c8ff0011;color:#c8ff00}
 .os-tab:hover{color:#c8ff00}
-.dl-panel{display:none;font-size:12px}.dl-panel.active{display:block}
+.dl-panel{display:none;font-size:12px}
+.dl-panel.active{display:block}
 .dl-name{color:#eee;font-size:13px;margin-bottom:6px}
 .dl-meta{color:#555;font-size:11px;margin-bottom:16px;line-height:1.8}
 .dl-meta span{color:#4af}
@@ -59,11 +56,14 @@ hr{border:none;border-top:1px solid #222;margin:40px auto;max-width:860px}
 .step-n{color:#c8ff0055;font-size:20px;min-width:36px}
 .step-title{color:#eee;margin-bottom:4px}
 .step-desc{color:#555;line-height:1.6}
-.code{background:#111;border:1px solid #333;padding:10px 14px;margin-top:8px;color:#4af;font-size:11px}
+.code{background:#111;border:1px solid #333;padding:10px 14px;margin-top:8px;color:#4af;font-size:11px;font-family:'Space Mono',monospace}
 .roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
 .rcard{border:1px solid #333;padding:16px;font-size:11px;color:#555}
-.rcard.done{border-color:#c8ff0044}.rcard.done .rphase{color:#c8ff00}
-.rcard.active{border-color:#4af444}.rcard.active .rphase{color:#4af}
+.rcard.done{border-color:#c8ff0044}
+.rcard.done .rphase{color:#c8ff00}
+.rcard.active{border-color:#4af444}
+.rcard.active .rphase{color:#4af}
+.rcard.upcoming .rphase{color:#555}
 .rphase{margin-bottom:6px;font-size:10px}
 .rtitle{color:#eee;margin-bottom:8px}
 .rcard ul{padding-left:14px;line-height:2}
@@ -73,113 +73,228 @@ footer a:hover{color:#c8ff00}
 </style>
 
 <body>
-    <nav>
-        <span class="brand">✦ ORION</span>
-        <div class="links">
-            <a href="#download">Download</a>
-            <a href="#features">Features</a>
-            <a href="#setup">Setup</a>
-            <a href="#roadmap">Roadmap</a>
-        </div>
-    </nav>
-    <div class="terminal">
-        <h1>ORION</h1>
-        <p class="sub">asistente local de escritorio con ia</p>
-        <div class="line"><span class="prompt">&gt;</span>hey orion</div>
-        <p class="ans">listo. voz, texto y comandos - sin cloud, sin datos enviados</p>
-        <div class="line"><span class="prompt">&gt;</span>qué puedes hacer?</div>
-        <p class="ans">buscar, notas, timers, abrir apps y mucho mas en un futuro</p>
-        <div class="line"><span class="prompt">&gt;</span><span class="blinl">_</span></div>
 
-        <div class="btns">
-            <a class="btn btn-y" href="">▶ Download v1.0.0</a>
-            <a class="btn btn-b" href="#setup">How to run</a>
-        </div>
+<nav>
+  <span class="brand">✦ ORION</span>
+  <div class="links">
+    <a href="#download">Download</a>
+    <a href="#features">Features</a>
+    <a href="#setup">Setup</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+</nav>
 
-        <div class="status">
-            <span>local mode</span> ·  <span>whisper medium</span> · <span>ollama phi3:lastest</span> · <span>es / en</span> · <span>agent mode</span>
-        </div>
+<div class="terminal">
+  <h1>ORION</h1>
+  <p class="sub">asistente local de escritorio con ia</p>
+
+  <div class="line"><span class="prompt">&gt;</span> hey orion</div>
+  <p class="ans">listo. voz, texto y comandos — sin cloud, sin datos enviados</p>
+
+  <div class="line"><span class="prompt">&gt;</span> qué puedes hacer?</div>
+  <p class="ans">buscar, notas, timers, abrir apps y mucho mas en un futuro</p>
+
+  <div class="line"><span class="prompt">&gt;</span><span class="blink">_</span></div>
+
+  <div class="btns">
+    <a class="btn btn-y" href="">▶ Download v1.0.0</a>
+    <a class="btn btn-b" href="#setup">How to run</a>
+  </div>
+
+  <div class="status">
+    <span>local mode</span> · <span>whisper medium</span> · <span>ollama phi3:latest</span> · <span>es / en</span> · <span>agent mode</span>
+  </div>
+</div>
+
+<hr id="download"/>
+
+<div class="section">
+  <p class="stitle">última versión</p>
+
+  <div class="dl-box">
+    <div class="os-select">
+      <button class="os-tab active" onclick="setOS(this,'win')">Windows</button>
+      <button class="os-tab" onclick="setOS(this,'mac')">macOS</button>
+      <button class="os-tab" onclick="setOS(this,'linux')">Linux</button>
     </div>
 
-    <hr id="download"/>
-
-    <div class="section">
-        <p class="slabel">&gt; download</p>
-        <p class="stitle">última version</p>
-        <div class="dl-box">
-            <div class="os-select">
-                <button class="os-tab active" onclick="setOS('win')">[ Windows] </button>
-                <button class="os-tab" onclick="setOS('mac')">[ macOS ]</button>
-                <button class="os-tab" onclick="setOS('linux')">[ Linux ]</button>
-            </div>
-
-            <div class="dl-panel active" id="os-win">
-                <p class="dl-name">ORION_Setup_1.0.0.zip</p>
-                <div class="dl-meta">version <span>stable</span> installer incluido <span>200MB</span></div>
-                <div class="dl-reqs">requiere: Windows 10/11 Pyhton no necesario </div>
-                <a class="btn btn-y" style="font-size: 8px;padding: 10px 10px;" href="">▶ Descargar .zip (Windows)</a>
-            </div>
-            
-            <div class="dl-panel" id="os-mac">
-                <p class="dl-name">ORION_1.0.0.zip</p>
-                <div class="dl-meta"> version stable <span>installer no incluido</span></div>
-                <div class="dl-reqs">requiere: macOs 12+ Python 3.11+  </div>
-                <a class="btn btn-y" style="font-size: 8px;padding: 10px 10px;" href="">▶ Descargar </a>
-            </div>
-
-            <div class="dl-panel" id="os linux">
-                <p class="dl-name">ORION-1.0.0-linux.tar.gz</p>
-                <div class="dl-meta"> version <span>stable</span>portable</div>
-                <div class="dl-reqs">requiere: Ubuntu 20.04+/Debian Python 3.11+ </div>
-                <a class="btn btn-y" style="font-size: 8px;padding:10px 10px" href="">▶ Descargar</a>
-            </div>
-        </div>
+    <div class="dl-panel active" id="os-win">
+      <p class="dl-name">ORION_Setup_1.0.0.zip</p>
+      <div class="dl-meta">versión <span>stable</span> · installer incluido · <span>200MB</span></div>
+      <div class="dl-reqs">requiere: Windows 10/11 · Python no necesario</div>
+      <a class="btn btn-y" href="https://github.com/asierpernias/ORION/releases/tag/v2.windows">▶ Descargar</a>
     </div>
-    <hr id="features"/>
 
-    <div class="section">
-        <p class="slabel">&gt; features</p>
-        <p class="stitle">qué puedes hacer ORION?</p>
-        <div class="grid">
-            <div class="card"><p class="card-icon">[ VOZ ]</p><p class="card-title">Comandos por voz</p><p class="card-desc">Transcripción local con Whisper. Sin servidores externos.</p></div>
-            <div class="card"><p class="card-icon">[ TEXT ]</p><p class="card-title">Barra de texto</p><p class="card-desc">Abre con Espacio. Respuesta sin latencia de red.</p></div>
-            <div class="card"><p class="card-icon">[ SEARCH ]</p><p class="card-title">Búsqueda inteligente</p><p class="card-desc">Google y YouTube con detección automática de motor.</p></div>
-            <div class="card"><p class="card-icon">[ NOTES ]</p><p class="card-title">Notas locales</p><p class="card-desc">Guarda notas con timestamp. Sin cloud, sin cuenta.</p></div>
-            <div class="card"><p class="card-icon">[ TIMER ]</p><p class="card-title">Timers</p><p class="card-desc">Múltiples timers simultáneos. Beep al terminar.</p></div>
-            <div class="card"><p class="card-icon">[ APPS ]</p><p class="card-title">Abrir apps</p><p class="card-desc">Busca apps en Windows, macOS y Linux dinámicamente.</p></div>
-        </div>
+    <div class="dl-panel" id="os-mac">
+      <p class="dl-name">ORION_1.0.0.zip</p>
+      <div class="dl-meta">versión <span>stable</span> · app bundle · <span>180MB</span></div>
+      <div class="dl-reqs">requiere: macOS 12+ · Python 3.11+</div>
+      <a class="btn btn-y" href="https://github.com/asierpernias/ORION/releases/tag/v2.macOs">▶ Descargar</a>
     </div>
-    
+
+    <div class="dl-panel" id="os-linux">
+      <p class="dl-name">ORION-1.0.0-linux.tar.gz</p>
+      <div class="dl-meta">versión <span>stable</span> · portable · <span>175MB</span></div>
+      <div class="dl-reqs">requiere: Ubuntu 20.04+ / Debian · Python 3.11+ · Requiere de la instalación de whisper</div>
+      <a class="btn btn-y" href="https://github.com/asierpernias/ORION/releases/tag/v2.linux">▶ Descargar</a>
+    </div>
+  </div>
+</div>
+
+<hr id="features"/>
+
+<div class="section">
+  <p class="stitle">qué puede hacer ORION?</p>
+
+  <div class="grid">
+    <div class="card">
+      <p class="card-icon">[ VOZ ]</p>
+      <p class="card-title">Comandos por voz</p>
+      <p class="card-desc">Transcripción local con Whisper. Sin internet, sin latencia.</p>
+    </div>
+    <div class="card">
+      <p class="card-icon">[ LLM ]</p>
+      <p class="card-title">IA local con Ollama</p>
+      <p class="card-desc">Corre modelos como phi3 o llama3 directamente en tu máquina.</p>
+    </div>
+    <div class="card">
+      <p class="card-icon">[ CMD ]</p>
+      <p class="card-title">Comandos del sistema</p>
+      <p class="card-desc">Abre apps, busca archivos, lanza scripts con lenguaje natural.</p>
+    </div>
+    <div class="card">
+      <p class="card-icon">[ NOTE ]</p>
+      <p class="card-title">Notas rápidas</p>
+      <p class="card-desc">Dicta o escribe notas. Se guardan localmente en texto plano.</p>
+    </div>
+    <div class="card">
+      <p class="card-icon">[ TIME ]</p>
+      <p class="card-title">Timers y recordatorios</p>
+      <p class="card-desc">Pon timers y alertas por voz. Todo sin salir del teclado.</p>
+    </div>
+    <div class="card">
+      <p class="card-icon">[ PRIV ]</p>
+      <p class="card-title">100% privado</p>
+      <p class="card-desc">Cero datos enviados a la nube. Todo ocurre en tu hardware.</p>
+    </div>
+  </div>
+</div>
+
 <hr id="setup"/>
 
 <div class="section">
-  <p class="slabel">&gt; setup</p>
   <p class="stitle">cómo instalarlo</p>
+
   <div class="steps">
-    <div class="step"><span class="step-n">01</span><div><p class="step-title">Descarga el .zip</p><p class="step-desc">Descarga <strong>ORION_Setup_1.0.0.zip</strong>, extrae y ejecuta el installer.</p></div></div>
-    <div class="step"><span class="step-n">02</span><div><p class="step-title">Instala Ollama (opcional)</p><p class="step-desc">Para IA local, instala Ollama y ejecuta:</p><div class="code">ollama pull phi3:latest</div></div></div>
-    <div class="step"><span class="step-n">03</span><div><p class="step-title">Lanza ORION</p><p class="step-desc">Doble clic para hablar, Espacio para escribir.</p></div></div>
-    <div class="step"><span class="step-n">04</span><div><p class="step-title">Desde código fuente</p><div class="code">git clone https://github.com/asierpernias/ORION<br>pip install -r requirements.txt<br>python app.py</div></div></div>
+    <div class="step">
+      <span class="step-n">01</span>
+      <div>
+        <p class="step-title">Descarga el paquete</p>
+        <p class="step-desc">Elige tu sistema operativo arriba y descarga el zip correspondiente.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-n">02</span>
+      <div>
+        <p class="step-title">Instala dependencias</p>
+        <p class="step-desc">Dentro de la carpeta extraída, ejecuta:</p>
+        <div class="code">pip install -r requirements.txt</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-n">03</span>
+      <div>
+        <p class="step-title">Instala Ollama y descarga un modelo</p>
+        <p class="step-desc">ORION necesita Ollama corriendo localmente. Descárgalo en <span style="color:#4af">ollama.com</span> y luego:</p>
+        <div class="code">ollama pull phi3:latest</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-n">04</span>
+      <div>
+        <p class="step-title">Ejecuta ORION</p>
+        <p class="step-desc">Abre el ejecutable y descubre todas sus posibilidades</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-n">05</span>
+      <div>
+        <p class="step-title">Activa el micrófono (opcional)</p>
+        <p class="step-desc">Para comandos por voz, asegúrate de tener un micrófono activo. Whisper medium se descarga automáticamente en el primer uso (~1.5GB).</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <hr id="roadmap"/>
 
 <div class="section">
-  <p class="slabel">&gt; roadmap</p>
-  <p class="stitle">qué viene después?</p>
+  <p class="stitle">roadmap</p>
+
   <div class="roadmap">
-    <div class="rcard done"><p class="rphase">PHASE 1 — DONE</p><p class="rtitle">Core estable</p><ul><li>voz + texto</li><li>solo busqueda</li><li> trabajo en web</li></ul></div>
-    <div class="rcard active"><p class="rphase">PHASE 2 — DONE</p><p class="rtitle">Intents variados</p><ul><li>ui trabajada con pixel art</li><li>parser híbrido con ml</li></ul></div>
-    <div class="rcard"><p class="rphase">PHASE 3 — V3</p><p class="rtitle">Mayor personalizacion</p><ul><li>sistema tipo marketplace de plugings</li><li>perfil de usuario</li></ul></div>
-    <div class="rcard"><p class="rphase">PHASE 4 — V4</p><p class="rtitle">Sistema fisico con esp32</p><ul><li>uso de sensores de clima y humedad</li><li>domótica?</li></ul></div>
+    <div class="rcard done">
+      <p class="rphase">DONE ✓</p>
+      <p class="rtitle">Core</p>
+      <ul>
+        <li>Motor LLM local</li>
+        <li>Whisper STT</li>
+        <li>Comandos básicos</li>
+        <li>Notas y timers</li>
+      </ul>
+    </div>
+
+    <div class="rcard active">
+      <p class="rphase">ACTIVE ▶</p>
+      <p class="rtitle">UI</p>
+      <ul>
+        <li>Interfaz de escritorio</li>
+        <li>Overlay flotante</li>
+        <li>Historial de sesión</li>
+        <li>Configuración visual</li>
+      </ul>
+    </div>
+
+    <div class="rcard upcoming">
+      <p class="rphase">PRÓXIMO</p>
+      <p class="rtitle">Plugins</p>
+      <ul>
+        <li>Sistema de plugins</li>
+        <li>Integración calendario</li>
+        <li>Control de música</li>
+        <li>API local</li>
+      </ul>
+    </div>
+
+    <div class="rcard upcoming">
+      <p class="rphase">FUTURO</p>
+      <p class="rtitle">Agent v2</p>
+      <ul>
+        <li>Version física con esp32</li>
+        <li>Memoria persistente</li>
+        <li>Sistema usuario</li>
+        <li>Domotica</li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <footer>
-  <span>✦ ORION v1.0.0 · local ai · no cloud</span>
-  <div><a href="https://github.com/asierpernias/ORION">GitHub</a> · <a href="#download">Download</a> · <a href="#roadmap">Roadmap</a></div>
+  <div>ORION v1.0.0 — hecho por ASIER PERNIA SORIA </div>
+  <div><a href="">GitHub</a></div>
 </footer>
+
+<script>
+function setOS(btn, os) {
+  document.querySelectorAll('.os-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.dl-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('os-' + os).classList.add('active');
+}
+</script>
 
 </body>
 </html>
