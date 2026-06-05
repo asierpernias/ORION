@@ -8,8 +8,70 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styless.css"/>
 </head>
+
+<style>
+    
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#c8ff00;font-family:'Share Tech Mono',monospace;min-height:100vh;padding:20px}
+a{color:inherit;text-decoration:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #c8ff0033;margin-bottom:40px}
+.brand{font-family:'Press Start 2P',monospace;font-size:14px}
+nav a{color:#888;font-size:12px;margin-left:20px;transition:.2s}
+nav a:hover{color:#c8ff00}
+.terminal{border:1px solid #c8ff0044;padding:30px;max-width:860px;margin:0 auto;position:relative}
+.terminal::before{content:'ORION v1.0.0 — orion.exe';position:absolute;top:-10px;left:20px;background:#0a0a0a;padding:0 10px;font-size:11px;color:#555}
+h1{font-family:'Press Start 2P',monospace;font-size:clamp(24px,5vw,52px);color:#c8ff00;margin-bottom:6px}
+.sub{color:#555;font-size:13px;margin-bottom:30px}
+.line{margin:8px 0;font-size:13px}
+.prompt{color:#c8ff0088}
+.ans{color:#4af;margin-left:20px;margin-bottom:12px;font-size:12px}
+.blink{animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.btns{display:flex;gap:12px;margin:30px 0}
+.btn{border:2px solid currentColor;padding:10px 20px;font-family:'Press Start 2P',monospace;font-size:9px;cursor:pointer;transition:.2s;display:inline-block}
+.btn-y{color:#c8ff00}.btn-y:hover{background:#c8ff00;color:#000}
+.btn-b{color:#4af}.btn-b:hover{background:#4af;color:#000}
+.status{border-top:1px solid #c8ff0033;margin-top:20px;padding-top:12px;display:flex;gap:20px;flex-wrap:wrap;font-size:11px;color:#555}
+.status span{color:#4af}
+hr{border:none;border-top:1px solid #222;margin:40px auto;max-width:860px}
+.section{max-width:860px;margin:0 auto 40px}
+.slabel{color:#555;font-size:11px;margin-bottom:8px}
+.stitle{font-size:16px;margin-bottom:24px;color:#eee}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.card{border:1px solid #c8ff0022;padding:16px;font-size:12px}
+.card-icon{color:#c8ff00;margin-bottom:8px;font-size:11px}
+.card-title{color:#eee;margin-bottom:6px}
+.card-desc{color:#555;line-height:1.6}
+.dl-box{border:1px solid #c8ff0044;padding:24px;max-width:560px}
+.os-select{display:flex;gap:0;margin-bottom:20px;border:1px solid #333}
+.os-tab{flex:1;padding:10px;font-family:'Share Tech Mono',monospace;font-size:12px;background:none;border:none;color:#555;cursor:pointer;transition:.2s;border-right:1px solid #333}
+.os-tab:last-child{border-right:none}
+.os-tab.active{background:#c8ff0011;color:#c8ff00}
+.os-tab:hover{color:#c8ff00}
+.dl-panel{display:none;font-size:12px}.dl-panel.active{display:block}
+.dl-name{color:#eee;font-size:13px;margin-bottom:6px}
+.dl-meta{color:#555;font-size:11px;margin-bottom:16px;line-height:1.8}
+.dl-meta span{color:#4af}
+.dl-reqs{border:1px solid #333;padding:10px 14px;font-size:11px;color:#555;margin-bottom:16px;line-height:1.8}
+.steps{display:flex;flex-direction:column;gap:16px}
+.step{display:flex;gap:20px;font-size:12px}
+.step-n{color:#c8ff0055;font-size:20px;min-width:36px}
+.step-title{color:#eee;margin-bottom:4px}
+.step-desc{color:#555;line-height:1.6}
+.code{background:#111;border:1px solid #333;padding:10px 14px;margin-top:8px;color:#4af;font-size:11px}
+.roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.rcard{border:1px solid #333;padding:16px;font-size:11px;color:#555}
+.rcard.done{border-color:#c8ff0044}.rcard.done .rphase{color:#c8ff00}
+.rcard.active{border-color:#4af444}.rcard.active .rphase{color:#4af}
+.rphase{margin-bottom:6px;font-size:10px}
+.rtitle{color:#eee;margin-bottom:8px}
+.rcard ul{padding-left:14px;line-height:2}
+footer{max-width:860px;margin:40px auto 0;border-top:1px solid #222;padding-top:16px;display:flex;justify-content:space-between;font-size:11px;color:#555;flex-wrap:wrap;gap:8px}
+footer a:hover{color:#c8ff00}
+@media(max-width:600px){nav .links{display:none}.btns{flex-direction:column}}
+</style>
+
 <body>
     <nav>
         <span class="brand">✦ ORION</span>
@@ -77,7 +139,7 @@
 
     <div class="section">
         <p class="slabel">&gt; features</p>
-        <p class="stitle">qué puedes hacer ORION</p>
+        <p class="stitle">qué puedes hacer ORION?</p>
         <div class="grid">
             <div class="card"><p class="card-icon">[ VOZ ]</p><p class="card-title">Comandos por voz</p><p class="card-desc">Transcripción local con Whisper. Sin servidores externos.</p></div>
             <div class="card"><p class="card-icon">[ TEXT ]</p><p class="card-title">Barra de texto</p><p class="card-desc">Abre con Espacio. Respuesta sin latencia de red.</p></div>
@@ -105,12 +167,12 @@
 
 <div class="section">
   <p class="slabel">&gt; roadmap</p>
-  <p class="stitle">qué viene después</p>
+  <p class="stitle">qué viene después?</p>
   <div class="roadmap">
     <div class="rcard done"><p class="rphase">PHASE 1 — DONE</p><p class="rtitle">Core estable</p><ul><li>voz + texto</li><li>solo busqueda</li><li> trabajo en web</li></ul></div>
     <div class="rcard active"><p class="rphase">PHASE 2 — DONE</p><p class="rtitle">Intents variados</p><ul><li>ui trabajada con pixel art</li><li>parser híbrido con ml</li></ul></div>
-    <div class="rcard"><p class="rphase">PHASE 3 — NEXT</p><p class="rtitle">Mayor personalizacion</p><ul><li>bubbles + botones</li><li>perfil de usuario</li></ul></div>
-    <div class="rcard"><p class="rphase">PHASE 4 — V3</p><p class="rtitle">Intents avanzados</p><ul><li>clima, calculadora</li><li>recordatorios</li></ul></div>
+    <div class="rcard"><p class="rphase">PHASE 3 — V3</p><p class="rtitle">Mayor personalizacion</p><ul><li>sistema tipo marketplace de plugings</li><li>perfil de usuario</li></ul></div>
+    <div class="rcard"><p class="rphase">PHASE 4 — V4</p><p class="rtitle">Sistema fisico con esp32</p><ul><li>uso de sensores de clima y humedad</li><li>domótica?</li></ul></div>
   </div>
 </div>
 
