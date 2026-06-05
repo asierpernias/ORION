@@ -24,7 +24,7 @@ class CommandBar(QWidget):
     def __init__(
         self,
         parent=None,
-        assets_dir=resource_path("assets/input_bar"),
+        assets_dir="assets/input_bar",
         scale=4,
         width=640
     ):
@@ -36,9 +36,9 @@ class CommandBar(QWidget):
 
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
-        self.left = self.load_part(resource_path("bar_left.png"))
-        self.center = self.load_part(resource_path("bar_center.png"))
-        self.right = self.load_part(resource_path("bar_right.png"))
+        self.left = self.load_part("bar_left.png")
+        self.center = self.load_part("bar_center.png")
+        self.right = self.load_part("bar_right.png")
 
         if self.center.isNull():
             self.bar_height = 32
@@ -69,7 +69,7 @@ class CommandBar(QWidget):
         self.hide()
 
     def load_part(self, filename):
-        path = os.path.join(self.assets_dir, filename)
+        path = resource_path(os.path.join(self.assets_dir, filename))
         pixmap = QPixmap(path)
 
         if pixmap.isNull():

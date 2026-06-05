@@ -4,3 +4,10 @@ grabacion.wav
 .wakatime-project
 .venv/
 .env
+dist/
+build/
+*.spec
+*.pkl
+ml/trainin_data.json
+__pycache__/
+*.pyc

@@ -5,3 +5,5 @@ numpy
 requests
 fastapi
 uvicorn
+pyinstaller
+sckit-learn

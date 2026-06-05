@@ -9,14 +9,14 @@ from paths import resource_path
 class HistoryButton(QLabel):
     clicked = pyqtSignal()
 
-    def __init__(self, parent=None, assets_dir=resource_path("assets\history_button"), scale=2):
+    def __init__(self, parent=None, assets_dir="assets\history_button", scale=2):
         super().__init__(parent)
 
         self.assets_dir = assets_dir
         self.scale = scale
-        self.idle_pixmap = self.load_pixmap(resource_path("pixil-frame-0.png"))
-        self.hover_pixmap = self.load_pixmap(resource_path("pixil-frame-2.png"))
-        self.pressed_pixmap = self.load_pixmap(resource_path("pixil-frame-1.png"))
+        self.idle_pixmap = self.load_pixmap("pixil-frame-0.png")
+        self.hover_pixmap = self.load_pixmap("pixil-frame-2.png")
+        self.pressed_pixmap = self.load_pixmap("pixil-frame-1.png")
 
         self.setPixmap(self.idle_pixmap)
         self.resize(
@@ -29,7 +29,7 @@ class HistoryButton(QLabel):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
     def load_pixmap(self, filename):
-        path = os.path.join(self.assets_dir, filename)
+        path = resource_path(os.path.join(self.assets_dir, filename))
         pixmap = QPixmap(path)
 
         if pixmap.isNull():
