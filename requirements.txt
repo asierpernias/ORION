@@ -6,4 +6,4 @@ requests
 fastapi
 uvicorn
 pyinstaller
-sckit-learn
+scikit-learn

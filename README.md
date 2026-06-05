@@ -66,7 +66,7 @@ launch ORION from the desktop shortcut
 ### from source
 
 ```bash
-git clone https://github.com/your-username/orion
+git clone [text](https://github.com/asierpernias/ORION)
 cd orion
 pip install -r requirements.txt
 python app.py
