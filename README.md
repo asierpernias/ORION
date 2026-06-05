@@ -1,7 +1,7 @@
 
 # ORION
 
-> local desktop assistant with AI
+### local desktop assistant with AI
 
 voice + text. no cloud processing. everything local.
 
@@ -56,8 +56,11 @@ help
 ## > installation
 
 ### installer method
+([Landing page](https://asierpernias.github.io/ORION/)):
 
 download ORION_Setup_1.0.0.exe
+install ollama (whisper too if linux)
+install dependencies
 run the installer
 launch ORION from the desktop shortcut
 
@@ -93,11 +96,12 @@ WHISPER_LANGUAGE
 
 ---
 
+
 ## > requirements
 
 minimum system requirements:
 
-* Windows 10 / 11
+* Windows 10 / 11 // Linux // macOS
 * Python 3.11+
 * microphone for voice mode
 * 200MB+ free disk space
@@ -134,6 +138,13 @@ pyaudio
 * App cache for faster speed response
 
 ---
+
+## > imagenes
+
+![Launch Page](<Captura de pantalla 2026-06-05 092915.png>)
+![Avatar](<Captura de pantalla 2026-06-02 151750.png>)
+![Historial](<Captura de pantalla 2026-06-02 151800.png>)
+![Configuation](<Captura de pantalla 2026-06-02 150725.png>)
 
 ## > license
 
