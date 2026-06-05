@@ -1,6 +1,6 @@
 from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QPixmap
-
+from paths import resource_path
 
 def start_idle_animation(window):
 
@@ -8,11 +8,11 @@ def start_idle_animation(window):
         window.idle_timer.stop()
 
     window.idle_frames = [
-        QPixmap("assets/idle/idle_1.png"),
-        QPixmap("assets/idle/idle_2.png"),
-        QPixmap("assets/idle/idle_3.png"),
-        QPixmap("assets/idle/idle_4.png"),
-        QPixmap("assets/idle/idle_5.png")
+        QPixmap(resource_path("assets/idle/idle_1.png")),
+        QPixmap(resource_path("assets/idle/idle_2.png")),
+        QPixmap(resource_path("assets/idle/idle_3.png")),
+        QPixmap(resource_path("assets/idle/idle_4.png")),
+        QPixmap(resource_path("assets/idle/idle_5.png"))
     ]
 
     window.idle_durations = [400, 250, 100, 250, 300]
@@ -43,10 +43,10 @@ def start_searching_animation(window):
         window.searching_timer.stop()
 
     window.searching_frames = [
-        QPixmap("assets/searching/searching_1.png"),
-        QPixmap("assets/searching/searching_2.png"),
-        QPixmap("assets/searching/searching_3.png"),
-        QPixmap("assets/searching/searching_4.png")
+        QPixmap(resource_path("assets/searching/searching_1.png")),
+        QPixmap(resource_path("assets/searching/searching_2.png")),
+        QPixmap(resource_path("assets/searching/searching_3.png")),
+        QPixmap(resource_path("assets/searching/searching_4.png"))
     ]
 
     window.searching_index = 0
@@ -71,12 +71,12 @@ def start_recording_animation(window):
         window.recording_timer.stop()
 
     window.recording_frames = [
-        QPixmap("assets/recording/recording_1.png"),
-        QPixmap("assets/recording/recording_2.png"),
-        QPixmap("assets/recording/recording_3.png"),
-        QPixmap("assets/recording/recording_4.png"),
-        QPixmap("assets/recording/recording_5.png"),
-        QPixmap("assets/recording/recording_6.png")
+        QPixmap(resource_path("assets/recording/recording_1.png")),
+        QPixmap(resource_path("assets/recording/recording_2.png")),
+        QPixmap(resource_path("assets/recording/recording_3.png")),
+        QPixmap(resource_path("assets/recording/recording_4.png")),
+        QPixmap(resource_path("assets/recording/recording_5.png")),
+        QPixmap(resource_path("assets/recording/recording_6.png"))
     ]
 
     window.recording_index = 0
@@ -101,10 +101,10 @@ def start_responding_animation(window):
         window.responding_timer.stop()
 
     window.responding_frames = [
-        QPixmap("assets/responding/responding_1.png"),
-        QPixmap("assets/responding/responding_2.png"),
-        QPixmap("assets/responding/responding_3.png"),
-        QPixmap("assets/responding/responding_4.png")
+        QPixmap(resource_path("assets/responding/responding_1.png")),
+        QPixmap(resource_path("assets/responding/responding_2.png")),
+        QPixmap(resource_path("assets/responding/responding_3.png")),
+        QPixmap(resource_path("assets/responding/responding_4.png"))
     ]
 
     window.responding_index = 0

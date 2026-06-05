@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayo
 from i18n import t
 from ui import AvatarWindow
 from config import OLLAMA_MODEL, OLLAMA_URL
+from paths import resource_path
 
 
 class StartWindow(QWidget):
@@ -14,7 +15,7 @@ class StartWindow(QWidget):
         super().__init__()
         self.avatar_window = None
         self._cursor_visible = True
-        font_id = QFontDatabase.addApplicationFont("assets/fonts/press-start-2p.ttf")
+        font_id = QFontDatabase.addApplicationFont(resource_path("assets/fonts/press-start-2p.ttf"))
         
         self.setup_window()
         self.setup_ui()
@@ -33,7 +34,7 @@ class StartWindow(QWidget):
         y = (screen.height() - height) // 2
 
         self.setGeometry(x, y, width, height)
-        self.setWindowIcon(QIcon("assets/icon.ico"))
+        self.setWindowIcon(QIcon(resource_path("assets/icon.ico")))
 
         self.setStyleSheet("""
             QWidget {

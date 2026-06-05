@@ -4,13 +4,14 @@ from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QPainter, QPixmap, QFont, QFontMetrics
 from PyQt6.QtWidgets import QWidget, QLabel
 from logger import log
+from paths import resource_path
 
 class SpeechBubble(QWidget):
 
     def __init__(
         self,
         parent=None,
-        assets_dir="assets/bubbles",
+        assets_dir=resource_path("assets/bubbles"),
         tile_size=8,
         scale=4,
         max_text_width=320
@@ -31,15 +32,15 @@ class SpeechBubble(QWidget):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
         self.tiles = {
-            "top_left": self.load_tile("bubble_top_left.png"),
-            "top": self.load_tile("bubble_top.png"),
-            "top_right": self.load_tile("bubble_top_right.png"),
-            "left": self.load_tile("bubble_left.png"),
-            "center": self.load_tile("bubble_center.png"),
-            "right": self.load_tile("bubble_right.png"),
-            "bottom_left": self.load_tile("bubble_bottom_left.png"),
-            "bottom": self.load_tile("bubble_bottom.png"),
-            "bottom_right": self.load_tile("bubble_bottom_right.png"),
+            "top_left": self.load_tile(resource_path("bubble_top_left.png")),
+            "top": self.load_tile(resource_path("bubble_top.png")),
+            "top_right": self.load_tile(resource_path("bubble_top_right.png")),
+            "left": self.load_tile(resource_path("bubble_left.png")),
+            "center": self.load_tile(resource_path("bubble_center.png")),
+            "right": self.load_tile(resource_path("bubble_right.png")),
+            "bottom_left": self.load_tile(resource_path("bubble_bottom_left.png")),
+            "bottom": self.load_tile(resource_path("bubble_bottom.png")),
+            "bottom_right": self.load_tile(resource_path("bubble_bottom_right.png")),
         }
 
         self.label = QLabel(self)

@@ -6,6 +6,8 @@ from i18n import t
 from history_button import HistoryButton
 from history_window import HistoryWindow
 
+from paths import resource_path
+
 import threading
 
 
@@ -49,7 +51,7 @@ class AvatarWindow(QWidget):
         self.setup_history_button()
         
 
-        self.setWindowIcon(QIcon("assets/icon.ico"))
+        self.setWindowIcon(QIcon(resource_path("assets/icon.ico")))
 
         self.state = None
         self.set_state(self.IDLE)
@@ -72,7 +74,7 @@ class AvatarWindow(QWidget):
     def setup_avatar(self):
         self.avatar = QLabel(self)
 
-        pixmap = QPixmap("assets/idle/idle_1.png")
+        pixmap = QPixmap(resource_path("assets/idle/idle_1.png"))
 
         self.avatar.setPixmap(pixmap)
 

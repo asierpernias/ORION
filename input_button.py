@@ -3,21 +3,22 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QLabel
 from logger import log
+from paths import resource_path
 
 class inputButton(QLabel):
 
     clicked = pyqtSignal()
 
     def __init__(
-            self, parent = None, assets_dir="assets/button", scale = 2
+            self, parent = None, assets_dir=resource_path("assets/button"), scale = 2
     ):
         super(). __init__(parent)
 
         self.assets_dir = assets_dir
         self.scale = scale
-        self.idle_pixmap = self.load_pixmap("button_idle.png")
-        self.hover_pixmap = self.load_pixmap("button_hover.png")
-        self.pressed_pixmap = self.load_pixmap("button_pressed.png") 
+        self.idle_pixmap = self.load_pixmap(resource_path("button_idle.png"))
+        self.hover_pixmap = self.load_pixmap(resource_path("button_hover.png"))
+        self.pressed_pixmap = self.load_pixmap(resource_path("button_pressed.png")) 
 
         self.setPixmap(self.idle_pixmap)
         self.resize(

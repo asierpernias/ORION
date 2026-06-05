@@ -5,6 +5,7 @@ from PyQt6.QtGui import QIcon
 from ui import AvatarWindow
 from start_window import StartWindow
 import logging
+from paths import resource_path
 
 if __name__ == "__main__":
 
@@ -12,7 +13,7 @@ if __name__ == "__main__":
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
     
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("assets\icon.ico"))
+    app.setWindowIcon(QIcon(resource_path("assets\icon.ico")))
 
     logging.basicConfig(
         filename="orion.log",
@@ -21,7 +22,7 @@ if __name__ == "__main__":
     )
 
     window = StartWindow()
-    window.setWindowIcon(QIcon("assets\icon.ico"))
+    window.setWindowIcon(QIcon(resource_path("assets\icon.ico")))
     window.show()
 
     sys.exit(app.exec())

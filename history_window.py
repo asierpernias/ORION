@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import(
     QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QScrollArea, QFrame
 )
 from logger import log
+from paths import resource_path
 
 class HistoryWindow(QWidget):
     def __init__(self, history_path="history.json", parent=None):
@@ -14,9 +15,9 @@ class HistoryWindow(QWidget):
         self.history_path = history_path
         self.entries = []
 
-        self.window_pixmap = QPixmap("history_window/pixil-frame-0 (2).png")
+        self.window_pixmap = QPixmap(resource_path("history_window/pixil-frame-0 (2).png"))
         
-        font_id = QFontDatabase.addApplicationFont("assets\fonts\press-start-2p.ttf")
+        font_id = QFontDatabase.addApplicationFont(resource_path("assets\fonts\press-start-2p.ttf"))
 
         self.setup_window()
         self.setup_ui()
