@@ -3,108 +3,77 @@
 
 ### local desktop assistant with AI
 
-voice + text. no cloud processing. everything local.
+ a voice / text assistant which can open apps, save notes and do things such as set timers.
 
 ---
 
 ## > what is it
 
-ORION is a desktop assistant that lives in the corner of your screen. You can talk to it or type commands, and it understands and executes them.
 
-Whisper transcribes audio locally. A machine learning model analyzes intent. Nothing leaves your computer.
 
 ---
 
 ## > features
 
-* local voice recognition using Whisper
-* voice and text interaction
-* fully offline processing
-* local intent detection system
-* local note storage
-* timer system with sound alert
-* open applications from commands
-* smart search (Google / YouTube)
-* draggable floating desktop avatar
-* lightweight desktop UI
-* privacy-focused design
+
 
 ---
 
 ## > commands (v2)
 
-search [query]
--> opens Google or YouTube depending on context
+Right now this are the commands that I have been able to release:
 
-note [text]
--> saves notes locally
+search [query];
+opens Google or YouTube depending on context
+
+note [text]:
+saves notes locally
 
 show my notes
--> lists saved notes
+lists saved notes
 
 set a timer for [time]
--> starts a countdown timer with sound alert
+starts a countdown timer with sound alert
 
 open [app]
--> launches any application on your system
+launches any application on your system
 
 help
--> shows available commands
+shows available commands
 
 ---
 
 ## > installation
 
-### installer method
-([Landing page](https://asierpernias.github.io/ORION/)):
 
-download ORION_Setup_1.0.0.exe
-install ollama (whisper too if linux)
-install dependencies
-run the installer
-launch ORION from the desktop shortcut
 
 ---
 
-### from source
+## > how to use it
 
-```bash
-git clone [text](https://github.com/asierpernias/ORION)
-cd orion
-pip install -r requirements.txt
-python app.py
-```
+The two ways to use is by clicking on the avatar (voice input) or clicking in the button/click on avatar + space to open the text bar.
 
----
-
-## > usage
-
-double click avatar -> voice mode
-click or press space -> text input mode
-
-the avatar appears in the bottom-right corner and can be dragged anywhere on the screen
+The avatar will appear on the right bottom of the screen and by clicking and dragging you can move it to any place on the screen.
 
 ---
 
 ## > configuration
 
-edit config.py to change settings:
-
-WHISPER_MODEL
-APP_LANGUAGE
-WHISPER_LANGUAGE
+By entering in config in the launch page you can change the app language, orion language and the whisper model, set on a light one in order to make it more accesible to all users.
 
 ---
 
 
-## > requirements
+## 
 
 minimum system requirements:
 
-* Windows 10 / 11 // Linux // macOS
-* Python 3.11+
+* Windows 10 / 11 // Linux // macOs
+  (Linux and mac hadnt been tried susceptible
+  of errors)
+* Python downloaded.
 * microphone for voice mode
-* 200MB+ free disk space
+* Is not really accurate but more or less 200mb+ free disk space
 
 python dependencies:
 
@@ -118,24 +87,26 @@ pyaudio
 
 ---
 
-## > technologies
+## > what I used to create this project
 
-* Python
-* PyQt6
+* Python (all the core)
+* PyQt6 (ui of the app)
 * OpenAI Whisper (local speech-to-text)
-* machine learning intent classification
-* SQLite / JSON local storage
-* PyInstaller for packaging
-* GitHub Actions for builds
+* machine learning intent classification (with a backup with key words depending on the fiabilty shown by the model)
+* JSON local storage that saves up to 50 logs 
+* PyInstaller for packaging for windows
+* GitHub Actions for builds for linux and macOs
+* 
 
 ---
 
 
-## > roadmap
+## what is next?
 
-* custom wake word detection
-* plugin system with a system that allows user create plugings
-* App cache for faster speed response
+Once my project gets reviewed my plans are to add these new features:
+> A pluging marketplace from where users could add new features and release them
+> Some web where users can see stats and those type of things
+> 
 
 ---
 
