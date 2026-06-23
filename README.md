@@ -7,18 +7,6 @@
 
 ---
 
-## > what is it
-
-
-
----
-
-## > features
-
-
-
----
-
 ## > commands (v2)
 
 Right now this are the commands that I have been able to release:
@@ -45,8 +33,7 @@ shows available commands
 
 ## > installation
 
-
-
+To install ORION, first make sure you have Ollama installed and running on your system, as it is used for intent analysis and command understanding. Once Ollama is installed, download the model used by ORION and start the local server. After that, download the latest ORION release, extract the ZIP file, and keep all files inside the same folder, including the assets and configuration files. Finally, launch ORION.exe and the assistant will be ready to use. If you prefer running the project from source, clone the repository, create a Python virtual environment, install the dependencies listed in requirements.txt, and execute app.py. ORION requires a working microphone for voice commands and stores all configuration and history locally on your machine
 ---
 
 ## > how to use it
