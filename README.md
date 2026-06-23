@@ -7,7 +7,7 @@
 
 ---
 
-## > commands (v2)
+## commands (v2)
 
 Right now this are the commands that I have been able to release:
 
@@ -31,7 +31,7 @@ shows available commands
 
 ---
 
-## > installation
+## installation
 
 To install ORION, first make sure you have Ollama installed and running on your system, as it is used for intent analysis and command understanding. Once Ollama is installed, download the model used by ORION and start the local server. After that, download the latest ORION release, extract the ZIP file, and keep all files inside the same folder, including the assets and configuration files. Finally, launch ORION.exe and the assistant will be ready to use. If you prefer running the project from source, clone the repository, create a Python virtual environment, install the dependencies listed in requirements.txt, and execute app.py. ORION requires a working microphone for voice commands and stores all configuration and history locally on your machine
 
@@ -43,7 +43,7 @@ The avatar will appear on the right bottom of the screen and by clicking and dra
 
 ---
 
-## > configuration
+## configuration
 
 By entering in config in the launch page you can change the app language, orion language and the whisper model, set on a light one in order to make it more accesible to all users.
 
@@ -73,7 +73,7 @@ pyaudio
 
 ---
 
-## > what I used to create this project
+## what I used to create this project
 
 * Python (all the core)
 * PyQt6 (ui of the app)
@@ -89,21 +89,20 @@ pyaudio
 
 ## what is next?
 
-Once my project gets reviewed my plans are to add these new features:
-> A pluging marketplace from where users could add new features and release them
-> Some web where users can see stats and those type of things
-> 
+Once my project gets reviewed my plans are to add these new features
+- A pluging marketplace from where users could add new features and release them
+- Some web where users can see stats and those type of things
 
 ---
 
-## > imagenes
+## imagenes
 
 ![Launch Page](<Captura de pantalla 2026-06-05 092915.png>)
 ![Avatar](<Captura de pantalla 2026-06-02 151750.png>)
 ![Historial](<Captura de pantalla 2026-06-02 151800.png>)
 ![Configuation](<Captura de pantalla 2026-06-02 150725.png>)
 
-## > license
+## license
 
 MIT License
 
