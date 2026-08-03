@@ -1,9 +1,11 @@
 import os
+
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QLabel
-from logger import log
-from paths import resource_path
+
+from ...core.logger import log
+from ...core.paths import resource_path
 
 class inputButton(QLabel):
 

@@ -1,12 +1,12 @@
 
 from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtGui import QGuiApplication, QIcon, QFontDatabase
-from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QFrame
+from PyQt6.QtGui import QFontDatabase, QGuiApplication, QIcon
+from PyQt6.QtWidgets import QFrame, QHBoxLayout, QLabel, QPushButton, QVBoxLayout, QWidget
 
-from i18n import t
-from ui import AvatarWindow
-from config import OLLAMA_MODEL, OLLAMA_URL
-from paths import resource_path
+from ...config import OLLAMA_MODEL, OLLAMA_URL
+from ...core.i18n import t
+from ...core.paths import resource_path
+from .ui import AvatarWindow
 
 
 class StartWindow(QWidget):
@@ -229,7 +229,7 @@ class StartWindow(QWidget):
         self.setLayout(root)
 
     def build_status_text(self):
-        import config
+        from ... import config
         o = "#FFEFAD"
         g = "#3666CB"
         w = "#FFF9E2"
@@ -272,7 +272,7 @@ class StartWindow(QWidget):
 
     def open_config(self):
         from PyQt6.QtWidgets import QDialog, QComboBox, QFormLayout, QDialogButtonBox
-        import config
+        from ... import config
 
         dialog = QDialog(self)
         dialog.setWindowTitle("ORION config")
@@ -355,17 +355,18 @@ class StartWindow(QWidget):
     def _write_config(self, whisper_model, whisper_language, app_language):
         import re
         import threading
-        from ORION import reload_model
+        from pathlib import Path
+        from ...core.ORION import reload_model
 
-        path = "config.py"
-        with open(path, "r", encoding="utf-8") as f:
+        path = Path(__file__).resolve().parents[2] / "config.py"
+        with path.open("r", encoding="utf-8") as f:
             content = f.read()
 
         content = re.sub(r'WHISPER_MODEL\s*=\s*".*?"',    f'WHISPER_MODEL = "{whisper_model}"',      content)
         content = re.sub(r'WHISPER_LANGUAGE\s*=\s*".*?"', f'WHISPER_LANGUAGE = "{whisper_language}"', content)
         content = re.sub(r'APP_LANGUAGE\s*=\s*".*?"',     f'APP_LANGUAGE = "{app_language}"',         content)
 
-        with open(path, "w", encoding="utf-8") as f:
+        with path.open("w", encoding="utf-8") as f:
             f.write(content)
 
         thread = threading.Thread(target=reload_model, daemon=True)

@@ -1,12 +1,10 @@
-from i18n import t
-from notes import save_note, load_notes
-import re
-import winsound
-import threading
-
-from storage import save_history_entry
-
 import os
+import re
+import threading
+import winsound
+
+from ..storage import load_notes, save_history_entry, save_note
+from .i18n import t
 
 active_timers = []
 ACTION_REGISTRY = {}
@@ -46,7 +44,7 @@ def action_help(intent_data, ui=None):
 @register("search")
 def action_search(intent_data, ui=None):
     
-    from ORION import quick_intent, analyze_search_intent, build_search_url, open_search
+    from .ORION import analyze_search_intent, build_search_url, open_search, quick_intent
     text = intent_data.get("raw", "")
     result = quick_intent(text)
     if not result:
@@ -224,7 +222,7 @@ def action_note_list(intent_data, ui=None):
 
 def parse_duration(text):
 
-    import config
+    from .. import config
     clean = text.lower().strip()
 
     short = re.search(r'(\d+)\s*(h|m|s)\b', clean)
