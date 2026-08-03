@@ -1,67 +1,87 @@
-
 # ORION
 
-### local desktop assistant with AI
+### Local Desktop Assistant with AI
 
- a voice / text assistant which can open apps, save notes and do things such as set timers.
+A voice/text assistant that can open apps, save notes, and perform tasks such as setting timers.
 
----
+# Commands (v2)
 
-## commands (v2)
+Right now these are the commands that I have been able to release:
 
-Right now this are the commands that I have been able to release:
+### `search [query]`
+Opens Google or YouTube depending on the context.
 
-search [query];
-opens Google or YouTube depending on context
+### `note [text]`
+Saves notes locally.
 
-note [text]:
-saves notes locally
+### `show my notes`
+Lists saved notes.
 
-show my notes
-lists saved notes
+### `set a timer for [time]`
+Starts a countdown timer with a sound alert.
 
-set a timer for [time]
-starts a countdown timer with sound alert
+### `open [app]`
+Launches any application on your system.
 
-open [app]
-launches any application on your system
+### `help`
+Shows the available commands.
 
-help
-shows available commands
+# Installation
 
----
+To install ORION, first make sure you have Ollama installed and running on your system, as it is used for intent analysis and command understanding.
 
-## installation
+Once Ollama is installed:
 
-To install ORION, first make sure you have Ollama installed and running on your system, as it is used for intent analysis and command understanding. Once Ollama is installed, download the model used by ORION and start the local server. After that, download the latest ORION release, extract the ZIP file, and keep all files inside the same folder, including the assets and configuration files. Finally, launch ORION.exe and the assistant will be ready to use. If you prefer running the project from source, clone the repository, create a Python virtual environment, install the dependencies listed in requirements.txt, and execute app.py. ORION requires a working microphone for voice commands and stores all configuration and history locally on your machine
+1. Download the model used by ORION.
+2. Start the local Ollama server.
+3. Download the latest ORION release.
+4. Extract the ZIP file and keep all files in the same folder, including the assets and configuration files.
+5. Launch `ORION.exe`.
 
-## > how to use it
+The assistant will be ready to use.
 
-The two ways to use is by clicking on the avatar (voice input) or clicking in the button/click on avatar + space to open the text bar.
+If you prefer running the project from source:
 
-The avatar will appear on the right bottom of the screen and by clicking and dragging you can move it to any place on the screen.
+1. Clone the repository.
+2. Create a Python virtual environment.
+3. Install the dependencies listed in `requirements.txt`.
+4. Run `app.py`.
 
----
+> ORION requires a working microphone for voice commands and stores all configuration and history locally on your machine.
 
-## configuration
+# How to use it
 
-By entering in config in the launch page you can change the app language, orion language and the whisper model, set on a light one in order to make it more accesible to all users.
+There are two ways to interact with ORION:
 
----
+- Click the avatar to use voice input.
+- Click the text button (or press **Space** after selecting the avatar) to open the text input bar.
+
+The avatar appears in the bottom-right corner of the screen. You can click and drag it anywhere on your desktop.
 
 
-## 
+# Configuration
 
-minimum system requirements:
+Open **Config** from the launch page to change:
 
-* Windows 10 / 11 // Linux // macOs
-  (Linux and mac hadnt been tried susceptible
-  of errors)
-* Python downloaded.
-* microphone for voice mode
-* Is not really accurate but more or less 200mb+ free disk space
+- App language
+- ORION language
+- Whisper model
 
-python dependencies:
+The default Whisper model is a lightweight one to make the application more accessible on lower-end computers.
+
+
+# Minimum System Requirements
+
+- Windows 10 / 11
+- Linux *(experimental)*
+- macOS *(experimental)*
+- Python installed
+- A microphone (for voice mode)
+- Around **200 MB** of free disk space
+
+> Linux and macOS have not been fully tested and may contain bugs.
+
+## Python Dependencies
 
 ```txt
 PyQt6
@@ -71,38 +91,36 @@ scikit-learn
 pyaudio
 ```
 
----
 
-## what I used to create this project
+# What I Used to Create This Project
 
-* Python (all the core)
-* PyQt6 (ui of the app)
-* OpenAI Whisper (local speech-to-text)
-* machine learning intent classification (with a backup with key words depending on the fiabilty shown by the model)
-* JSON local storage that saves up to 50 logs 
-* PyInstaller for packaging for windows
-* GitHub Actions for builds for linux and macOs
-* 
+- Python (application core)
+- PyQt6 (UI)
+- OpenAI Whisper (local speech-to-text)
+- Machine learning intent classification with a keyword-based fallback depending on the model confidence
+- Local JSON storage (stores up to 50 logs)
+- PyInstaller (Windows builds)
+- GitHub Actions (Linux and macOS builds)
 
----
+# What's Next?
 
+Once my project gets reviewed, I plan to add:
 
-## what is next?
+- A plugin marketplace where users can install and publish new features.
+- A web dashboard where users can view statistics and other information.
 
-Once my project gets reviewed my plans are to add these new features
-- A pluging marketplace from where users could add new features and release them
-- Some web where users can see stats and those type of things
-
----
-
-## imagenes
+# Images
 
 ![Launch Page](<Captura de pantalla 2026-06-05 092915.png>)
-![Avatar](<Captura de pantalla 2026-06-02 151750.png>)
-![Historial](<Captura de pantalla 2026-06-02 151800.png>)
-![Configuation](<Captura de pantalla 2026-06-02 150725.png>)
 
-## license
+![Avatar](<Captura de pantalla 2026-06-02 151750.png>)
+
+![History](<Captura de pantalla 2026-06-02 151800.png>)
+
+![Configuration](<Captura de pantalla 2026-06-02 150725.png>)
+
+
+# License
 
 MIT License
 
