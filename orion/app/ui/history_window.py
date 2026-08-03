@@ -1,18 +1,31 @@
 import json
 import os
+from pathlib import Path
+
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFontDatabase, QPixmap, QPainter
-from PyQt6.QtWidgets import(
-    QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QScrollArea, QFrame
+from PyQt6.QtGui import QFontDatabase, QPainter, QPixmap
+from PyQt6.QtWidgets import (
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QScrollArea,
+    QVBoxLayout,
+    QWidget,
 )
-from logger import log
-from paths import resource_path
+
+from ...core.logger import log
+from ...core.paths import resource_path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+DEFAULT_HISTORY_PATH = PROJECT_ROOT / "data" / "history.json"
+
 
 class HistoryWindow(QWidget):
-    def __init__(self, history_path="history.json", parent=None):
+    def __init__(self, history_path=None, parent=None):
         super().__init__(parent)
 
-        self.history_path = history_path
+        self.history_path = str(history_path or DEFAULT_HISTORY_PATH)
         self.entries = []
 
         self.window_pixmap = QPixmap(resource_path("history_window/pixil-frame-0 (2).png"))

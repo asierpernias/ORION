@@ -1,11 +1,11 @@
 import os
 
-from PyQt6.QtCore import Qt, pyqtSignal, QRect
-from PyQt6.QtGui import QPainter, QPixmap, QFont
-from PyQt6.QtWidgets import QWidget, QLineEdit
+from PyQt6.QtCore import QRect, Qt, pyqtSignal
+from PyQt6.QtGui import QFont, QPainter, QPixmap
+from PyQt6.QtWidgets import QLineEdit, QWidget
 
-from logger import log
-from paths import resource_path
+from ...core.logger import log
+from ...core.paths import resource_path
 
 
 class CommandLineEdit(QLineEdit):

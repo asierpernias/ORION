@@ -1,28 +1,24 @@
-from PyQt6.QtWidgets import QWidget, QLabel
-from PyQt6.QtGui import QPixmap, QIcon, QGuiApplication
-from PyQt6.QtCore import Qt, pyqtSignal
-
-from i18n import t
-from history_button import HistoryButton
-from history_window import HistoryWindow
-
-from paths import resource_path
-
 import threading
 
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QGuiApplication, QIcon, QPixmap
+from PyQt6.QtWidgets import QLabel, QWidget
 
-from controller import controller_run_orion, controller_run_text
-from bubbles import SpeechBubble
-from command_bar import CommandBar
-from input_button import inputButton
-
-from animations import (
+from ...core.i18n import t
+from ...core.logger import log
+from ...core.paths import resource_path
+from ..controller import controller_run_orion, controller_run_text
+from .animations import (
     start_idle_animation,
     start_recording_animation,
+    start_responding_animation,
     start_searching_animation,
-    start_responding_animation
 )
-from logger import log
+from .bubbles import SpeechBubble
+from .command_bar import CommandBar
+from .history_button import HistoryButton
+from .history_window import HistoryWindow
+from .input_button import inputButton
 
 class AvatarWindow(QWidget):
 

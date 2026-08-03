@@ -1,10 +1,11 @@
 import os
 
-from PyQt6.QtCore import Qt, QRect
-from PyQt6.QtGui import QPainter, QPixmap, QFont, QFontMetrics
-from PyQt6.QtWidgets import QWidget, QLabel
-from logger import log
-from paths import resource_path
+from PyQt6.QtCore import QRect, Qt
+from PyQt6.QtGui import QFont, QFontMetrics, QPainter, QPixmap
+from PyQt6.QtWidgets import QLabel, QWidget
+
+from ...core.logger import log
+from ...core.paths import resource_path
 
 class SpeechBubble(QWidget):
 

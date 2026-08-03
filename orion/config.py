@@ -2,7 +2,7 @@ DEVICE_ID = 1
 SAMPLE_RATE = 48000
 CHANNELS = 2
 
-AUDIO_FILE = "grabacion.wav"
+AUDIO_FILE = "data/grabacion.wav"
 
 SILENCE_THRESHOLD = 0.0005
 SILENCE_SECONDS = 2.5

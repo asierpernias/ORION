@@ -1,9 +1,11 @@
-import json 
+import json
 from datetime import datetime
-import os
-from logger import log
+from pathlib import Path
 
-HISTORY_FILE = "history.json"
+from ..core.logger import log
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+HISTORY_FILE = PROJECT_ROOT / "data" / "history.json"
   
 def save_history_entry(command_type, text, intent_data, url):
     history = load_history()
@@ -19,20 +21,22 @@ def save_history_entry(command_type, text, intent_data, url):
         "engine": intent_data.get("engine", ""),
         "url": url
     }
-    
+
     history.append(entry)
     history = history[-50:]
 
     try:
-        with open(HISTORY_FILE, "w", encoding="utf-8") as file:
+        with HISTORY_FILE.open("w", encoding="utf-8") as file:
             json.dump(history, file, ensure_ascii=False, indent=2)
     except Exception as error:
         log("No se ha podido guardar el historial: ", error)
+
+
 def load_history():
-    if not os.path.exists(HISTORY_FILE):
+    if not HISTORY_FILE.exists():
         return []
     try:
-        with open(HISTORY_FILE, "r", encoding="utf-8") as file:
+        with HISTORY_FILE.open("r", encoding="utf-8") as file:
             data = json.load(file)
         if isinstance(data, list):
             return data

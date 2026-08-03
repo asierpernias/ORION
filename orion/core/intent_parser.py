@@ -1,5 +1,5 @@
-import config
-from ml.predict import predict_intent
+from .. import config
+from ..ml.predict import predict_intent
 
 ML_THRESHOLD = 0.70
 

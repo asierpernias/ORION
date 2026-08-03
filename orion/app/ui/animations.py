@@ -1,6 +1,7 @@
 from PyQt6.QtCore import QTimer
 from PyQt6.QtGui import QPixmap
-from paths import resource_path
+
+from ...core.paths import resource_path
 
 def start_idle_animation(window):
 
